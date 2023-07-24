@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>SSH</title>
+<meta name="author" content="Reindert-Jan Ekker"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../../../reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../../../reveal.js/dist/theme/league.css" id="theme"/>
+
+<link rel="stylesheet" href="../../../reveal.js/plugin/highlight/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>SSH</h1><h2>Reindert-Jan Ekker</h2><p>Code Sensei</p>
+</section>
+
+
+
+<section>
+<section id="slide-orga7e66fb">
+<h2 id="orga7e66fb">SSH</h2>
+<div class="outline-text-2" id="text-orga7e66fb">
+</div>
+</section>
+<section id="slide-org2b2af65">
+<h3 id="org2b2af65">SSH in Python</h3>
+<p>
+Paramiko: <a href="http://docs.paramiko.org/">http://docs.paramiko.org/</a>
+</p>
+
+<p>
+Python implementatie van SSHv2
+</p>
+
+</section>
+<section id="slide-org7036143">
+<h3 id="org7036143">Paramiko</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >import paramiko
+
+client = paramiko.SSHClient()
+client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+client.connect('rjekker.nl', username='reindert', password='my_strong_password')
+
+stdin, stdout, stderr = client.exec_command('ls -l')
+
+for line in stdout:
+    print(line.strip('\n'))
+
+client.close()
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org21d3625">
+<h3 id="org21d3625">Windows</h3>
+<p>
+Zie
+<a href="https://www.scivision.dev/python-windows-visual-c-14-required/">hier</a>
+voor installeren van paramiko onder windows.
+</p>
+
+<p>
+Note: mogelijk moet je het package <i>cffi</i> opnieuw installeren nadat je
+dit gedaan hebt.
+</p>
+</section>
+<section id="slide-org23205b4">
+<h3 id="org23205b4">Netmiko</h3>
+<p>
+Package voor communicatie met Cisco apparatuur en andere networking
+devices.
+</p>
+
+<ul>
+<li class="fragment appear">ondersteunt veel verschillende devices</li>
+<li class="fragment appear">kleine verschillen in config/syntax worden gladgestreken</li>
+<li class="fragment appear">gebruikt paramiko in onderlaag</li>
+<li class="fragment appear">configuratie-commando's schakelen automatisch naar <i>config mode</i></li>
+<li class="fragment appear">schonere output</li>
+
+</ul>
+
+<p>
+Zie <a href="../../exercises/netmiko_uitleg.html">Netmiko uitleg</a>
+</p>
+</section>
+</section>
+</div>
+</div>
+<script src="../../../reveal.js/dist/reveal.js"></script>
+<script src="../../../reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight]
+});
+
+</script>
+</body>
+</html>

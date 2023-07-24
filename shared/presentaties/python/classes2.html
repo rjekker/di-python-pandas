@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Classes (continued)</title>
+<meta name="author" content="Reindert-Jan Ekker"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../../../reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../../../reveal.js/dist/theme/simple.css" id="theme"/>
+
+<link rel="stylesheet" href="../../../reveal.js/plugin/highlight/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>Classes (continued)</h1><h2>Reindert-Jan Ekker</h2><p>Code Sensei</p>
+</section>
+
+<section>
+<section id="slide-orgd9c8c64">
+<h2 id="orgd9c8c64">Magic methods</h2>
+<ul>
+<li>Methods whose name is of the form <code>__func__</code></li>
+<li>These functions have special meanings and are pre-defined in the language</li>
+
+</ul>
+
+<p>
+We already know about <code>__str__</code>, <code>__repr__</code>, <code>__init__</code>
+</p>
+
+</section>
+<section id="slide-org05da2f6">
+<h3 id="org05da2f6">Examples of other magic methods</h3>
+<ul>
+<li><code>__add__</code>: add two objects together</li>
+<li><code>__eq__</code>:  implementation of ==</li>
+<li><code>__ne__</code>: implementation of !=</li>
+<li><code>__len__</code>: implementation of len() method</li>
+
+</ul>
+
+<p>
+See also:
+</p>
+
+<ul>
+<li><a href="https://www.python-course.eu/python3_magic_methods.php">Tutorial</a></li>
+
+</ul>
+
+</section>
+<section id="slide-org2623046">
+<h3 id="org2623046">An example</h3>
+<p>
+Two circles are equal if they have the same radius
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >class Circle:
+    def __init__(self, radius):
+        self.radius = radius
+
+    def __eq__(self, other):
+        return self.radius == other.radius
+</code></pre>
+</div>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >c1 = Circle(5)
+c2 = Circle(6)
+c3 = Circle(5)
+c1 == c2 # False
+c1 == c3 # True
+</code></pre>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgf6036ab">
+<h2 id="orgf6036ab">Encapsulations</h2>
+<div class="outline-text-2" id="text-orgf6036ab">
+</div>
+</section>
+<section id="slide-org508bbca">
+<h3 id="org508bbca">Private?</h3>
+<p>
+Python does not have a <b>private</b> keyword. You can mark an attribute as
+intended for internal use by prefixing the name with an underscore.
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="python" >class Circle:
+    def __init__(self, radius):
+        self._r = radius
+
+c = Circle(5) # We can still access this
+print(c._r)
+c._r = 10  # AND change it
+print(c._r)
+</code></pre>
+</div>
+
+<p class="fragment (appear)">
+Convention: "we are all adults"
+</p>
+
+</section>
+<section id="slide-org5cd07d6">
+<h3 id="org5cd07d6">Name Mangling</h3>
+<p>
+If you prefix an attribute name with two underscores, you make it even
+harder to reach.
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >class Circle:
+    def __init__(self, radius):
+        self.__r = radius
+
+# We can not access this normally
+c = Circle(5)
+print(c.__r)
+</code></pre>
+</div>
+
+<div class="org-src-container">
+
+<pre   ><code class="text" >AttributeError: 'Circle' object has no attribute '__r'
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgbc16fd9">
+<h3 id="orgbc16fd9">Name Mangling</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >class Circle:
+    def __init__(self, radius):
+        self.__r = radius
+
+# But there is a trick
+c = Circle(5)
+print(c.__dict__)
+print(c._Circle__r)
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgb394a8a">
+<h3 id="orgb394a8a">Property</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >class Circle:
+    def __init__(self, radius):
+        self.r = radius
+
+    @property
+    def diameter(self):
+        return 2*self.r
+</code></pre>
+</div>
+
+<p>
+Here <code>diameter</code> behaves like a read-only attribute.
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >c = Circle(5)
+print(c.diameter)  # Computed on-the-fly from self.r
+c.diameter = 10    # Error!
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org5a87a40">
+<h3 id="org5a87a40">Setter</h3>
+<p>
+We can add a setter method as well:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >class Circle:
+    def __init__(self, radius):
+        self.r = radius
+
+    @property
+    def diameter(self):
+        return 2*self.r
+
+    @diameter.setter
+    def diameter(self, value):
+        self.r = value//2
+</code></pre>
+</div>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >c = Circle(5)
+c.diameter = 20
+print(c.r) # Prints 10
+</code></pre>
+</div>
+</section>
+</section>
+</div>
+</div>
+<script src="../../../reveal.js/dist/reveal.js"></script>
+<script src="../../../reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight]
+});
+
+</script>
+</body>
+</html>

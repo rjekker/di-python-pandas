@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>REST and Python</title>
+<meta name="author" content="Reindert-Jan Ekker"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../../../reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../../../reveal.js/dist/theme/moon.css" id="theme"/>
+
+<link rel="stylesheet" href="../../../reveal.js/plugin/highlight/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>REST and Python</h1><h2>Reindert-Jan Ekker</h2><p>Code Sensei</p>
+</section>
+
+
+<section>
+<section id="slide-org5daf1de">
+<h2 id="org5daf1de">RPC</h2>
+<p>
+The problem: RPC
+</p>
+<ul>
+<li class="fragment appear">Remote Procedure Call</li>
+<li class="fragment appear">Pretty hard to do right</li>
+<li class="fragment appear">Differences in OS, binary representations, more</li>
+<li class="fragment appear">Closed standards: CORBA, RMI, &#x2026;</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org09ee858">
+<h2 id="org09ee858">But..</h2>
+<p>
+There is a simple open standard protocol:
+</p>
+
+<p>
+HTTP
+</p>
+
+</section>
+<section id="slide-org703bda3">
+<h3 id="org703bda3">HTTP</h3>
+<p>
+Resources
+</p>
+
+<p>
+Verbs
+</p>
+
+<p>
+Error Handling
+</p>
+
+</section>
+<section id="slide-org1381437">
+<h3 id="org1381437">REST</h3>
+<p>
+Representational State Transfer
+</p>
+
+<p>
+RPC Over HTTP
+</p>
+
+<p>
+Very popular, everybody uses it, incl. Facebook, Twitter, Paypal, etc. etc.
+</p>
+
+<p>
+Data format: JSON, XML, others..
+</p>
+
+</section>
+<section id="slide-orgc9ab6a3">
+<h3 id="orgc9ab6a3">Persons REST API</h3>
+<p>
+Let's say I have a Persons DB table. How do I serve this over REST?
+</p>
+
+
+<div id="orgf9da788" class="figure">
+<p><img src="../../static/REST_table.png" alt="REST_table.png" />
+</p>
+</div>
+
+</section>
+<section id="slide-org394acb5">
+<h3 id="org394acb5">Note</h3>
+<p>
+GET en PUT should be <i>idempotent</i>
+</p>
+
+<p>
+And <i>true</i> restfulness is not a simple thing
+</p>
+
+</section>
+<section id="slide-org78f9387">
+<h3 id="org78f9387">Resources</h3>
+<p>
+<a href="http://web.archive.org/web/20130116005443/http://tomayko.com/writings/rest-to-my-wife">How I explained REST to my wife</a>
+</p>
+
+<p>
+<a href="http://martinfowler.com/articles/richardsonMaturityModel.html">Martin Fowler: glory of REST</a>
+</p>
+
+<p>
+<a href="http://stackoverflow.com/questions/671118/what-exactly-is-restful-programming">Stackoverflow discussie</a>
+</p>
+
+<p>
+<a href="https://en.wikipedia.org/wiki/HATEOAS">https://en.wikipedia.org/wiki/HATEOAS</a>
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org8ca3731">
+<h2 id="org8ca3731">Examples</h2>
+<p>
+<a href="https://github.com/public-apis/public-apis">https://github.com/public-apis/public-apis</a>
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-orgd0afa49">
+<h2 id="orgd0afa49">Python and REST</h2>
+<p>
+To consume REST APIs we use <a href="https://requests.readthedocs.io/en/master/">requests</a>
+</p>
+
+<p>
+Install this library using
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="sh" >python -m pip install requests
+</code></pre>
+</div>
+
+<p>
+Note: this is not necessary on anaconda and pythonanywhere.
+</p>
+</section>
+<section id="slide-orgdbee353">
+<h3 id="orgdbee353">Example</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >import requests
+
+apiKey = "80559f68dddf48a689a7d5d5d9074522"
+r = requests.get(f'https://newsapi.org/v2/top-headlines?country=nl&amp;apiKey={apiKey}')
+print(r.status_code)
+print(r.text)
+# output:
+200
+{"status":"ok","totalResults":34,"articles":[{"source":{"id":null,"name":"Dpgmedia.nl"},"author":null,"title":"Sinterklaas is weer in het land!",...
+</code></pre>
+</div>
+
+<ul>
+<li class="fragment appear"><a href="../../static/requests_demo1.py">Demo</a></li>
+
+</ul>
+</section>
+<section id="slide-org4315399">
+<h3 id="org4315399">Convert JSON data</h3>
+<p>
+Use <code>response.json()</code> to convert from JSON text data to a Python
+datastructure.
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >import requests
+
+r = requests.get(f'https://newsapi.org/v2/top-headlines?country=nl&amp;apiKey={apiKey}')
+data = r.json()
+</code></pre>
+</div>
+</section>
+</section>
+</div>
+</div>
+<script src="../../../reveal.js/dist/reveal.js"></script>
+<script src="../../../reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight]
+});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Flask</title>
+<meta name="author" content="Reindert-Jan Ekker"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../../../reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../../../reveal.js/dist/theme/serif.css" id="theme"/>
+
+<link rel="stylesheet" href="../../../reveal.js/plugin/highlight/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>Flask</h1><h2>Reindert-Jan Ekker</h2><p>Code Sensei</p>
+</section>
+
+<section>
+<section id="slide-org6ce0e53">
+<h2 id="org6ce0e53">Flask</h2>
+<p>
+<a href="https://flask.palletsprojects.com">https://flask.palletsprojects.com</a>
+</p>
+
+<p>
+A <i>microframework</i> for building websites in Python
+</p>
+
+</section>
+<section id="slide-org8e4cf8f">
+<h3 id="org8e4cf8f">Minimal Application</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >from flask import Flask
+app = Flask(__name__)
+
+@app.route('/')
+def hello_world():
+    return 'Hello, World!'
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgcf1d383">
+<h3 id="orgcf1d383">Running</h3>
+<p>
+Commandline:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="sh" >flask --app mysite run --debug
+</code></pre>
+</div>
+
+<ul>
+<li>Run this from project dir</li>
+<li><code>mysite</code> is the name of the python file containing the app object</li>
+<li><code>--debug</code> makes sure that the app reloads on changes</li>
+
+</ul>
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-org2e3bab9">
+<h2 id="org2e3bab9">Templates</h2>
+<div class="outline-text-2" id="text-org2e3bab9">
+</div>
+</section>
+<section id="slide-org81ae407">
+<h3 id="org81ae407">HTML Pages</h3>
+<p>
+See for instance <a href="https://www.w3schools.com/html/html_intro.asp">https://www.w3schools.com/html/html_intro.asp</a>
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >from flask import Flask, render_template
+app = Flask(__name__)
+
+@app.route('/')
+def hello_world():
+    return render_template("hello.html")
+</code></pre>
+</div>
+
+<p>
+The html file <code>hello.html</code> must be in a folder <code>templates</code> 
+</p>
+
+</section>
+<section id="slide-org050c31b">
+<h3 id="org050c31b">Pass data to template</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >@app.route('/')
+def hello_world():
+    return render_template("hello.html",
+        name="reindert", age=43)
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgad0c40d">
+<h3 id="orgad0c40d">Template code</h3>
+<p>
+Jinja template engine: generate HTML
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="html" >&lt;h1&gt;hallo, {{name}}&lt;/h1&gt;
+{% if age &gt; 18 %}
+You're an adult!!
+{% else %}
+You're a kid.
+{% endif %}
+&lt;/ul&gt;
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgb0b14cb">
+<h3 id="orgb0b14cb">Template syntax</h3>
+<p>
+Double curly braces: output a variable value
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="html" >&lt;p&gt; Hi, {{ name }}!&lt;/p&gt;
+</code></pre>
+</div>
+
+<p>
+Statements like <code>if</code> and <code>for</code> go inside  <code>{% .. %}</code> 
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="html" >&lt;ul&gt;
+{% for user in users %}
+    &lt;li&gt;{{ user.username|e }}&lt;/li&gt;
+{% endfor %}
+&lt;/ul&gt;
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgde45e97">
+<h3 id="orgde45e97">Template documentation</h3>
+<p>
+The template language is <i>Jinja2</i>
+<a href="https://jinja.palletsprojects.com/">https://jinja.palletsprojects.com/</a>
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org9e77935">
+<h2 id="org9e77935">Serving JSON</h2>
+<p>
+Use <a href="https://flask.palletsprojects.com/en/1.1.x/api/#flask.json.jsonify">jsonify</a>
+</p>
+
+<p>
+Demo..
+</p>
+</section>
+</section>
+</div>
+</div>
+<script src="../../../reveal.js/dist/reveal.js"></script>
+<script src="../../../reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight]
+});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Import and Packages</title>
+<meta name="author" content="Reindert-Jan Ekker"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../../../reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../../../reveal.js/dist/theme/beige.css" id="theme"/>
+
+<link rel="stylesheet" href="../../../reveal.js/plugin/highlight/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>Import and Packages</h1><h2>Reindert-Jan Ekker</h2><p>Code Sensei</p>
+</section>
+
+<section>
+<section id="slide-orgc86579c">
+<h2 id="orgc86579c">Modules, packages, import</h2>
+<div class="outline-text-2" id="text-orgc86579c">
+</div>
+</section>
+<section id="slide-org7eea0c7">
+<h3 id="org7eea0c7">Importing</h3>
+<p>
+When we import a package
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >import my_pkg
+</code></pre>
+</div>
+
+<p>
+What happens is determined by <code>__init__.py</code>. See <a href="https://realpython.com/python-import/#packages">here</a>
+</p>
+
+</section>
+<section id="slide-orgfc87293">
+<h3 id="orgfc87293">Run a package</h3>
+<p>
+If the package has a <code>__main__.py</code> we can run it
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="shell" >python -m my_package
+</code></pre>
+</div>
+
+<p>
+This runs the code in <code>__main__.py</code>
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-orge641c3d">
+<h2 id="orge641c3d">Absolute vs relative</h2>
+<div class="outline-text-2" id="text-orge641c3d">
+</div>
+</section>
+<section id="slide-orgdaf1ca8">
+<h3 id="orgdaf1ca8">Absolute import</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >from my_pkg import something
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org00c1751">
+<h3 id="org00c1751">Relative</h3>
+<p>
+Import relative to the "current" package.
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="python" >from . import something
+from .. import something_else
+</code></pre>
+</div>
+
+<p>
+(see also <a href="https://realpython.com/python-import/#absolute-and-relative-imports">here</a>)
+</p>
+
+</section>
+<section id="slide-org3338513">
+<h3 id="org3338513">In general</h3>
+<p>
+Absolute imports are preferred
+</p>
+
+<p>
+Pros/cons: <a href="https://realpython.com/absolute-vs-relative-python-imports/">article</a>
+</p>
+</section>
+</section>
+</div>
+</div>
+<script src="../../../reveal.js/dist/reveal.js"></script>
+<script src="../../../reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight]
+});
+
+</script>
+</body>
+</html>

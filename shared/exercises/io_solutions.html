@@ -1,0 +1,600 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Solutions: File I/O</title>
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../../themes/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="../../themes/readtheorg/css/readtheorg.css"/>
+<link rel="stylesheet" type="text/css" href="../../css/homelink.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../themes/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="../../themes/readtheorg/js/readtheorg.js"></script>
+<script type="text/javascript" src="../../js/addhomelink.js"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Solutions: File I/O</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org1037a57">Reading a file</a></li>
+<li><a href="#orge42043d">Read a program</a></li>
+<li><a href="#orgdbcdc39">Strip</a></li>
+<li><a href="#org239667a">Look up</a></li>
+<li><a href="#orge822042">Filter</a></li>
+<li><a href="#orgc730847">Athletes</a></li>
+<li><a href="#org258e50d">CSV</a>
+<ul>
+<li><a href="#org1458d4a">Writing a csv</a></li>
+<li><a href="#org34b8222">Bonus: Transformation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+<section id="outline-container-org1037a57" class="outline-2">
+<h2 id="org1037a57">Reading a file</h2>
+<div class="outline-text-2" id="text-org1037a57">
+<p>
+You can open a text file using the built-in function <code>open()</code>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-variable-name">f</span> = <span class="org-builtin">open</span>(<span class="org-string">"somefile.txt"</span>)
+</pre>
+</div>
+
+<p>
+f now points to a "File object" which represents the file we just opened.
+</p>
+
+<p>
+This file behaves like a sequence in the sense that we can use a <i>for
+loop</i> to read its contents:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">for</span> line <span class="org-keyword">in</span> f:
+    <span class="org-builtin">print</span>(line)
+</pre>
+</div>
+</div>
+</section>
+
+
+<section id="outline-container-orge42043d" class="outline-2">
+<h2 id="orge42043d">Read a program</h2>
+<div class="outline-text-2" id="text-orge42043d">
+<p>
+Start by trying to read and print one of your own python programs.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-variable-name">f</span> = <span class="org-builtin">open</span>(<span class="org-string">"highlow.py"</span>) <span class="org-comment-delimiter"># </span><span class="org-comment">use your own filename here</span>
+<span class="org-keyword">for</span> line <span class="org-keyword">in</span> f:
+    <span class="org-builtin">print</span>(line)
+</pre>
+</div>
+</div>
+</section>
+
+<section id="outline-container-orgdbcdc39" class="outline-2">
+<h2 id="orgdbcdc39">Strip</h2>
+<div class="outline-text-2" id="text-orgdbcdc39">
+<p>
+The output of your program will have a lot of extra blank lines. This
+is because there is a newline character at the end of each line, and
+<code>print()</code> adds a newline as well.
+</p>
+
+<p>
+Can you find a way to solve this?
+</p>
+
+<p>
+There are actually two solutions here:
+</p>
+
+<ol class="org-ol">
+<li>Strip whitespace from each line</li>
+</ol>
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-variable-name">f</span> = <span class="org-builtin">open</span>(<span class="org-string">"highlow.py"</span>) <span class="org-comment-delimiter"># </span><span class="org-comment">use your own filename here</span>
+<span class="org-keyword">for</span> line <span class="org-keyword">in</span> f:
+    <span class="org-builtin">print</span>(line.strip())
+</pre>
+</div>
+
+<ol class="org-ol">
+<li>Tell print not to add extra newlines</li>
+</ol>
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-variable-name">f</span> = <span class="org-builtin">open</span>(<span class="org-string">"highlow.py"</span>) <span class="org-comment-delimiter"># </span><span class="org-comment">use your own filename here</span>
+<span class="org-keyword">for</span> line <span class="org-keyword">in</span> f:
+    <span class="org-builtin">print</span>(line, end=<span class="org-string">''</span>)
+</pre>
+</div>
+</div>
+</section>
+
+<section id="outline-container-org239667a" class="outline-2">
+<h2 id="org239667a">Look up</h2>
+<div class="outline-text-2" id="text-org239667a">
+<p>
+Write a program that counts how many 5-letter words are in the words_with_a.txt file.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-variable-name">f</span> = <span class="org-builtin">open</span>(<span class="org-string">"words_with_a.txt"</span>)
+<span class="org-variable-name">count</span> = 0
+<span class="org-keyword">for</span> line <span class="org-keyword">in</span> f:
+    <span class="org-comment-delimiter"># </span><span class="org-comment">Line length includes newline character</span>
+    <span class="org-keyword">if</span> <span class="org-builtin">len</span>(line) == 6:
+        count += 1
+<span class="org-builtin">print</span>(count)
+</pre>
+</div>
+
+<p>
+There are exactly 1000 5-letter words in the file.
+</p>
+</div>
+</section>
+<section id="outline-container-orge822042" class="outline-2">
+<h2 id="orge822042">Filter</h2>
+<div class="outline-text-2" id="text-orge822042">
+<p>
+Write a program that:
+</p>
+
+<ul class="org-ul">
+<li>reads a text file</li>
+<li>replaces every 'a' with an 'o'</li>
+<li>writes the result to a new text file</li>
+</ul>
+
+<p>
+The name of the new file should be equal to the name of the input
+file, with the string "_filtered" added to the end.
+</p>
+
+<p>
+So if you read a file <code>book.txt</code>, you will write a file
+<code>book.txt_filtered</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-variable-name">filename</span> = <span class="org-builtin">input</span>(<span class="org-string">"Filename? "</span>)
+
+<span class="org-keyword">try</span>:
+    <span class="org-keyword">with</span> <span class="org-builtin">open</span>(filename) <span class="org-keyword">as</span> fin:
+        <span class="org-keyword">with</span> <span class="org-builtin">open</span>(filename + <span class="org-string">"_filtered"</span>, <span class="org-string">'w'</span>) <span class="org-keyword">as</span> <span class="org-variable-name">fout</span>:
+            <span class="org-keyword">for</span> line <span class="org-keyword">in</span> fin:
+                line = line.replace(<span class="org-string">'a'</span>, <span class="org-string">'o'</span>)
+                fout.write(line)
+<span class="org-keyword">except</span> <span class="org-type">FileNotFoundError</span>:
+    <span class="org-builtin">print</span>(f<span class="org-string">"Cannot open </span>{filename}<span class="org-string">"</span>)
+
+
+</pre>
+</div>
+</div>
+</section>
+
+<section id="outline-container-orgc730847" class="outline-2">
+<h2 id="orgc730847">Athletes</h2>
+<div class="outline-text-2" id="text-orgc730847">
+<p>
+In your pythonanywhere folder there is a file called
+ <a href="../static/athletes.csv">athletes.csv</a>.
+</p>
+
+<ul class="org-ul">
+<li>Write a program to determine the average length of all female athletes.</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-variable-name">f</span> = <span class="org-builtin">open</span>(<span class="org-string">"athletes.csv"</span>)
+<span class="org-variable-name">count</span> = 0
+<span class="org-variable-name">total_length</span> = 0
+<span class="org-keyword">for</span> line <span class="org-keyword">in</span> <span class="org-variable-name">f</span>:
+    fields = line.split(<span class="org-string">","</span>)
+    <span class="org-comment-delimiter"># </span><span class="org-comment">Note: the text in the file actually contains quotes!</span>
+    <span class="org-keyword">if</span> fields[2] == <span class="org-string">'"female"'</span>:
+        length_field = fields[3].replace(<span class="org-string">'"'</span>, <span class="org-string">''</span>)
+        <span class="org-comment-delimiter"># </span><span class="org-comment">To make matters worse, some lines have no length at all!</span>
+        <span class="org-comment-delimiter"># </span><span class="org-comment">We just skip those</span>
+        <span class="org-keyword">if</span> length_field:
+            total_length += <span class="org-builtin">float</span>(length_field)
+            count += 1
+
+<span class="org-builtin">print</span>(count, <span class="org-string">"women, with an average length of"</span>, <span class="org-builtin">str</span>(total_length / count))
+</pre>
+</div>
+
+<p>
+Output:
+</p>
+<pre class="example" id="org7a9dcad">
+⇒  python3 athletes.py
+5068 women, with an average length of 1.7000177584846043
+</pre>
+
+<ul class="org-ul">
+<li>Ask the user to enter a country code and print how many medals this country won.</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-variable-name">f</span> = <span class="org-builtin">open</span>(<span class="org-string">"athletes.csv"</span>)
+<span class="org-variable-name">gold</span> = 0
+<span class="org-variable-name">silver</span> = 0
+<span class="org-variable-name">bronze</span> = 0
+
+<span class="org-variable-name">country_code</span> = <span class="org-builtin">input</span>(<span class="org-string">"Country code? "</span>)
+
+<span class="org-keyword">def</span> <span class="org-function-name">get_number_from_field</span>(field):
+    <span class="org-doc">"Convert a field to an int"</span>
+    <span class="org-comment-delimiter"># </span><span class="org-comment">Note: for russia there are some fields with incorrect data, fix this</span>
+    <span class="org-keyword">if</span> field.strip() == <span class="org-string">'"O"'</span>:
+        <span class="org-keyword">return</span> 0
+    <span class="org-keyword">return</span> <span class="org-builtin">int</span>(field.replace(<span class="org-string">'"'</span>, <span class="org-string">''</span>))
+
+<span class="org-keyword">for</span> line <span class="org-keyword">in</span> f:
+    fields = line.split(<span class="org-string">","</span>)
+    <span class="org-comment-delimiter"># </span><span class="org-comment">Note: the text in the file actually contains quotes!</span>
+    <span class="org-keyword">if</span> fields[1].replace(<span class="org-string">'"'</span>, <span class="org-string">''</span>) == country_code:
+        gold += get_number_from_field(fields[-3])
+        silver += get_number_from_field(fields[-2])
+        bronze += get_number_from_field(fields[-1])
+
+<span class="org-builtin">print</span>(country_code, <span class="org-string">"won:"</span>)
+<span class="org-builtin">print</span>(gold, <span class="org-string">"gold medals"</span>)
+<span class="org-builtin">print</span>(silver, <span class="org-string">"silver medals"</span>)
+<span class="org-builtin">print</span>(bronze, <span class="org-string">"bronze medals"</span>)
+<span class="org-builtin">print</span>(<span class="org-string">"total:"</span>, gold+silver+bronze, <span class="org-string">"medals"</span>)
+</pre>
+</div>
+</div>
+</section>
+
+
+<section id="outline-container-org258e50d" class="outline-2">
+<h2 id="org258e50d">CSV</h2>
+<div class="outline-text-2" id="text-org258e50d">
+<p>
+Use the <a href="../../shared/presentaties/python/csv.html">CSV</a> module to implement the
+<a href="#orgc730847">Athletes</a> exercise.
+</p>
+
+<ul class="org-ul">
+<li>Write a program to determine the average length of all female athletes.</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">import</span> csv
+
+<span class="org-variable-name">f</span> = <span class="org-builtin">open</span>(<span class="org-string">"athletes.csv"</span>)
+<span class="org-variable-name">reader</span> = csv.reader(f)
+<span class="org-variable-name">count</span> = 0
+<span class="org-variable-name">total_length</span> = 0
+<span class="org-keyword">for</span> row <span class="org-keyword">in</span> reader:
+    <span class="org-keyword">if</span> row[2] == <span class="org-string">'female'</span>:
+        length_field = row[3]
+        <span class="org-keyword">if</span> length_field:
+            total_length += <span class="org-builtin">float</span>(length_field)
+            count += 1
+
+<span class="org-builtin">print</span>(count, <span class="org-string">"women, with an average length of"</span>, <span class="org-builtin">str</span>(total_length / count))
+</pre>
+</div>
+
+<p>
+Output:
+</p>
+<pre class="example" id="orgad5cb46">
+⇒  python3 athletes.py
+5068 women, with an average length of 1.7000177584846043
+</pre>
+
+<ul class="org-ul">
+<li>Ask the user to enter a country code and print how many medals this country won.</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">import</span> csv
+
+<span class="org-variable-name">gold</span> = 0
+<span class="org-variable-name">silver</span> = 0
+<span class="org-variable-name">bronze</span> = 0
+
+<span class="org-variable-name">country_code</span> = <span class="org-builtin">input</span>(<span class="org-string">"Country code? "</span>)
+
+<span class="org-keyword">def</span> <span class="org-function-name">get_number_from_field</span>(field):
+    <span class="org-keyword">try</span>:
+        <span class="org-keyword">return</span> <span class="org-builtin">int</span>(field)
+    <span class="org-keyword">except</span> <span class="org-type">ValueError</span>:
+        <span class="org-keyword">return</span> 0
+
+f = <span class="org-builtin">open</span>(<span class="org-string">"athletes.csv"</span>)
+<span class="org-variable-name">reader</span> = csv.reader(f)
+
+<span class="org-keyword">for</span> row <span class="org-keyword">in</span> reader:
+    <span class="org-keyword">if</span> row[1] == country_code:
+        gold += get_number_from_field(row[-3])
+        silver += get_number_from_field(row[-2])
+        bronze += get_number_from_field(row[-1])
+
+<span class="org-builtin">print</span>(country_code, <span class="org-string">"won:"</span>)
+<span class="org-builtin">print</span>(gold, <span class="org-string">"gold medals"</span>)
+<span class="org-builtin">print</span>(silver, <span class="org-string">"silver medals"</span>)
+<span class="org-builtin">print</span>(bronze, <span class="org-string">"bronze medals"</span>)
+<span class="org-builtin">print</span>(<span class="org-string">"total:"</span>, gold+silver+bronze, <span class="org-string">"medals"</span>)
+</pre>
+</div>
+</div>
+
+
+<div id="outline-container-org1458d4a" class="outline-3">
+<h3 id="org1458d4a">Writing a csv</h3>
+<div class="outline-text-3" id="text-org1458d4a">
+<p>
+Write a program that reads the athletes csv file, and writes a new
+csv file that contains only four columns: country code and the three medal
+columns.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">import</span> csv
+
+<span class="org-variable-name">reader</span> = csv.DictReader(<span class="org-builtin">open</span>(<span class="org-string">"athletes.csv"</span>))
+<span class="org-variable-name">writer</span> = csv.writer(<span class="org-builtin">open</span>(<span class="org-string">"new_athletes.csv"</span>,<span class="org-string">'w'</span>))
+
+<span class="org-keyword">for</span> row <span class="org-keyword">in</span> reader:
+    writer.writerow([row[<span class="org-string">'nationality'</span>], row[<span class="org-string">'gold'</span>], row[<span class="org-string">'silver'</span>], row[<span class="org-string">'silver'</span>]])
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org34b8222" class="outline-3">
+<h3 id="org34b8222">Bonus: Transformation</h3>
+<div class="outline-text-3" id="text-org34b8222">
+<p>
+Write a program that reads the athletes csv file, and writes a new csv
+file that contains only one line per country with three columns: gold,
+silver and bronze.
+</p>
+
+<p>
+These columns contain total medal counts for each country.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">import</span> csv
+
+<span class="org-variable-name">reader</span> = csv.DictReader(<span class="org-builtin">open</span>(<span class="org-string">"athletes.csv"</span>))
+
+<span class="org-keyword">def</span> <span class="org-function-name">get_number_from_field</span>(field):
+    <span class="org-keyword">try</span>:
+        <span class="org-keyword">return</span> <span class="org-builtin">int</span>(field)
+    <span class="org-keyword">except</span> <span class="org-type">ValueError</span>:
+        <span class="org-keyword">return</span> 0
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">First, we need to read in all the data and count medals per country</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">We create a dict that maps each country to the three counts</span>
+totals = {}
+
+<span class="org-keyword">for</span> row <span class="org-keyword">in</span> <span class="org-variable-name">reader</span>:
+    country = row[<span class="org-string">'nationality'</span>]
+    <span class="org-keyword">if</span> country <span class="org-keyword">not</span> <span class="org-keyword">in</span> <span class="org-variable-name">totals</span>:
+        totals[<span class="org-variable-name">country</span>] = [0,0,0]
+
+    totals[country][0] += get_number_from_field(row[<span class="org-string">'gold'</span>])
+    totals[country][1] += get_number_from_field(row[<span class="org-string">'silver'</span>])
+    totals[country][2] += get_number_from_field(row[<span class="org-string">'bronze'</span>])
+
+<span class="org-variable-name">writer</span> = csv.writer(<span class="org-builtin">open</span>(<span class="org-string">"country_totals.csv"</span>,<span class="org-string">'w'</span>))
+<span class="org-keyword">for</span> country <span class="org-keyword">in</span> totals:
+    writer.writerow([country, totals[country][0], totals[country][1], totals[country][2]])
+</pre>
+</div>
+</div>
+</div>
+</section>
+</div>
+<div id="postamble" class="status">
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

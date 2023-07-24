@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Code: Best Practices</title>
+<meta name="author" content="Reindert-Jan Ekker"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../../reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../../reveal.js/dist/theme/white.css" id="theme"/>
+
+<link rel="stylesheet" href="../../reveal.js/plugin/highlight/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>Code: Best Practices</h1><h2>Reindert-Jan Ekker</h2><p>Code Sensei</p>
+</section>
+
+<section>
+<section id="slide-org90eec86">
+<h2 id="org90eec86">Code Structure</h2>
+<div class="outline-text-2" id="text-org90eec86">
+</div>
+</section>
+<section id="slide-orgafe7ff7">
+<h3 id="orgafe7ff7">Modules</h3>
+<p>
+The following apply in a broad sense to any structure in programming,
+e.g. classes, functions, packages, etc.
+</p>
+
+<p>
+We use the word <i>module</i> in a very general sense.
+</p>
+
+</section>
+<section id="slide-org331602f">
+<h3 id="org331602f">Single Responsibility Principle</h3>
+<p>
+The single-responsibility principle (SRP)
+</p>
+
+<p>
+Every module in a computer program should have responsibility over a
+single part of that program's functionality
+</p>
+
+<p>
+For more see: <a href="https://en.wikipedia.org/wiki/Single_responsibility_principle">Single Responsibility Principle</a>
+</p>
+
+</section>
+<section id="slide-org537a359">
+<h3 id="org537a359">Cohesion</h3>
+<p>
+Cohesion is the degree to which the elements
+of a certain module belong together. 
+</p>
+
+<p>
+Thus, it is a measure of how strongly related each piece of
+functionality expressed by the source code of a software module is.
+</p>
+
+</section>
+<section id="slide-org8e06b91">
+<h3 id="org8e06b91">Cohesion 2</h3>
+<p>
+In other words: cohesion means that modules should have a small and
+well-defined purpose, and they should do as little as possible.
+</p>
+
+</section>
+<section id="slide-org3c03606">
+<h3 id="org3c03606">A cohesive class</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >q  class Pizza:
+      def __init__(self, name, toppings):
+          self.name = name
+          self.toppings = toppings
+
+      def get_price(self):
+          return sum([t.price for t in self.toppings])
+
+      def __str__(self):
+          return f"{self.name}: {self.get_price()}"
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgfc79c76">
+<h3 id="orgfc79c76">A non-cohesive class</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >class User:
+    def __init__(self, firstname, lastname, age):
+        self.firstname = firstname
+        self.lastname = lastname
+        self.age = age
+
+    def get_full_name(self):
+        return self.firstname + " " + self.lastname
+
+    def get_account_balance(self):
+        # This is NOT a user-related function
+        return Bank.getaccount(self).balance
+
+    def read_address_streetname(self):
+        # Why does the User class do input?
+        # Should this be coupled to text-based UI?
+        self.streetname = input("Enter streetname?")  
+</code></pre>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org5cfcfcc">
+<h2 id="org5cfcfcc">Coupling</h2>
+<p>
+Coupling is how much one component knows about the inner workings or
+inner elements of another one, i.e. how much knowledge it has of the
+other component.
+</p>
+
+</section>
+<section id="slide-org1d200f6">
+<h3 id="org1d200f6">Loose Coupling</h3>
+<p>
+Best practice: <b>Loose Coupling</b>
+</p>
+
+<p>
+Different classes/modules should be minimally
+dependent.
+</p>
+
+<p>
+It should be possible to change implementation details of a class
+without interfering with dependent classes.
+</p>
+
+</section>
+<section id="slide-org2eec6c6">
+<h3 id="org2eec6c6">Tight Coupling</h3>
+<p>
+Where components ar so tied to one another, that you cannot possibly
+change the one without changing the other.
+</p>
+
+</section>
+<section id="slide-org879b89c">
+<h3 id="org879b89c">Example</h3>
+<p>
+An iPhone is a good example of tight coupling:
+</p>
+
+<p>
+Once the battery dies, the phone dies, because the battery is soldered
+fixed.
+</p>
+
+<p>
+Loose coupling would allow effortlessly changing the battery.
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org2f27e75">
+<h2 id="org2f27e75">A Bad Example</h2>
+<div class="org-src-container">
+
+<pre   ><code class="python" >def get_number(question):
+    return int(input(question))
+
+def addition():
+    # Not cohesive (does multiple things)
+    # Tightly coupled to get_number
+    num_1 = get_number("Enter Number One")
+    num_2 = get_number("Enter Number Two")
+    addition = num_1 + num_2
+    print(addition)
+</code></pre>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org99dad3c">
+<h2 id="org99dad3c">Better</h2>
+<div class="org-src-container">
+
+<pre   ><code class="python" >def addition(a, b):
+    # A function with a single, clear responsibility
+    return a+b
+
+# This leaves the choice of how to do input/output outside of the function:
+a = get_number("first number?")
+b = get_number("second number?")
+print(f"the total is {addition(a,b)}")
+</code></pre>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orga65fbc7">
+<h2 id="orga65fbc7">Another bad example</h2>
+</section>
+</section>
+</div>
+</div>
+<script src="../../reveal.js/dist/reveal.js"></script>
+<script src="../../reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight]
+});
+
+</script>
+</body>
+</html>

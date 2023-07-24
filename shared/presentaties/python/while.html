@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>While loops</title>
+<meta name="author" content="Reindert-Jan Ekker"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../../../reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../../../reveal.js/dist/theme/solarized.css" id="theme"/>
+
+<link rel="stylesheet" href="../../../reveal.js/plugin/highlight/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>While loops</h1><h2>Reindert-Jan Ekker</h2><p>Code Sensei</p>
+</section>
+
+<section>
+<section id="slide-orgfa3613a">
+<h2 id="orgfa3613a">Iterations (while)</h2>
+<p>
+Or: how to repeat yourself.
+</p>
+
+</section>
+<section id="slide-org741e489">
+<h3 id="org741e489">While</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >while boolean_expression:
+    body
+</code></pre>
+</div>
+
+<p>
+The code in the <i>body</i> will be repeated as long as the
+boolean_expression remains <code>True</code>.
+</p>
+
+<p>
+There can be more than 1 line of code in the body.
+</p>
+
+</section>
+<section id="slide-orgf69d2be">
+<h3 id="orgf69d2be">1 to 100</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >count = 1
+while count &lt;= 100:
+    print(count)
+    count += 1
+
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgd131ccc">
+<h3 id="orgd131ccc">Break</h3>
+<p>
+<code>break</code> allows us to stop the loop whenever we want.
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >count = 1
+while True:
+    print(count)
+    if count &gt;= 100:
+        break
+    count += 1
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgee4dc61">
+<h3 id="orgee4dc61">Break 2</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >while True:
+    # allow user to do things
+    # e.g. play a game, buy items, etc.
+    answer = input("Want to continue [y/n]?")
+    if answer == 'n':
+        break
+</code></pre>
+</div>
+</section>
+</section>
+</div>
+</div>
+<script src="../../../reveal.js/dist/reveal.js"></script>
+<script src="../../../reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight]
+});
+
+</script>
+</body>
+</html>

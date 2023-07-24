@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Threading</title>
+<meta name="author" content="Reindert-Jan Ekker"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../../../reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../../../reveal.js/dist/theme/simple.css" id="theme"/>
+
+<link rel="stylesheet" href="../../../reveal.js/plugin/highlight/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>Threading</h1><h2>Reindert-Jan Ekker</h2><p>Code Sensei</p>
+</section>
+
+<section>
+<section id="slide-org79779d2">
+<h2 id="org79779d2">Threading</h2>
+<ul>
+<li>Typical use: do some task while IO is happening</li>
+<li>E.g. DB, network, user input etc.</li>
+<li>Goal: keep application responsive</li>
+<li>The GIL prevents us from doing <i>real</i> parallel threads</li>
+
+</ul>
+
+</section>
+<section id="slide-orgdb3fafc">
+<h3 id="orgdb3fafc">Dangers</h3>
+<p>
+Your thread may stop at <i>any</i> time and another might start running.
+</p>
+
+<p>
+Memory is shared
+</p>
+
+<p>
+Writing to the same memory structure from multiple threads is a <i>bad
+idea</i>
+</p>
+
+</section>
+<section id="slide-org6bf12bb">
+<h3 id="org6bf12bb">Creating a thread</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >from threading import Thread
+
+class MyThread(Thread):
+
+    def run(self):
+        ...
+
+t = MyThread()
+t.start()
+t.join()
+</code></pre>
+</div>
+</section>
+<section id="slide-org2957a11">
+<h3 id="org2957a11">But</h3>
+<p>
+There is a newer, better library: <a href="https://docs.python.org/3/library/concurrent.futures.html">concurrent.futures</a>.
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >from concurrent.futures import ThreadPoolExecutor
+
+def square(x):
+    return x*x
+
+with ThreadPoolExecutor(max_workers=5) as ex:
+    for y in ex.map(square, [10, 28, 13, 45]):
+        print(y)
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org611dbef">
+<h3 id="org611dbef">Tip</h3>
+<p>
+Keep the functions small and stateless.
+</p>
+
+<p>
+This avoids common concurrency problems like
+</p>
+
+<ul>
+<li>deadlocks</li>
+<li>concurrent writes</li>
+<li>race conditions</li>
+
+</ul>
+
+</section>
+<section id="slide-orgc296e46">
+<h3 id="orgc296e46">Synchronization</h3>
+<p>
+If you need to access the same (non-threadsafe) resource from multiple
+threads:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >import threading
+mutex = Lock()
+
+# in thread
+mutex.acquire() # will cause thread to wait if another has the lock
+mutex.release()
+</code></pre>
+</div>
+
+<p>
+<a href="../../exercises/locks_example.html">Example usage</a>
+</p>
+
+</section>
+<section id="slide-org3745323">
+<h3 id="org3745323">Warning</h3>
+<p>
+Locks can lead to deadlock and other complications.
+</p>
+
+<p>
+They also compromise performance.
+</p>
+
+<p>
+Debugging can be very hard because of non-deterministic execution.
+</p>
+
+</section>
+<section id="slide-org9f8b35a">
+<h3 id="org9f8b35a">An alternative</h3>
+<p>
+Threadsafe datastructures: <a href="https://docs.python.org/3/library/queue.html">Queue</a>
+</p>
+
+<p>
+<a href="../../exercises/locks_example.html">Example usage</a>
+</p>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orged3cd4a">
+<h2 id="orged3cd4a">Multiprocessing</h2>
+<ul>
+<li>For CPU-bound jobs</li>
+<li>Separate memory and processes</li>
+<li>Code slightly simpler than with threading</li>
+<li>No GIL limitation</li>
+<li>No synchronization problems</li>
+
+</ul>
+
+</section>
+<section id="slide-org0babb71">
+<h3 id="org0babb71">Example</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >from multiprocessing import Pool
+
+def square(x):
+    return x*x
+
+def main():
+    with Pool() as pool:
+        result = pool.map(square, range(100))
+        print(result)
+
+if __name__ == '__main__':
+    main()
+
+</code></pre>
+</div>
+</section>
+<section id="slide-org6e0a842">
+<h3 id="org6e0a842">Note</h3>
+<p>
+All multiprocessing code must be inside
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >if __name__ == '__main__':
+    ....
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org3ad7182">
+<h3 id="org3ad7182">Old-fashioned way</h3>
+<p>
+Starting processes yourself
+</p>
+
+<p>
+See <a href="../../exercises/multiproc_example.html">example here</a>
+</p>
+
+</section>
+<section id="slide-org24c7b6e">
+<h3 id="org24c7b6e">Multiprocessing</h3>
+<ul>
+<li>No reason for more processes than processors</li>
+<li>Can only run as many as you have cpu's</li>
+<li>Each proc has a full copy of python interpreter</li>
+<li>Own memory space etc.</li>
+<li>Communicating between processes is expensive</li>
+<li>Creating processes is expensive</li>
+
+</ul>
+</section>
+</section>
+</div>
+</div>
+<script src="../../../reveal.js/dist/reveal.js"></script>
+<script src="../../../reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight]
+});
+
+</script>
+</body>
+</html>

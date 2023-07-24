@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Teamwork</title>
+<meta name="author" content="Reindert-Jan Ekker"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../../reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../../reveal.js/dist/theme/sky.css" id="theme"/>
+
+<link rel="stylesheet" href="../../reveal.js/plugin/highlight/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>Teamwork</h1><h2>Reindert-Jan Ekker</h2><p>Code Sensei</p>
+</section>
+<section>
+<section id="slide-org9de5feb">
+<h2 id="org9de5feb">Git</h2>
+<div class="outline-text-2" id="text-org9de5feb">
+</div>
+</section>
+<section id="slide-orgc447426">
+<h3 id="orgc447426">Remember this?</h3>
+
+<div id="org2b29eae" class="figure">
+<p><img src="../static/git_diag_simple.png" alt="git_diag_simple.png" />
+</p>
+</div>
+
+
+</section>
+<section id="slide-org9e44acf">
+<h3 id="org9e44acf">And this?</h3>
+
+<div id="orga229a20" class="figure">
+<p><img src="../static/git-diagram.png" alt="git-diagram.png" />
+</p>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org8176602">
+<h2 id="org8176602">Teamwork met Git</h2>
+<div class="outline-text-2" id="text-org8176602">
+</div>
+</section>
+<section id="slide-org9963f4e">
+<h3 id="org9963f4e">Conflicts</h3>
+<p>
+When working on the same files at the same time, you will run into
+conflicts.
+</p>
+
+</section>
+<section id="slide-org2103ef2">
+<h3 id="org2103ef2">Hands-on conflict</h3>
+<p>
+Let's try this:
+</p>
+
+<ul>
+<li>teammate 1 makes a change to a file and commits (no push)</li>
+<li>teammate 2 makes a change to the same line in the same file and pushes</li>
+<li>teammate 1 pulls</li>
+
+</ul>
+
+
+</section>
+<section id="slide-org38abde8">
+<h3 id="org38abde8">Conflict</h3>
+<p>
+Code with a conflict looks like this
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+    print("this is my code");
+    return 0;
+=======
+    print("This is my coworkers code")
+    return -1;
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; branch 'master' of git@bitbucket.org:rjekker/git-test.git
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org5bf8a1f">
+<h3 id="org5bf8a1f">Solve conflict</h3>
+<ul>
+<li>It's just text; change it until it's the way you want it</li>
+<li>Or use a specialised merge tool</li>
+<li>Then: commit</li>
+<li>This is called a <i>merge</i></li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgcf85333">
+<h2 id="orgcf85333">Branches</h2>
+<p>
+Real teamwork
+</p>
+</section>
+<section id="slide-orgfef8184">
+<h3 id="orgfef8184">Branches</h3>
+<p>
+We don't want to have to solve conflicts all the time
+</p>
+
+<p>
+Usually everybody works on their <b>own branch</b>
+</p>
+
+<p>
+You only merge branches when you want to.
+</p>
+
+<p>
+<b>Demo: local branch and merging!</b>
+</p>
+
+</section>
+<section id="slide-orgf699554">
+<h3 id="orgf699554">Merge branches</h3>
+<ol>
+<li><i>check out</i> the branch you want to merge <i>into</i></li>
+<li>Then <i>merge</i> with the branch with changes</li>
+<li>Solve conflicts</li>
+<li>Commit!</li>
+
+</ol>
+
+</section>
+<section id="slide-org55975cc">
+<h3 id="org55975cc">Remote branches</h3>
+<p>
+You can <i>push</i> and <i>pull</i> your own branch to the <i>remote</i>.
+</p>
+
+<p>
+Do you want this? When?
+</p>
+</section>
+</section>
+</div>
+</div>
+<script src="../../reveal.js/dist/reveal.js"></script>
+<script src="../../reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight]
+});
+
+</script>
+</body>
+</html>

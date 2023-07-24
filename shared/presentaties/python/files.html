@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Files en Directories</title>
+<meta name="author" content="Reindert-Jan Ekker"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../../../reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../../../reveal.js/dist/theme/serif.css" id="theme"/>
+
+<link rel="stylesheet" href="../../../reveal.js/plugin/highlight/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>Files en Directories</h1><h2>Reindert-Jan Ekker</h2><p>Code Sensei</p>
+</section>
+
+<section>
+<section id="slide-org04eb24e">
+<h2 id="org04eb24e">Paden en bestanden</h2>
+<div class="outline-text-2" id="text-org04eb24e">
+</div>
+</section>
+<section id="slide-org3b67d79">
+<h3 id="org3b67d79">os</h3>
+<p>
+<code>os</code> is een module voor os-gerelateerde functies. Onder andere bevat
+deze functies voor file-manipulatie.
+</p>
+
+<ul>
+<li><a href="https://docs.python.org/3/library/os.html">OS documentatie</a></li>
+<li><a href="https://docs.python.org/3/library/os.html#files-and-directories">File en Directory functies</a></li>
+
+</ul>
+</section>
+<section id="slide-orgfb449f2">
+<h3 id="orgfb449f2">Voorbeelden</h3>
+<ul>
+<li>os.chdir(path)</li>
+<li>os.getcwd()</li>
+<li>os.listdir()</li>
+<li>os.mkdir()</li>
+<li>os.remove(), os.rmdir()</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgce85c62">
+<h2 id="orgce85c62">os.path</h2>
+<p>
+<code>os.path</code> is een module waarmee je bestandsnamen kunt manipuleren
+</p>
+
+<p>
+Werkt volledig <i>cross-platform</i>
+</p>
+
+</section>
+<section id="slide-org5ec3c03">
+<h3 id="org5ec3c03">Belangrijke functies</h3>
+<ul>
+<li><code>os.path.join()</code> voor het samenstellen van een pad</li>
+<li><code>os.path.exists(), ..isfile(), ..isdir()</code></li>
+
+</ul>
+
+<p>
+Zie <a href="https://docs.python.org/3/library/os.path.html">https://docs.python.org/3/library/os.path.html</a>
+</p>
+
+</section>
+<section id="slide-orgd46a3a6">
+<h3 id="orgd46a3a6">Een pad samenstellen</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >import os, os.path
+# een relatief pad
+pad = os.path.join('mijndir' )
+
+# Een absoluut pad
+# Gebruik os.sep: dit is een slash
+homedir = os.path.join(os.sep, 'home', 'reindert')
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org5ffd8c9">
+<h3 id="org5ffd8c9">Files list</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >from os import listdir
+
+homedir = os.path.join(os.sep, 'home', 'reindert')
+
+files = listdir(homedir)
+for f in files:
+    if f.endswith("txt"):
+        print(f)
+</code></pre>
+</div>
+</section>
+</section>
+</div>
+</div>
+<script src="../../../reveal.js/dist/reveal.js"></script>
+<script src="../../../reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight]
+});
+
+</script>
+</body>
+</html>

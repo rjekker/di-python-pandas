@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Input/Output</title>
+<meta name="author" content="Reindert-Jan Ekker"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../../../reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../../../reveal.js/dist/theme/white.css" id="theme"/>
+
+<link rel="stylesheet" href="../../../reveal.js/plugin/highlight/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>Input/Output</h1><h2>Reindert-Jan Ekker</h2><p>Code Sensei</p>
+</section>
+
+<section>
+<section id="slide-orgffb044f">
+<h2 id="orgffb044f">Text files and I/O</h2>
+<div class="outline-text-2" id="text-orgffb044f">
+</div>
+</section>
+<section id="slide-orgef26557">
+<h3 id="orgef26557">Open</h3>
+<p>
+Built-in function <code>open(filename, mode)</code>
+</p>
+
+<p>
+Returns a <code>File</code> object.
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >fin = open("somefile.txt")
+for l in fin:
+    print(l)
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgcb41f5e">
+<h3 id="orgcb41f5e">Mode</h3>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">r</td>
+<td class="org-left">read from start of file <b>(default)</b></td>
+</tr>
+
+<tr>
+<td class="org-left">r+</td>
+<td class="org-left">read and write from start</td>
+</tr>
+
+<tr>
+<td class="org-left">w</td>
+<td class="org-left"><i>truncate</i>; write from start</td>
+</tr>
+
+<tr>
+<td class="org-left">w+</td>
+<td class="org-left">read and write; truncate</td>
+</tr>
+
+<tr>
+<td class="org-left">a</td>
+<td class="org-left">write at <i>end</i> of file</td>
+</tr>
+
+<tr>
+<td class="org-left">a+</td>
+<td class="org-left">read and write at end of file</td>
+</tr>
+</tbody>
+</table>
+
+<ul>
+<li class="fragment appear">It's usually better not to use the modes with a +</li>
+
+</ul>
+
+</section>
+<section id="slide-org8a34152">
+<h3 id="org8a34152">File Output</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >fout = open("file.txt", 'a')
+print("hello, world!", file=fout)
+
+#alternative
+fout.write("hello, world!")
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org1e052ff">
+<h3 id="org1e052ff">print() vs f.write()</h3>
+<ul>
+<li><code>print()</code> adds a newline, <code>f.write()</code> does not</li>
+<li><code>print()</code> calls <code>__str__()</code> on an object</li>
+
+</ul>
+
+</section>
+<section id="slide-org8cd8224">
+<h3 id="org8cd8224">closing files</h3>
+<p>
+Best practice: to make sure file is closed on errors
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >with open("log.txt") as f:
+    for l in f:
+        print(l)
+</code></pre>
+</div>
+
+<ul>
+<li class="fragment appear">This is like wrapping the code with try/except and calling <code>f.close</code></li>
+
+</ul>
+</section>
+</section>
+</div>
+</div>
+<script src="../../../reveal.js/dist/reveal.js"></script>
+<script src="../../../reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight]
+});
+
+</script>
+</body>
+</html>

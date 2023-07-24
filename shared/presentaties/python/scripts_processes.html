@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Scripts and Processes</title>
+<meta name="author" content="Reindert-Jan Ekker"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../../../reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../../../reveal.js/dist/theme/white.css" id="theme"/>
+
+<link rel="stylesheet" href="../../../reveal.js/plugin/highlight/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>Scripts and Processes</h1><h2>Reindert-Jan Ekker</h2><p>Code Sensei</p>
+</section>
+
+<section>
+<section id="slide-org8c01640">
+<h2 id="org8c01640">Standalone scripts</h2>
+<div class="outline-text-2" id="text-org8c01640">
+</div>
+</section>
+<section id="slide-org8274309">
+<h3 id="org8274309">Main</h3>
+<p>
+When we write a Python file that can be run as a script,
+</p>
+
+<p>
+The code to start the program should use the following if-statement:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >if __name__ == '__main__':
+    print("Let's do stuff!")
+</code></pre>
+</div>
+
+<p>
+This make sure that you can <code>import</code> the file without side effects.
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org7e476e5">
+<h2 id="org7e476e5">Running a script</h2>
+<div class="outline-text-2" id="text-org7e476e5">
+</div>
+</section>
+<section id="slide-org8bdaa0f">
+<h3 id="org8bdaa0f">Running with python</h3>
+<p>
+On the commandline with python:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="sh" >$ python my_script.py
+# Or specify the version if needed
+$ python3 my_script.py
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org6a3e1b2">
+<h3 id="org6a3e1b2">Running a notebook</h3>
+<div class="org-src-container">
+
+<pre   ><code class="sh" >jupyter nbconvert --to notebook --execute mynotebook.ipynb --output mynotebook.ipynb
+</code></pre>
+</div>
+
+<p>
+This runs the notebook and writes the output back to the same notebook file.
+</p>
+
+<p>
+See also <a href="https://github.com/jupyter/nbconvert#documentation">nbconvert docs</a>.
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org10ecf57">
+<h2 id="org10ecf57">Running standalone</h2>
+<div class="outline-text-2" id="text-org10ecf57">
+</div>
+</section>
+<section id="slide-orgb176fc6">
+<h3 id="orgb176fc6">Windows</h3>
+<p>
+<code>.py</code> files should be associated with <code>python.exe</code>
+</p>
+
+<p>
+<code>.pyw</code> files are associated with <code>pythonw.exe</code> (no terminal window)
+</p>
+
+<p>
+Run the file by double clicking.
+</p>
+</section>
+<section id="slide-org8d6cb3c">
+<h3 id="org8d6cb3c">UNIX</h3>
+<p>
+On Mac Os/Linux:
+</p>
+
+<p>
+First line of script: <code>shebang</code>
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="py" >#!/usr/bin/python3
+</code></pre>
+</div>
+
+<p>
+Although <a href="https://blogs.gnome.org/mcatanzaro/2018/02/16/on-python-shebangs/">YMMV</a>
+</p>
+</section>
+<section id="slide-orgebafef0">
+<h3 id="orgebafef0">UNIX 2</h3>
+<p>
+Also make sure to set executable permissions:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="sh" >chmod u+x my_script.py
+</code></pre>
+</div>
+
+<p>
+Now you can run the script:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="sh" >./my_script.py
+</code></pre>
+</div>
+
+<p>
+See <a href="https://www.tutorialspoint.com/unix/unix-file-permission.htm">UNIX file permissions</a>
+</p>
+
+</section>
+<section id="slide-orgea24b51">
+<h3 id="orgea24b51">Bundling your program</h3>
+<ul>
+<li><a href="https://packaging.python.org/tutorials/packaging-projects/">Regular Python Package</a></li>
+<li><a href="https://pyinstaller.readthedocs.io/en/stable/">PyInstaller</a> cross-platform installer</li>
+<li><a href="http://py2exe.org/">Py2Exe</a> Create a windows .exe</li>
+<li><a href="https://nuitka.net/">Nuitka</a> Python compiler</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org5828675">
+<h2 id="org5828675">Arguments</h2>
+<p>
+Are stored in <a href="https://docs.python.org/3/library/sys.html#sys.argv">sys.argv</a>
+</p>
+
+<p>
+Or use <a href="https://docs.python.org/3/library/argparse.html">argparse</a>
+</p>
+</section>
+</section>
+<section>
+<section id="slide-org7a2c21c">
+<h2 id="org7a2c21c">Exiting the script</h2>
+<p>
+Use <code>sys.exit()</code> if you want to exit your program.
+</p>
+
+<p>
+You can use the built-in <code>exit()</code> but that is meant to be used in interactive Python sessions.
+</p>
+
+</section>
+<section id="slide-org70908ba">
+<h3 id="org70908ba">Exit status</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >from sys import exit
+
+if something_wrong:
+    exit(1) # Not zero: error
+else:
+    exit(0) # Zero: success
+</code></pre>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org3798fa9">
+<h2 id="org3798fa9">Running programs</h2>
+<div class="outline-text-2" id="text-org3798fa9">
+</div>
+</section>
+<section id="slide-orgac4da65">
+<h3 id="orgac4da65">Run</h3>
+<p>
+Use module <code>subprocess</code>
+</p>
+
+<p>
+<a href="https://docs.python.org/3/library/subprocess.html">https://docs.python.org/3/library/subprocess.html</a>
+</p>
+
+<p>
+Preferred function is <code>run()</code>
+</p>
+
+</section>
+<section id="slide-orgb24c8b1">
+<h3 id="orgb24c8b1">run</h3>
+<p>
+Simple case
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="python" >c = subprocess.run(["ls", "-l"])
+</code></pre>
+</div>
+
+<p>
+This will print the output of the command.
+</p>
+
+<p>
+<code>c</code> is a <a href="https://docs.python.org/3/library/subprocess.html#subprocess.CompletedProcess">CompletedProcess</a> object
+</p>
+
+</section>
+<section id="slide-org4081398">
+<h3 id="org4081398">CompletedProcess</h3>
+<ul>
+<li>returncode: Exit status of the child process (0=success)</li>
+<li>stdout: Captured output</li>
+<li>stderr: Captured errors</li>
+
+</ul>
+
+</section>
+<section id="slide-org3f67948">
+<h3 id="org3f67948">Return code</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >c = subprocess.run(['ls', 'glorpje'])
+if not c.returncode:
+    print("ok")
+else:
+    print("something went wrong")
+</code></pre>
+</div>
+</section>
+<section id="slide-orgf1817b9">
+<h3 id="orgf1817b9">Output</h3>
+<p>
+We can capture the output into a variable
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="python" >c = subprocess.run(["ls", "-l"], stdout=subprocess.PIPE)
+print(c.stdout)
+b'total 2672\n-rw-rw-r-- 1 reindert reindert   58880 sep 25 11:15 file1.doc\ndrwxrwxr-x 4 reindert reindert    4096 sep 25 11:15 file2.jpg\n
+</code></pre>
+</div>
+
+<p>
+Note that stdout is not a string but a <code>bytes</code> object (program might return binary data).
+</p>
+
+
+</section>
+<section id="slide-orga112554">
+<h3 id="orga112554">Process output</h3>
+<p>
+To get output as text, add <code>text=True</code>
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="python" >import subprocess
+c = subprocess.run(["ls", "-l"], stdout=subprocess.PIPE,
+    text=True)
+
+print(c.stdout)
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgb3a7382">
+<h3 id="orgb3a7382">Older python versions</h3>
+<p>
+Before Python 3.7 this was called <code>universal_newlines</code>:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >import subprocess
+c = subprocess.run(["ls", "-l"], stdout=subprocess.PIPE,
+    universal_newlines=True)
+
+print(c.stdout)
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org44461bf">
+<h3 id="org44461bf">Running a command inside the shell</h3>
+<p>
+Some shell commands are not actually executables. You need a shell to
+run them:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >import subprocess
+# On windows, there is no dir.exe
+c = subprocess.run(["dir"], stdout=subprocess.PIPE,
+    text=True, shell=True)
+
+print(c.stdout)
+</code></pre>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org3fb8f15">
+<h2 id="org3fb8f15">Files and paths</h2>
+<p>
+Instead of running <code>dir</code> or <code>ls</code>, use <a href="https://docs.python.org/3/library/pathlib.html">pathlib</a> to manipulate files and
+paths:
+</p>
+
+<ul>
+<li><a href="https://realpython.com/python-pathlib/">Tutorial</a></li>
+<li><a href="https://github.com/chris1610/pbpython/blob/master/extras/Pathlib-Cheatsheet.pdf">Cheat sheet</a></li>
+
+</ul>
+</section>
+</section>
+</div>
+</div>
+<script src="../../../reveal.js/dist/reveal.js"></script>
+<script src="../../../reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight]
+});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Dictionaries</title>
+<meta name="author" content="Reindert-Jan Ekker"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../../../reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../../../reveal.js/dist/theme/sky.css" id="theme"/>
+
+<link rel="stylesheet" href="../../../reveal.js/plugin/highlight/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>Dictionaries</h1><h2>Reindert-Jan Ekker</h2><p>Code Sensei</p>
+</section>
+
+<section>
+<section id="slide-org17edebe">
+<h2 id="org17edebe">Dictionaries</h2>
+<div class="outline-text-2" id="text-org17edebe">
+</div>
+</section>
+<section id="slide-org1fcbc90">
+<h3 id="org1fcbc90">Dictionaries</h3>
+<p>
+Store <i>associations</i>: <b>key -&gt; value</b>.
+</p>
+
+<p>
+Also called:
+</p>
+<ul>
+<li class="fragment appear">associative array</li>
+<li class="fragment appear">(hash)map</li>
+
+</ul>
+
+</section>
+<section id="slide-orga0605eb">
+<h3 id="orga0605eb">Example</h3>
+<ul>
+<li>Phonebook: we map names (keys) to phone numbers (values):</li>
+
+</ul>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >d = { "Jenny": '867-5309', "Morgan": '776-2323' }
+</code></pre>
+</div>
+
+<ul>
+<li class="fragment appear">This dictionary has 2 elements</li>
+<li class="fragment appear">keys and values can have (almost) any type (<a href="https://wiki.python.org/moin/DictionaryKeys">More Info</a>)</li>
+
+</ul>
+
+</section>
+<section id="slide-org3365eb4">
+<h3 id="org3365eb4">Length</h3>
+<p>
+A dictionary has a length just like a string and a list
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >d = { "Jenny": '867-5309', "Morgan": '776-2323' }
+print(len(d))
+</code></pre>
+</div>
+
+<p>
+Output:
+</p>
+<pre class="example" id="orgf5ecee0">
+2
+</pre>
+
+</section>
+<section id="slide-orga7a99ae">
+<h3 id="orga7a99ae">Example 2</h3>
+<ul>
+<li>DNS records: IP addresses and server names</li>
+
+</ul>
+<div class="org-src-container">
+
+<pre   ><code class="python" >d = { 'localhost': '127.0.0.1',
+     'www.example.com': ['168.192.0.5', '888.777.666.444', '123.456.789.0']
+     }
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org81332f7">
+<h3 id="org81332f7">Example 3</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >d = {
+    91827: { 'type': 'iPhone', 'os': 'Mac OS' },
+    72365: { 'type': 'Samsung', 'os': 'Android' },
+    97356: { 'type': 'Rotary', 'os': None }
+}
+print(d[72365]['os'])
+</code></pre>
+</div>
+
+<p>
+Output:
+</p>
+<pre class="example" id="org9679e63">
+Android
+</pre>
+</section>
+<section id="slide-org5eae81e">
+<h3 id="org5eae81e">Example 4</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >{}
+</code></pre>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-org7776d27">
+<h2 id="org7776d27">Operations</h2>
+<p>
+Like with lists, we can add, remove and change values.
+</p>
+
+</section>
+<section id="slide-org3f856b1">
+<h3 id="org3f856b1">Retrieving a value</h3>
+<p>
+You retrieve a value by using the <i>key</i>.
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >d = { "Jenny": '867-5309', "Morgan": '776-2323' }
+print(d["Jenny"])
+</code></pre>
+</div>
+
+<ul>
+<li class="fragment appear">Note the similarity with retrieving an item from a list</li>
+<li class="fragment appear">Dict values are retrieved by <i>key</i>, not by index</li>
+<li class="fragment appear">You cannot retrieve keys this way!</li>
+
+</ul>
+
+</section>
+<section id="slide-org6e34fa9">
+<h3 id="org6e34fa9">Add/change an element</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >inventory = {'eggs': 5, 'bread': 8}
+inventory['wine'] = 10     # key does not exist: adds new
+inventory['bread'] -= 1    # changing existing element
+print(inventory)
+</code></pre>
+</div>
+<p>
+Output:
+</p>
+<pre class="example" id="org81c6132">
+{'eggs': 5, 'bread': 7, 'wine': 10}
+</pre>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org474c919">
+<h2 id="org474c919">Missing keys</h2>
+<p>
+If you try to use a non-existing key this gives an error:
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="python" >&gt;&gt;&gt; d['marie']
+Traceback (most recent call last):
+  File "stdin", line 1, in module
+KeyError: 'marie'
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org7f105e3">
+<h3 id="org7f105e3">Check first</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >d = { "Jenny": '867-5309', "Morgan": '776-2323' }
+  if "marie" in d:
+      print("Phonenr for marie:", d["marie"])
+  else:
+      print("Marie is not in phonebook")
+</code></pre>
+</div>
+
+<ul>
+<li class="fragment appear">The <code>in</code> operator works on keys not values!</li>
+
+</ul>
+
+</section>
+<section id="slide-orgac44746">
+<h3 id="orgac44746">Another solution</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >d = { "Jenny": '867-5309', "Morgan": '776-2323' }
+  try:
+      print("Phonenr for marie:", d["marie"])
+  except:
+      print("Marie is not in phonebook")
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org1dfa165">
+<h3 id="org1dfa165">Alternative: get</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >d = { "Jenny": '867-5309', "Morgan": '776-2323' }
+print(d.get("Jenny"))
+print(d.get("Marie"))  # Key does not exist -&gt; None
+print(d.get("Marie", "unknown contact")) # Default value
+</code></pre>
+</div>
+
+<pre class="example" id="org3064645">
+Output:
+867-5309
+None
+unknown contact
+</pre>
+</section>
+</section>
+<section>
+<section id="slide-orge81278f">
+<h2 id="orge81278f">Looping over a dictionary</h2>
+<div class="org-src-container">
+
+<pre   ><code class="python" >for person in d:
+    print("Number for", person, "is: ", d[person])
+</code></pre>
+</div>
+
+<p>
+Output:
+</p>
+<pre class="example" id="org2e98f0e">
+Number for Jenny is: 867-5309
+Number for Morgan is: 776-2323
+</pre>
+
+<ul>
+<li class="fragment appear">We loop over the <i>keys</i></li>
+<li class="fragment appear">Inside the loop we retrieve the <i>values</i></li>
+
+</ul>
+
+</section>
+<section id="slide-org28c2d1f">
+<h3 id="org28c2d1f">values()</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >capitals = { 'DE': 'Berlin', 'FR': 'Paris', 'NL': 'Amsterdam' }
+print(capitals.values())
+</code></pre>
+</div>
+
+<p>
+Output:
+</p>
+<pre class="example" id="org8531867">
+['Berlin', 'Paris', 'Amsterdam']
+</pre>
+
+<ul>
+<li class="fragment appear">You can use this to loop over all values</li>
+<li class="fragment appear">There is a function keys() which works similarly</li>
+
+</ul>
+
+</section>
+<section id="slide-org2e36e58">
+<h3 id="org2e36e58">items()</h3>
+<p>
+When you need to retrieve keys and dictionaries at the same time.
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >for k, v in capitals.items():
+    print(v, "is the capital of", k)
+</code></pre>
+</div>
+
+<pre class="example" id="org4ebf175">
+Berlin is the capital of DE
+Paris is the capital of FR
+Amsterdam is the capital of NL
+</pre>
+</section>
+</section>
+</div>
+</div>
+<script src="../../../reveal.js/dist/reveal.js"></script>
+<script src="../../../reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight]
+});
+
+</script>
+</body>
+</html>

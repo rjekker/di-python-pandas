@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Overige Onderwerpen</title>
+<meta name="author" content="Reindert-Jan Ekker"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../../../reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../../../reveal.js/dist/theme/sky.css" id="theme"/>
+
+<link rel="stylesheet" href="../../../reveal.js/plugin/highlight/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>Overige Onderwerpen</h1><h2>Reindert-Jan Ekker</h2><p>Code Sensei</p>
+</section>
+
+<section>
+<section id="slide-org3d4f2c3">
+<h2 id="org3d4f2c3">Tuples</h2>
+<div class="outline-text-2" id="text-org3d4f2c3">
+</div>
+</section>
+<section id="slide-orgadc16b1">
+<h3 id="orgadc16b1">Tuples</h3>
+<ul>
+<li>sequenties met willekeurige waardes, lijken veel op lijsten.</li>
+<li>Werken voor het grootste deel net zoals lijsten (indices, for, len, max, min, etc.)</li>
+<li>Groot verschil: tuples zijn <i>immutable</i></li>
+
+</ul>
+</section>
+<section id="slide-orgddf6775">
+<h3 id="orgddf6775">Tuples</h3>
+<p>
+Een tuple is een lijst waardes gescheiden door komma's
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="python" >&gt;&gt;&gt; t = 'a', 5, [1, 2]
+&gt;&gt;&gt; t2 = ('a', 5, [1,2])
+&gt;&gt;&gt; t == t2
+True
+&gt;&gt;&gt; type(t)
+type 'tuple'
+&gt;&gt;&gt; t = ()   # leeg tuple
+&gt;&gt;&gt; type(t)
+type 'tuple'
+</code></pre>
+</div>
+</section>
+<section id="slide-org2240f0b">
+<h3 id="org2240f0b">een tuple met 1 element</h3>
+<p>
+Let op de komma
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="python" >&gt;&gt;&gt; t = (5)
+&gt;&gt;&gt; type(t)
+type 'int'
+&gt;&gt;&gt; t = (5,)
+type 'tuple'
+</code></pre>
+</div>
+</section>
+<section id="slide-orgf2a1aa6">
+<h3 id="orgf2a1aa6">Voorbeeldtoepassing</h3>
+<p>
+Een functie met meer dan 1 returnwaarde
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="python" >def min_max(l):
+    return min(l), max(l)
+
+t = min_max([5,8,3,1,9])
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orge97edbc">
+<h3 id="orge97edbc">Nog een voorbeeld</h3>
+<p>
+Toekenning aan een tuple
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="python" >l = ['a','b','c']
+for index, char in enumerate(l):
+    print("%s: %d" % (index, char))
+</code></pre>
+</div>
+
+<p>
+Output:
+0: a
+1: b
+2: c
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org28d28b8">
+<h2 id="org28d28b8">List Comprehensions</h2>
+<div class="org-src-container">
+
+<pre   ><code class="python" >&gt;&gt;&gt; [x**2 for x in range(10)]
+[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+&gt;&gt;&gt; [s.capitalize() for s in ["kees", "jan", "piet"]]
+['Kees', 'Jan', 'Piet']
+</code></pre>
+</div>
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-org780b2e5">
+<h2 id="org780b2e5">SqlAlchemy</h2>
+<div class="outline-text-2" id="text-org780b2e5">
+</div>
+</section>
+<section id="slide-org465dcb2">
+<h3 id="org465dcb2">SqlAlchemy</h3>
+<p>
+<a href="https://www.sqlalchemy.org/">https://www.sqlalchemy.org/</a>
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="sh" >pip install sqlalchemy
+</code></pre>
+</div>
+
+<p>
+Is een library voor het werken met SQL databases vanuit python
+</p>
+
+</section>
+<section id="slide-org52de2a3">
+<h3 id="org52de2a3">Relationele databases</h3>
+<p>
+Data opgeslagen in Tabellen, Rijen, Kolommen
+</p>
+
+<p>
+Data opvragen en bewerken met SQL
+</p>
+
+<p>
+Ondersteunt alle gangbare SQL databases
+</p>
+
+<p>
+Kan DB en tabellen aanmaken obv Python code
+</p>
+
+</section>
+<section id="slide-org4cbbc09">
+<h3 id="org4cbbc09">SqlAlchemy</h3>
+<ul>
+<li>Python Classes    &#x2013;&gt;  DB Tabellen</li>
+<li>Python objecten   &#x2013;&gt;  Rijen in tabellen</li>
+<li>Object Attributen &#x2013;&gt;  Kolomen in tabellen</li>
+
+</ul>
+
+</section>
+<section id="slide-orgb9ab1f1">
+<h3 id="orgb9ab1f1">Setup</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >from sqlalchemy import create_engine
+
+engine = create_engine('sqlite:///mijndb.sqlite', echo=True)
+</code></pre>
+</div>
+
+<p>
+Dit engine object representeert de database verbinding
+</p>
+
+<p>
+In dit geval sqlite
+</p>
+
+<p>
+Andere DB's gebruiken een andere <i>connection string</i>
+</p>
+
+</section>
+<section id="slide-org6a2aab2">
+<h3 id="org6a2aab2">Class voor Tabel</h3>
+<p>
+Class moet <i>overerven</i> van <code>Base</code>
+</p>
+
+<p>
+Hierdoor wordt het een <i>persistente</i> class, gemapt op een DB tabel
+</p>
+
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, Integer, String, Boolean
+
+Base = declarative_base()
+
+class Resource(Base):
+    __tablename__ = "resource"  # DB tabelnaam
+
+    id = Column(Integer, primary_key=True)
+    hostname = Column(String)
+    ip = Column(String)
+    memory = Column(Integer)
+    active = Column(Boolean)
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org9997637">
+<h3 id="org9997637">Aanmaken van object</h3>
+<p>
+<code>__init__()</code> wordt auto-gegenereerd
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >res = Resource(hostname="rjekker.nl",\
+                     ip="123.456.7.8",\
+                 memory=50000,\
+                 active=True)
+</code></pre>
+</div>
+
+<p>
+Let op: het veld <code>id</code> wordt door de DB bepaald en daar zitten we dus niet aan.
+</p>
+
+
+</section>
+<section id="slide-org8027d6d">
+<h3 id="org8027d6d">Aanmaken van tabellen</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >Base.metadata.create_all(engine)
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgd8bf84d">
+<h3 id="orgd8bf84d">Aanmaken van data</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >from sqlalchemy.orm import sessionmaker
+
+# maak 1 sessionfactory per python programma/db connectie
+session_factory = sessionmaker(bind=engine)
+
+# Maak per transactie een sessie aan
+session = session_factory()
+res = Resource(hostname="rjekker.nl",\
+               ip="123.456.7.8",\
+               memory=50000,\
+               active=True)
+session.add(res)
+session.commit()
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org313bee9">
+<h3 id="org313bee9">Ophalen van data</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >session = session_factory()
+resources = session.query(Resource).all()
+</code></pre>
+</div>
+
+<p>
+Selecteren op een van de attributen:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >resources = session.query(Resouce).filter(Resource.hostname=="rjekker.nl")
+</code></pre>
+</div>
+
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-orga1cbe77">
+<h2 id="orga1cbe77">XML</h2>
+<div class="outline-text-2" id="text-orga1cbe77">
+</div>
+</section>
+<section id="slide-orgf8dd3b0">
+<h3 id="orgf8dd3b0">XML</h3>
+<p>
+Gebruik <code>elementtree</code> (ingebouwd)
+</p>
+
+<p>
+Zie <a href="https://docs.python.org/3/library/xml.etree.elementtree.html">https://docs.python.org/3/library/xml.etree.elementtree.html</a>
+</p>
+
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-org8cbc8eb">
+<h2 id="org8cbc8eb">Docstrings</h2>
+<p>
+Documenteer je functies en classes met een <i>docstring</i>:
+</p>
+
+<p>
+Begin de body van je functie of class met een string:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >def plus(a, b):
+    """Deze methode telt a en b op
+    en retourneert het resultaat"""
+    return a+b
+</code></pre>
+</div>
+
+<p>
+Tussen de driedubbele quotes zijn meerdere regels tekst toegestaan.
+</p>
+</section>
+</section>
+</div>
+</div>
+<script src="../../../reveal.js/dist/reveal.js"></script>
+<script src="../../../reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight]
+});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Functional Programming</title>
+<meta name="author" content="Reindert-Jan Ekker"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../../../reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../../../reveal.js/dist/theme/simple.css" id="theme"/>
+
+<link rel="stylesheet" href="../../../reveal.js/plugin/highlight/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>Functional Programming</h1><h2>Reindert-Jan Ekker</h2><p>Code Sensei</p>
+</section>
+
+<section>
+<section id="slide-org2eb5425">
+<h2 id="org2eb5425">Functional Programming</h2>
+<blockquote >
+<p>
+Functional programming is a programming paradigm where programs are
+constructed by applying and composing functions.
+</p>
+</blockquote>
+
+</section>
+<section id="slide-org4015775">
+<h3 id="org4015775">In Python</h3>
+<p>
+We mostly mean transforming sequences of data through application of functions, using
+</p>
+
+<ul>
+<li class="fragment appear">comprehensions</li>
+<li class="fragment appear">generators</li>
+<li class="fragment appear">lambda, map, filter</li>
+<li class="fragment appear">Note that comprehensions are preferred over lambda/map/filter</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgd65a8a4">
+<h2 id="orgd65a8a4">List Comprehensions</h2>
+<p>
+A list comprehension is a concise way to generate a list. The syntax
+looks like this:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >[ operation for var in input_data [if test] ]
+</code></pre>
+</div>
+
+<p>
+ <code>input_data</code> has to be iterable. Each element will be
+assigned to <code>var</code> in turn.
+</p>
+
+<p class="fragment (appear)">
+Optional test; only those elements that pass the test
+will be sent to the output.
+</p>
+
+</section>
+<section id="slide-org0fa7c9f">
+<h3 id="org0fa7c9f">Example</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >[ x*x for x in range(10) ] 
+</code></pre>
+</div>
+
+<pre class="example" id="org61e1295">
+[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+</pre>
+
+<ul>
+<li>Tip: read the <i>for</i> part first</li>
+<li>The result is always a list</li>
+
+</ul>
+
+</section>
+<section id="slide-org625eff3">
+<h3 id="org625eff3">With test</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >[ c for c in "hi everyone!" if c in "aeiouy" ] 
+</code></pre>
+</div>
+
+<pre class="example" id="org6c265d1">
+['i', 'e', 'e', 'y', 'o', 'e']
+</pre>
+<ul>
+<li>List comprehensions can filter and transform your data</li>
+<li>The result is a list.</li>
+
+</ul>
+
+</section>
+<section id="slide-org74a256b">
+<h3 id="org74a256b">Nested</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >[(x,y) for x in range(3) for y in range(3)]
+</code></pre>
+</div>
+
+<pre class="example" id="org65fce85">
+[(0, 0), (0, 1), (0, 2), (1, 0), (1, 1), (1, 2), (2, 0), (2, 1), (2, 2)]
+</pre>
+
+</section>
+</section>
+<section>
+<section id="slide-org020606d">
+<h2 id="org020606d">Other comprehension</h2>
+<p>
+A list comprehension creates a list. We also have
+Dict and set comprehensions.
+</p>
+
+</section>
+<section id="slide-org611c4ab">
+<h3 id="org611c4ab">Dict Comprehension</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >products = ["bread", "cheese", "milk"]
+prices = [2,5,1]
+{products[i].capitalize(): float(prices[i]) for i in range(3)}
+</code></pre>
+</div>
+
+<pre class="example" id="orgb48e17c">
+{'Bread': 2.0, 'Cheese': 5.0, 'Milk': 1.0}
+</pre>
+
+</section>
+<section id="slide-org0a6b821">
+<h3 id="org0a6b821">Set Comprehension</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >products = ["bread", "cheese", "milk"]
+prices = [2,5,1]
+{name for name in products if len(name) &gt; 4}
+</code></pre>
+</div>
+
+<pre class="example" id="orgd37f7c6">
+{'cheese', 'bread'}
+</pre>
+
+</section>
+</section>
+<section>
+<section id="slide-orgd5c61ad">
+<h2 id="orgd5c61ad">Generator expressions</h2>
+<p>
+Like list comprehensions, but return a generator object instead of a list.
+</p>
+
+<p>
+This allows for lazy computation.
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >numbers = (x**x for x in range(1000,1000000))
+</code></pre>
+</div>
+
+<p>
+This returns immediately.
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="text" >&lt;generator object &lt;genexpr&gt; at 0x10abebd60&gt;
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgca5d883">
+<h3 id="orgca5d883">Evaluation</h3>
+<p>
+The generator object promises to calculate its elements on demand. We
+can ask for the next element:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >next(numbers) # 1000**1000
+next(numbers) # 1001**1001
+next(numbers) # 1002**1002
+</code></pre>
+</div>
+
+<p>
+Or convert the whole thing to a list at once:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >list(numbers) # will take a long time
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgb9e4220">
+<h3 id="orgb9e4220">Evaluation 2</h3>
+<p>
+You can use the generator in a for loop
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="python" >for n in numbers:
+    # Calculate next number
+    print(f"{n} is a large number!")
+</code></pre>
+</div>
+
+<p>
+or in another comprehension:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >strings = (f"{n} is a large number!" for n in numbers)
+</code></pre>
+</div>
+
+<p>
+This last example still does no computations at all!
+</p>
+
+</section>
+<section id="slide-orgbf7f435">
+<h3 id="orgbf7f435">Itertools</h3>
+<p>
+The <a href="https://docs.python.org/3.8/library/itertools.html">itertools</a>
+package has some nice functions to work with generators.
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >from itertools import islice
+# Take first five elements
+first_five = islice(numbers,0,5)
+</code></pre>
+</div>
+
+<p>
+This again, returns a generator.
+</p>
+
+<p>
+Note that you cannot do (why?):
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >numbers[0,5] # Error
+</code></pre>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-orgf789ed7">
+<h2 id="orgf789ed7">Lambda functions</h2>
+<ul>
+<li>With <code>lambda</code> you can create an <i>anonymous</i> function within a line.</li>
+<li>Like a function that only has a return statement</li>
+<li>Usually needed to pass a function as an argument</li>
+
+</ul>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >l = ["Hello", "Bye", "Good Morning"] 
+sorted(l, key=lambda s: s[-1])
+</code></pre>
+</div>
+
+<pre class="example" id="org75bc1c4">
+['Bye', 'Good Morning', 'Hello']
+</pre>
+
+</section>
+<section id="slide-orgedc23f2">
+<h3 id="orgedc23f2">Compare</h3>
+<ul>
+<li>The following are equivalent</li>
+<li>But: lambda function is unnamed and cannot be reused</li>
+
+</ul>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >l = ["Hello", "Bye", "Good Morning"]
+sorted(l, key=lambda s: s[-1])
+</code></pre>
+</div>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >def f(s):
+    return s[-1]
+
+sorted(l, key=f)
+</code></pre>
+</div>
+
+<pre class="example" id="org26bab67">
+['Bye', 'Good Morning', 'Hello']
+</pre>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org0cf6682">
+<h2 id="org0cf6682">Old-style functional programming</h2>
+<p>
+The traditional way of functional programming uses 3 main functions:
+<code>map()</code>, <code>filter(), reduce()</code>, often in combination with <code>lambda()</code>.
+</p>
+
+<p>
+All of these functions return generators.
+</p>
+
+<p>
+We will not go into reduce.
+</p>
+</section>
+<section id="slide-orgf6dbf53">
+<h3 id="orgf6dbf53">Map</h3>
+<p>
+Apply a function to a sequence and return a generator with the results.
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="python" >prices = ["$0.50", "$0.30", "€100", "$210.20", "220€"]
+to_f = list(map(lambda s: float(s[1:]), prices))
+</code></pre>
+</div>
+
+<p>
+You can write this as a comprehension:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >to_f = [ float(s[1:]) for s in prices ]
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org8a42e7d">
+<h3 id="org8a42e7d">Filter</h3>
+<p>
+Apply a function to a sequence and return only those values for which
+the function returns a true value.
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="python" >prices = ["$0.50", "$0.30", "€100", "$210.20", "220€"]
+dollars = list(filter(lambda s: s[0] == '$', prices))
+</code></pre>
+</div>
+
+<p>
+As a comprehension:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >to_f = [ p for p in prices if p[0] == '$' ]
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orga6d5ff1">
+<h3 id="orga6d5ff1">Map and filter</h3>
+<p>
+Combining both:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >prices = ["$0.50", "$0.30", "€100", "$210.20", "220€"]
+to_f = list(map(lambda s: float(s[1:]), filter(lambda s: s[0] == '$', prices)))
+</code></pre>
+</div>
+
+<p>
+Comprehension:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >to_f = [ float(s[1:]) for s in prices if s[0] == '$']
+</code></pre>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org56439fc">
+<h2 id="org56439fc">Callables</h2>
+<p>
+A note about <a href="https://treyhunner.com/2019/04/is-it-a-class-or-a-function-its-a-callable/">callables</a>.
+</p>
+</section>
+</section>
+</div>
+</div>
+<script src="../../../reveal.js/dist/reveal.js"></script>
+<script src="../../../reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight]
+});
+
+</script>
+</body>
+</html>

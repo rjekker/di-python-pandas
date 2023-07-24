@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Variables, Types and Operators</title>
+<meta name="author" content="Reindert-Jan Ekker"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../../../reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../../../reveal.js/dist/theme/simple.css" id="theme"/>
+
+<link rel="stylesheet" href="../../../reveal.js/plugin/highlight/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>Variables, Types and Operators</h1><h2>Reindert-Jan Ekker</h2><p>Code Sensei</p>
+</section>
+
+<section>
+<section id="slide-org0cff5fa">
+<h2 id="org0cff5fa">Types and Variables</h2>
+<div class="outline-text-2" id="text-org0cff5fa">
+</div>
+</section>
+<section id="slide-orgbebdd27">
+<h3 id="orgbebdd27">Types</h3>
+<p>
+Value have a type. The most important types are:
+</p>
+
+<ul>
+<li>int: <code>325</code>, <code>-8</code></li>
+<li>float: <code>0.342</code></li>
+<li>str: 'hello', or "hello"</li>
+<li>bool: True or False</li>
+
+</ul>
+
+<p class="fragment (appear)">
+With strings you can use both single or double quotes. (what's the difference?)
+</p>
+
+</section>
+<section id="slide-org8180f54">
+<h3 id="org8180f54">Variables</h3>
+<p>
+Give a name to your value:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >&gt;&gt;&gt; x = 3.5
+&gt;&gt;&gt; x
+3.5
+&gt;&gt;&gt; x = "hello"
+</code></pre>
+</div>
+
+<p>
+We call <code>x</code> a <b>variable</b>.
+</p>
+
+<p>
+Variables are <i>untyped</i>: they can contain any kind of value.
+</p>
+
+</section>
+<section id="slide-org1650cba">
+<h3 id="org1650cba">Operators</h3>
+<p>
+Allow us to do calculations:
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left"><code>+, -</code></td>
+<td class="org-left">add, subtract</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>*, /, //</code></td>
+<td class="org-left">multiply, divide</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>**</code></td>
+<td class="org-left">powers</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>%</code></td>
+<td class="org-left"><i>modulo</i></td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Use parens when it makes your code more clear: <code>(3+5) / 2 = 4</code>
+</p>
+
+</section>
+<section id="slide-org617e925">
+<h3 id="org617e925">Operators and Types</h3>
+<p>
+What is the type of the result of each operation?
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >x = 0.5*2
+y = 6/4
+z = 7//3
+a = "Hello" * 2
+</code></pre>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org8d16323">
+<h2 id="org8d16323">Update operators</h2>
+<p>
+Sometimes you want to <i>update</i> a variable value, for example:
+</p>
+
+
+
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >&gt;&gt;&gt; x = 10
+&gt;&gt;&gt; x = x + 1
+&gt;&gt;&gt; x
+11
+</code></pre>
+</div>
+
+
+<div class="org-src-container">
+
+<pre  class="fragment (appear)"  ><code class="python" ># Equivalent
+&gt;&gt;&gt; x += 1
+&gt;&gt;&gt; x
+12
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org199d6d8">
+<h3 id="org199d6d8">Update operators 2</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >&gt;&gt;&gt; s = "good"
+&gt;&gt;&gt; s += "morning"
+&gt;&gt;&gt; s
+'goodmorning'
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org61f0699">
+<h3 id="org61f0699">Update operators 3</h3>
+<p>
+This works for all basic operators:
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="python" >x += 1   # x = x + 1
+y /= 5   # y = y / 5
+z -= 10  # etc..
+f *= 2
+</code></pre>
+</div>
+</section>
+</section>
+</div>
+</div>
+<script src="../../../reveal.js/dist/reveal.js"></script>
+<script src="../../../reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight]
+});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>More About Strings</title>
+<meta name="author" content="Reindert-Jan Ekker"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../../../reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../../../reveal.js/dist/theme/sky.css" id="theme"/>
+
+<link rel="stylesheet" href="../../../reveal.js/plugin/highlight/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>More About Strings</h1><h2>Reindert-Jan Ekker</h2><p>Code Sensei</p>
+</section>
+
+<section>
+<section id="slide-orgce97b34">
+<h2 id="orgce97b34">Printing</h2>
+<div class="outline-text-2" id="text-orgce97b34">
+</div>
+</section>
+<section id="slide-org7013c6b">
+<h3 id="org7013c6b">Remember</h3>
+<p>
+We can construct a string to print using the + operator:
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="python" >print("5 + 5 = " + str(10))
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgd6cb0e8">
+<h3 id="orgd6cb0e8">Comma's are better</h3>
+<p>
+Using a comma, <code>print</code> will send each value to the output without having to convert them.
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >print("5 + 5 =", 10, "!")
+</code></pre>
+</div>
+
+<p>
+Note that <code>print</code> will add a space between the values.
+</p>
+</section>
+</section>
+<section>
+<section id="slide-orgd684fc4">
+<h2 id="orgd684fc4">f-strings</h2>
+<p>
+This is probably the best way to construct strings.
+</p>
+
+<p>
+Put an <code>f</code> in front of the string and use your variables inside it.
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >name = "John"
+grade = 8
+print(f"Student {name} has grade {grade}")
+</code></pre>
+</div>
+
+<pre class="example">
+Student John has grade 8
+</pre>
+
+</section>
+<section id="slide-orgb5e95db">
+<h3 id="orgb5e95db">Expressions in f-strings</h3>
+<p>
+You can put simple expressions in f-strings
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >price = 5
+items = 4
+print(f"the total price for {items} items is {price*items} euros.")
+</code></pre>
+</div>
+
+<pre class="example">
+the total price for 4 items is 20 euros.
+</pre>
+
+</section>
+<section id="slide-orgcceb081">
+<h3 id="orgcceb081">Using lists</h3>
+<p>
+You can even use lists or dictionaries in an f-string:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >week = ["Monday", "Tuesday", "Wednesday", ...]
+print(f"The second day is {week[2]}")
+</code></pre>
+</div>
+
+<pre class="example">
+The second day is Wednesday
+</pre>
+
+</section>
+</section>
+<section>
+<section id="slide-orgda689aa">
+<h2 id="orgda689aa">Sequence</h2>
+<p>
+A string is a <i>sequence</i>, like a list. This means it also has a length
+and you can use indices to get its elements.
+</p>
+
+</section>
+<section id="slide-org72cee81">
+<h3 id="org72cee81">Length</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >print(len("hello there"))
+</code></pre>
+</div>
+
+<pre class="example">
+11
+</pre>
+
+</section>
+<section id="slide-org8082d8d">
+<h3 id="org8082d8d">Indices</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >name = "Reindert"
+print(name[0])
+print(name[-1])
+</code></pre>
+</div>
+
+<pre class="example">
+R
+t
+</pre>
+
+</section>
+<section id="slide-org9c1ba5e">
+<h3 id="org9c1ba5e">Slices</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >date = "2021-02-13"
+year = date[:4]
+month = date[5:-3]
+day = date[-2:]
+print(year, month, day)
+</code></pre>
+</div>
+
+<pre class="example">
+2021 02 13
+</pre>
+
+</section>
+<section id="slide-org6f52d4c">
+<h3 id="org6f52d4c">But</h3>
+<p>
+You cannot change elements of a string!
+</p>
+<div class="org-src-container">
+
+<pre   ><code class=":results" >s = "apple"
+s[0] = "A"
+</code></pre>
+</div>
+
+<pre class="example" id="org69bdd86">
+TypeError: 'str' object does not support item assignment
+</pre>
+
+</section>
+<section id="slide-orgf9e706c">
+<h3 id="orgf9e706c">Similarly</h3>
+<p>
+We cannot append to a string.
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >s = "apple"
+s.append("s")
+</code></pre>
+</div>
+
+<pre class="example" id="org5819c55">
+AttributeError: 'str' object has no attribute 'append'
+</pre>
+
+</section>
+</section>
+<section>
+<section id="slide-org344ecde">
+<h2 id="org344ecde">String operations</h2>
+<p>
+Strings are objects, just like lists. They have their own functions, like <code>upper()</code> and <code>lower()</code>.
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="python" >next_game = input("continue (y/n)? ")
+if next_game.upper() == 'N':
+    exit()
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org422c6b9">
+<h3 id="org422c6b9">Note</h3>
+<p>
+There's no need to know all of these by heart. Google is your friend!
+</p>
+
+</section>
+<section id="slide-orgbdb12b6">
+<h3 id="orgbdb12b6">Splitting</h3>
+<p>
+<code>split()</code> returns a list of strings.
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >s = "man,woman,camera,tv"
+l = s.split(",")
+print(l)
+print(l[2])
+</code></pre>
+</div>
+
+<pre class="example">
+['man', 'woman', 'camera', 'tv']
+camera
+</pre>
+
+</section>
+<section id="slide-orga24100a">
+<h3 id="orga24100a">Matching start and end</h3>
+<p>
+<code>startswith</code> and <code>endswith</code>
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="python" >s = "banana"
+print(s.startswith("ba"))
+print(s.endswith("ba"))
+</code></pre>
+</div>
+
+<pre class="example">
+True
+False
+</pre>
+
+</section>
+<section id="slide-orge857223">
+<h3 id="orge857223">Searching in a string</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >print("am" in "example")
+print("money" in "pocket")
+</code></pre>
+</div>
+
+<pre class="example">
+True
+False
+</pre>
+
+</section>
+<section id="slide-org6d29926">
+<h3 id="org6d29926">Remove whitespace</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >s = "  here's some text  "
+print(s.lstrip())
+print(s.rstrip())
+print(s.strip())
+</code></pre>
+</div>
+
+<pre class="example">
+here's some text  
+  here's some text
+here's some text
+</pre>
+
+</section>
+<section id="slide-org7837217">
+<h3 id="org7837217">Check contents</h3>
+<ul>
+<li>isalnum()</li>
+<li>str.isalpha()</li>
+<li>str.isdecimal()</li>
+<li>str.isdigit()</li>
+<li>str.islower()</li>
+<li>str.isnumeric()</li>
+<li>str.isspace()</li>
+<li>str.isupper()</li>
+
+</ul>
+
+</section>
+<section id="slide-org9f6274c">
+<h3 id="org9f6274c">And many others..</h3>
+<p>
+See <a href="https://docs.python.org/3/library/stdtypes.html#string-methods">https://docs.python.org/3/library/stdtypes.html#string-methods</a>
+</p>
+</section>
+</section>
+</div>
+</div>
+<script src="../../../reveal.js/dist/reveal.js"></script>
+<script src="../../../reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight]
+});
+
+</script>
+</body>
+</html>

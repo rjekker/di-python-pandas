@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Input, Output, Type Conversions</title>
+<meta name="author" content="Reindert-Jan Ekker"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../../../reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../../../reveal.js/dist/theme/black.css" id="theme"/>
+
+<link rel="stylesheet" href="../../../reveal.js/plugin/highlight/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>Input, Output, Type Conversions</h1><h2>Reindert-Jan Ekker</h2><p>Code Sensei</p>
+</section>
+
+<section>
+<section id="slide-orgeda98e5">
+<h2 id="orgeda98e5">Input and Output</h2>
+<ul>
+<li>Use <code>input()</code> to ask the user for input</li>
+<li>Use <code>print()</code> to show one or more values.</li>
+
+</ul>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >name = input("What is your name? ")
+print("Hi ", name, "!")
+</code></pre>
+</div>
+
+<div class="org-src-container">
+
+<pre   ><code class="example" >Result:
+What is your name? Reindert
+Hi Reindert !
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orga4118d9">
+<h3 id="orga4118d9">Print and scripts</h3>
+<p>
+Why do we need <code>print</code> in a script but not in a console?
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org672bf32">
+<h2 id="org672bf32">Operating on Input</h2>
+<div class="org-src-container">
+
+<pre   ><code class="pythono" >order = input("A bread is $2. How many do you need? ")
+print("That will be $", 2*order)
+</code></pre>
+</div>
+
+<p>
+What will go wrong here?
+</p>
+
+<p class="fragment (appear)">
+<code>input()</code> always returns a string!!
+</p>
+
+</section>
+<section id="slide-org0a713aa">
+<h3 id="org0a713aa">Conversion to int</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >order = input("A bread is $2. How many do you need? ")
+print("That will be $", 2*int(order))
+</code></pre>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org34f51f9">
+<h2 id="org34f51f9">Another problem</h2>
+<div class="org-src-container">
+
+<pre   ><code class="python" >birth_day = 15
+print("My birthday is on april " + birth_day)
+</code></pre>
+</div>
+
+<p>
+What will go wrong here?
+</p>
+
+<p class="fragment (appear)">
+You cannot add a string and an int
+</p>
+
+</section>
+<section id="slide-org68dd891">
+<h3 id="org68dd891">Conversion to string</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >birth_day = 15
+print("My birthday is on april " + str(birth_day))
+</code></pre>
+</div>
+
+
+</section>
+<section id="slide-org2006d5b">
+<h3 id="org2006d5b">Another solution</h3>
+<p>
+Print multiple values of any type:
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="python" >birth_day = 15
+print("My birthday is on april", birth_day, "and you are invited!")
+</code></pre>
+</div>
+
+<p class="fragment (appear)">
+Drawback: <code>print()</code> adds spaces between values.
+</p>
+
+
+</section>
+<section id="slide-org369e121">
+<h3 id="org369e121">Third solution: F-strings</h3>
+<p>
+Put an f in front of a string and use your variables inside the string:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >birth_day = 15
+print(f"My birthday is on april {birth_day} and you are invited!")
+</code></pre>
+</div>
+
+<pre class="example">
+My birthday is on april 15 and you are invited!
+</pre>
+
+</section>
+</section>
+<section>
+<section id="slide-orgcb31835">
+<h2 id="orgcb31835">Type Conversions</h2>
+<p>
+There are functions for type conversions for all builtin types:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" > &gt;&gt;&gt; str(5.8)
+'5.8'
+ &gt;&gt;&gt; int('10')
+ 10
+ &gt;&gt;&gt; int(5.6)
+ 5
+ &gt;&gt;&gt; float(5)
+ 5.0
+ &gt;&gt;&gt; float('5')
+ 5.0
+ &gt;&gt;&gt; list("hello")
+ ['h', 'e', 'l', 'l', 'o']
+</code></pre>
+</div>
+</section>
+</section>
+</div>
+</div>
+<script src="../../../reveal.js/dist/reveal.js"></script>
+<script src="../../../reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight]
+});
+
+</script>
+</body>
+</html>

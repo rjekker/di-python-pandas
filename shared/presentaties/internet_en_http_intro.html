@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Het Internet en HTTP, deel 1</title>
+<meta name="author" content="Reindert-Jan Ekker"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../../reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../../reveal.js/dist/theme/league.css" id="theme"/>
+
+<link rel="stylesheet" href="../../reveal.js/plugin/highlight/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>Het Internet en HTTP, deel 1</h1><h2>Reindert-Jan Ekker</h2><p>Code Sensei</p>
+</section>
+
+<section>
+<section id="slide-orgf0f707b" data-background="#483D8B" data-background-transition="page">
+<h2 id="orgf0f707b">Vraag</h2>
+<ul>
+<li>Welke protocollen kunnen jullie benoemen die een rol spelen bij een
+gemiddelde internet applicatie?</li>
+
+<li>Geef een definitie van het internet..</li>
+
+<li>En het "World Wide Web"?</li>
+
+</ul>
+
+</section>
+<section id="slide-org355ebb0">
+<h3 id="org355ebb0">Definitie: Internet</h3>
+<blockquote >
+<p>
+Een wereldwijd computernetwerk dat gebruik maakt van
+(voornamelijk) TCP/IP.
+</p>
+</blockquote>
+
+<ul>
+<li class="fragment appear">Oorsprong: ARPANET in de jaren '60.</li>
+<li class="fragment appear">Computers en deelnetwerken aan- en afkoppelen</li>
+<li class="fragment appear">Protocollen zijn geheel open (!)</li>
+
+</ul>
+
+</section>
+<section id="slide-orgfe3d455">
+<h3 id="orgfe3d455">Internet: Organisaties</h3>
+<ul>
+<li>IETF (Internet Engineering Task Force): IPv4, IPv6</li>
+<li>ICANN (Internet Corporation for Assigned Names and Numbers): adressen</li>
+
+</ul>
+
+</section>
+<section id="slide-orgc6db6d7">
+<h3 id="orgc6db6d7">Definitie: WWW</h3>
+<p>
+An open source information space where
+documents and other web resources
+</p>
+
+<ul>
+<li class="fragment appear">are identified by URLs,</li>
+<li class="fragment appear">interlinked by hypertext links,</li>
+<li class="fragment appear">and can be accessed via the Internet.</li>
+<li class="fragment appear">&#x2026; en via HTTP geserveerd natuurlijk!</li>
+
+</ul>
+</section>
+<section id="slide-org6b9426a">
+<h3 id="org6b9426a">WWW</h3>
+<ul>
+<li>Oorsprong: <b>Tim Berners-Lee</b> in 1989,</li>
+<li>eerste browser: 1990 at CERN, Zwitserland</li>
+
+</ul>
+
+<p class="fragment (appear)">
+Organisaties:
+</p>
+
+<ul>
+<li class="fragment appear">World Wide Web Consortium (W3C): HTML, CSS, DOM</li>
+<li class="fragment appear">Ecma International: EcmaScript</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org84eea58" data-background="#483D8B" data-background-transition="page">
+<h2 id="org84eea58">Protocollen</h2>
+</section>
+<section id="slide-org927054f">
+<h3 id="org927054f">OSI Model</h3>
+<p>
+<a href="https://en.wikipedia.org/wiki/OSI_model#Description_of_OSI_layers">Het OSI Model</a>
+</p>
+
+<p>
+Als applicatie-programmeurs zijn wij voornamelijk gericht op
+de bovenste drie lagen van het model
+</p>
+
+<p>
+Zie ook <a href="https://en.wikipedia.org/wiki/Internet_protocol_suite">Internet Protocol Suite</a>
+</p>
+
+</section>
+<section id="slide-org5f6d88c">
+<h3 id="org5f6d88c">IP</h3>
+<p>
+<b>Internet Protocol</b>
+</p>
+
+<ul>
+<li class="fragment appear">Verstuurt <i>packages</i> van het ene IP-adres naar het andere IP-adres</li>
+<li class="fragment appear">Geen garantie dat data intact aankomt, of in de juiste volgorde</li>
+<li class="fragment appear">Twee versies: IPv4 en IPv6</li>
+<li class="fragment appear">Voor vertalen van domein-namen naar adressen: <b>DNS</b></li>
+
+</ul>
+
+</section>
+<section id="slide-orgd282ea7">
+<h3 id="orgd282ea7">TCP</h3>
+<p>
+<b>Transmission Control Protocol</b>
+</p>
+
+<ul>
+<li class="fragment appear">Laag bovenop IP</li>
+<li class="fragment appear">Voegt het concept van een <i>connectie</i> toe</li>
+<li class="fragment appear">Zorgt dat data correct aankomt, packages worden in de juiste volgorde gezet</li>
+<li class="fragment appear">De endpoints van de connecties heten <i>sockets</i> en deze hebben een <i>port number</i></li>
+
+</ul>
+
+</section>
+<section id="slide-org8e662c2">
+<h3 id="org8e662c2">TCP: servers</h3>
+<p>
+Een server applicatie "luistert" naar connecties op een specifieke poort
+</p>
+
+<p>
+Standaard poorten:
+</p>
+<ul>
+<li>HTTP: 80</li>
+<li>SMTP: 25</li>
+<li>SSH: 22</li>
+<li>HTTPS: 443</li>
+
+</ul>
+
+</section>
+<section id="slide-org25a31cd">
+<h3 id="org25a31cd">UDP</h3>
+<p>
+Een alternatief voor TCP, voor connecties waar performance
+belangrijker is dan correctheid (video/audio bijvoorbeeld)
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org06ca716" data-background="#483D8B" data-background-transition="page">
+<h2 id="org06ca716">HTTP: HyperText Transfer Protocol</h2>
+</section>
+<section id="slide-org22e7dbe">
+<h3 id="org22e7dbe">Wat is HTTP</h3>
+<ul>
+<li class="fragment appear">Text-based server/client protocol</li>
+<li class="fragment appear">Voor versturen van allerlei soorten data</li>
+<li class="fragment appear">Serveren van web applicaties (HTML/CSS/JS) naar een browser</li>
+<li class="fragment appear">Vele andere soorten toepassingen</li>
+
+</ul>
+
+<p class="fragment (appear)">
+Default poort: 80
+</p>
+
+</section>
+<section id="slide-orgbf539d3" data-background="#a23" data-background-transition="zoom">
+<h3 id="orgbf539d3">Wat je nooit mag vergeten</h3>
+<p>
+De HTTP cyclus:
+</p>
+<ol>
+<li>De <b>Client</b> stuurt een <b>Request</b> naar de <b>Server</b></li>
+<li>De <b>Server</b> stuurt een <b>Response</b> terug.</li>
+
+</ol>
+
+<p>
+En niet anders!
+</p>
+
+</section>
+<section id="slide-org66f57f2">
+<h3 id="org66f57f2">Ook belangrijk</h3>
+<p>
+Request en Response zijn tekst.
+</p>
+
+<p>
+HTTP is <b>Stateless</b>: geen "geheugen" tussen verschillende
+ request/response cycles.
+</p>
+
+<p>
+Zie ook <a href="https://stackoverflow.com/questions/4913763/what-does-it-mean-when-they-say-http-is-stateless/4913942#4913942">Deze uitleg van het begrip statelessness</a>
+</p>
+
+</section>
+<section id="slide-orgda5b02f">
+<h3 id="orgda5b02f">HTTP/2</h3>
+<p>
+Een sneller, beter (<a href="http://queue.acm.org/detail.cfm?id=2716278">Of niet?</a>) HTTP-protocol. Geen tekst maar binair!
+<a href="https://en.wikipedia.org/wiki/HTTP/2">HTTP/2 op wikipedia</a>
+</p>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgec77e2a" data-background="#483D8B" data-background-transition="page">
+<h2 id="orgec77e2a">URLs</h2>
+</section>
+<section id="slide-orgcfc3945">
+<h3 id="orgcfc3945">Anatomie van een URL</h3>
+<p>
+<a href="http://www.myserver.org:100/something?x=10">http://www.myserver.org:100/something?x=10</a>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left"><code>http</code></td>
+<td class="org-left">protocol (http, https, ftp, &#x2026;)</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>://</code></td>
+<td class="org-left">delimiter</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>www.myserver.org</code></td>
+<td class="org-left">domain name van server</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>:100</code></td>
+<td class="org-left">poort van server. Weglaten als default (http -&gt; 80)</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>/something?x=10</code></td>
+<td class="org-left"><i>path</i> gedeelte van URL</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Het <b>path</b> bepaalt welke <i>resource</i> ik verwacht terug te krijgen van
+de server.
+</p>
+
+</section>
+<section id="slide-orgf3afa80">
+<h3 id="orgf3afa80">Wat gebeurt er..?</h3>
+<p>
+Wat gebeurt er in de browser als ik deze URL in de adresbalk invoer?
+</p>
+
+<p>
+<a href="http://www.myserver.org:100/something?x=10">http://www.myserver.org:100/something?x=10</a>
+</p>
+
+<ol>
+<li class="fragment appear">DNS lookup www.myserver.org -&gt; IP Adres</li>
+<li class="fragment appear">TCP connectie met server op poort 100</li>
+<li class="fragment appear">HTTP GET Request voor "/something?x=10"</li>
+<li class="fragment appear"><a href="https://github.com/alex/what-happens-when">Of click hier als je het precies wilt weten</a></li>
+
+</ol>
+
+</section>
+</section>
+<section>
+<section id="slide-org048afea" data-background="#483D8B" data-background-transition="page">
+<h2 id="org048afea">HTTP Request</h2>
+</section>
+<section id="slide-org7d212aa">
+<h3 id="org7d212aa">Anatomie</h3>
+<p>
+The request message consists of the following:
+</p>
+
+<ul>
+<li>A request line: Method and Resource</li>
+<li>Request header fields (e.g., Accept-Language: en).</li>
+<li>An empty line.</li>
+<li>An optional message body.</li>
+
+</ul>
+
+</section>
+<section id="slide-org0a46871">
+<h3 id="org0a46871">Simpel voorbeeld</h3>
+<pre class="example" id="orgf161859">
+GET /index.html HTTP/1.1
+Host: www.google.com
+</pre>
+
+</section>
+<section id="slide-org8867f36" data-background="#556B2F" data-background-transition="concave">
+<h3 id="org8867f36">Demo: De mens als browser</h3>
+<p>
+<i>telnet</i> als TCP client
+</p>
+
+</section>
+<section id="slide-org6cabdd3">
+<h3 id="org6cabdd3">Request Line</h3>
+<p>
+De Request Line is de eerste regel van de request
+</p>
+<ul>
+<li>Method: GET, POST, PUT, DELETE, HEAD, etc.</li>
+<li>Resource: het "path" gedeelte van URL</li>
+<li>eindigt met "HTTP/1.1"</li>
+
+</ul>
+
+</section>
+<section id="slide-org26343b6">
+<h3 id="org26343b6">Headers</h3>
+<ul>
+<li>Key/value pairs</li>
+<li>Syntax: <b>Key: Value</b></li>
+<li>Alles mag</li>
+<li>Eindigt met lege regel</li>
+
+</ul>
+
+</section>
+<section id="slide-org178e6cf">
+<h3 id="org178e6cf">Request body</h3>
+<p>
+Voor meesturen van data bij een POST (bijv file upload, form data)
+</p>
+
+</section>
+<section id="slide-org057b6f8">
+<h3 id="org057b6f8">Minder simpel voorbeeld</h3>
+<pre class="example" id="org8b95e11">
+POST /bestel/form.html HTTP/1.0
+User-Agent: SomeBrowser 5.8
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 44
+
+naam=reindert&amp;product=OCA_Boek&amp;hoeveelheid=1
+</pre>
+
+</section>
+<section id="slide-org1f17415" data-background="#556B2F" data-background-transition="concave">
+<h3 id="org1f17415">Demo: Developer Tools</h3>
+
+</section>
+</section>
+<section>
+<section id="slide-orgcbf8c15" data-background="#483D8B" data-background-transition="page">
+<h2 id="orgcbf8c15">HTTP Response</h2>
+</section>
+<section id="slide-orgae71075">
+<h3 id="orgae71075">Response Anatomie</h3>
+<p>
+Lijkt erg op een Request.
+</p>
+
+<ul>
+<li>Statuscode</li>
+<li>Headers</li>
+<li>Empty Line</li>
+<li>Response body</li>
+
+</ul>
+
+</section>
+<section id="slide-org575b5c3">
+<h3 id="org575b5c3">Voorbeeld</h3>
+<pre class="example" id="org923ffe5">
+HTTP/1.1 200 OK
+Date: Mon, 27 Jul 2009 12:28:53 GMT
+Server: Apache/2.2.14 (Win32)
+Last-Modified: Wed, 22 Jul 2009 19:15:56 GMT
+Content-Length: 88
+Content-Type: text/html
+Connection: Closed
+
+&lt;html&gt;
+&lt;body&gt;
+&lt;h1&gt;Hello, World!&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+</section>
+<section id="slide-orgd19ac2c">
+<h3 id="orgd19ac2c">Statuscodes</h3>
+<ul>
+<li>1xx Informational</li>
+<li>2xx Success</li>
+<li>3xx Redirection</li>
+<li>4xx Client Error</li>
+<li>5xx Server Error</li>
+
+</ul>
+
+</section>
+<section id="slide-orgf1877c5">
+<h3 id="orgf1877c5">Headers</h3>
+<p>
+bevatten in ieder geval informatie over:
+</p>
+<ul>
+<li>het soort data in de body (MIME type)</li>
+<li>de lengte van de data</li>
+
+</ul>
+
+</section>
+<section id="slide-org7f441e9">
+<h3 id="org7f441e9">Body</h3>
+<p>
+bevat de "payload": html, css, js, audio, video, etc. etc.
+</p>
+</section>
+</section>
+</div>
+</div>
+<script src="../../reveal.js/dist/reveal.js"></script>
+<script src="../../reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight]
+});
+
+</script>
+</body>
+</html>

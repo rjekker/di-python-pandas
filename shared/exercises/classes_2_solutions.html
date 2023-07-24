@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Solutions: Classes, Part 2</title>
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../../themes/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="../../themes/readtheorg/css/readtheorg.css"/>
+<link rel="stylesheet" type="text/css" href="../../css/homelink.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../themes/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="../../themes/readtheorg/js/readtheorg.js"></script>
+<script type="text/javascript" src="../../js/addhomelink.js"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Solutions: Classes, Part 2</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgec11a92">BankAccount</a></li>
+<li><a href="#org6ca248b">Game</a></li>
+<li><a href="#org400884e">Vectors</a></li>
+<li><a href="#orgc699cdd">Weird integers</a></li>
+</ul>
+</div>
+</div>
+
+<section id="outline-container-orgec11a92" class="outline-2">
+<h2 id="orgec11a92">BankAccount</h2>
+<div class="outline-text-2" id="text-orgec11a92">
+<p>
+Given the Bankaccount class:
+</p>
+
+<ul class="org-ul">
+<li>add <code>__str__()</code>, <code>__repr__()</code> methods</li>
+<li>Add an =__eq__()__ method to the BankAccount class, such that two
+accounts are equal only if their balances AND owner names are equal.
+Make sure to test that your code works correctly!</li>
+
+<li>Add a <code>__mul__()</code> method to the BankAccount class: this should
+create a new BankAccount with the names of both accounts added
+together, and the balances multiplied.</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">class</span> <span class="org-type">BankAccount</span>:
+    <span class="org-keyword">def</span> <span class="org-function-name">__init__</span>(<span class="org-keyword">self</span>, name, initial_balance):
+        <span class="org-keyword">self</span>.name = name
+        <span class="org-keyword">self</span>.<span class="org-variable-name">balance</span> = initial_balance
+
+    <span class="org-keyword">def</span> <span class="org-function-name">deposit</span>(<span class="org-keyword">self</span>, amount):
+        <span class="org-keyword">if</span> amount &gt; 0:
+            <span class="org-keyword">self</span>.<span class="org-variable-name">balance</span> += amount
+            <span class="org-keyword">return</span> <span class="org-keyword">self</span>.balance
+        <span class="org-keyword">else</span>:
+            <span class="org-builtin">print</span>(<span class="org-string">"Can't deposit a negative amount!"</span>)
+
+    <span class="org-keyword">def</span> <span class="org-function-name">withdraw</span>(<span class="org-keyword">self</span>, amount):
+        <span class="org-keyword">if</span> amount &gt; 0:
+            <span class="org-keyword">if</span> amount &lt;= <span class="org-keyword">self</span>.<span class="org-variable-name">balance</span>:
+                <span class="org-keyword">self</span>.balance -= amount
+                <span class="org-keyword">return</span> <span class="org-keyword">self</span>.balance
+            <span class="org-keyword">else</span>:
+                <span class="org-builtin">print</span>(<span class="org-string">"Insufficient balance!"</span>)
+        <span class="org-keyword">else</span>:
+            <span class="org-builtin">print</span>(<span class="org-string">"Can't withdraw nonpositive amount!"</span>)
+
+    <span class="org-keyword">def</span> <span class="org-function-name">__str__</span>(<span class="org-keyword">self</span>):
+        <span class="org-keyword">return</span> <span class="org-string">"Account for: "</span> + <span class="org-keyword">self</span>.name + <span class="org-string">", balance: "</span> + <span class="org-builtin">str</span>(<span class="org-keyword">self</span>.balance)
+
+    <span class="org-keyword">def</span> <span class="org-function-name">__repr__</span>(<span class="org-keyword">self</span>):
+        <span class="org-keyword">return</span> <span class="org-keyword">self</span>.__str__()
+
+    <span class="org-keyword">def</span> <span class="org-function-name">__eq__</span>(<span class="org-keyword">self</span>, other):
+        <span class="org-keyword">return</span> <span class="org-keyword">self</span>.name == other.name <span class="org-keyword">and</span> <span class="org-keyword">self</span>.balance == other.balance
+
+    <span class="org-keyword">def</span> <span class="org-function-name">__mul__</span>(<span class="org-keyword">self</span>, other):
+        <span class="org-keyword">return</span> BankAccount(<span class="org-keyword">self</span>.name+other.name, <span class="org-keyword">self</span>.balance*other.balance)
+</pre>
+</div>
+</div>
+</section>
+
+<section id="outline-container-org6ca248b" class="outline-2">
+<h2 id="org6ca248b">Game</h2>
+<div class="outline-text-2" id="text-org6ca248b">
+<div class="org-src-container">
+<pre class="src src-python">   <span class="org-keyword">class</span> <span class="org-type">Weapon</span>:
+    <span class="org-keyword">def</span> <span class="org-function-name">shoot</span>(<span class="org-keyword">self</span>):
+        <span class="org-keyword">if</span> <span class="org-keyword">self</span>.ammo:
+            <span class="org-builtin">print</span>(<span class="org-keyword">self</span>.sound)
+            <span class="org-keyword">self</span>.ammo -= 1
+        <span class="org-keyword">else</span>:
+            <span class="org-builtin">print</span>(<span class="org-string">"*click*"</span>)
+
+
+<span class="org-keyword">class</span> <span class="org-type">Gun</span>(Weapon):
+    <span class="org-keyword">def</span> <span class="org-function-name">__init__</span>(<span class="org-keyword">self</span>, ammo):
+        <span class="org-keyword">self</span>.<span class="org-variable-name">ammo</span> = ammo
+        <span class="org-keyword">self</span>.<span class="org-variable-name">sound</span> = <span class="org-string">"bang"</span>
+
+<span class="org-keyword">class</span> <span class="org-type">Cannon</span>(Weapon):
+    <span class="org-keyword">def</span> <span class="org-function-name">__init__</span>(<span class="org-keyword">self</span>, ammo):
+        <span class="org-keyword">self</span>.<span class="org-variable-name">ammo</span> = ammo
+        <span class="org-keyword">self</span>.<span class="org-variable-name">sound</span> = <span class="org-string">"BOOM"</span>
+
+<span class="org-keyword">class</span> <span class="org-type">Laser</span>(Weapon):
+    <span class="org-keyword">def</span> <span class="org-function-name">__init__</span>(<span class="org-keyword">self</span>, ammo):
+        <span class="org-keyword">self</span>.<span class="org-variable-name">ammo</span> = ammo
+        <span class="org-keyword">self</span>.<span class="org-variable-name">sound</span> = <span class="org-string">"dzzzz"</span>
+
+<span class="org-keyword">class</span> <span class="org-type">Player</span>:
+    <span class="org-keyword">def</span> <span class="org-function-name">__init__</span>(<span class="org-keyword">self</span>, name, weapon):
+        <span class="org-keyword">self</span>.name = name
+        <span class="org-keyword">self</span>.<span class="org-variable-name">weapon</span> = weapon
+
+    <span class="org-keyword">def</span> <span class="org-function-name">attack</span>(<span class="org-keyword">self</span>):
+        <span class="org-keyword">self</span>.weapon.shoot()
+
+
+<span class="org-variable-name">p</span> = Player(<span class="org-string">'bob'</span>, Laser(6))
+
+<span class="org-keyword">for</span> i <span class="org-keyword">in</span> <span class="org-builtin">range</span>(10):
+    p.attack()
+
+</pre>
+</div>
+</div>
+</section>
+
+<section id="outline-container-org400884e" class="outline-2">
+<h2 id="org400884e">Vectors</h2>
+<div class="outline-text-2" id="text-org400884e">
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">class</span> <span class="org-type">Vector</span>:
+    <span class="org-keyword">def</span> <span class="org-function-name">__init__</span>(<span class="org-keyword">self</span>, x, y):
+        <span class="org-keyword">self</span>.x = x
+        <span class="org-keyword">self</span>.<span class="org-variable-name">y</span> = y
+        <span class="org-keyword">self</span>.<span class="org-builtin">len</span> = (x**2 + y**2)**0.5
+
+    <span class="org-keyword">def</span> <span class="org-function-name">__repr__</span>(<span class="org-keyword">self</span>):
+        <span class="org-keyword">return</span> <span class="org-string">"({},{})"</span>.<span class="org-builtin">format</span>(<span class="org-keyword">self</span>.x, <span class="org-keyword">self</span>.y)
+
+    <span class="org-keyword">def</span> <span class="org-function-name">__abs__</span>(<span class="org-keyword">self</span>):
+         <span class="org-keyword">return</span> (<span class="org-keyword">self</span>.x**2 + <span class="org-keyword">self</span>.y**2)**0.5
+
+    <span class="org-keyword">def</span> <span class="org-function-name">__lt__</span>(<span class="org-keyword">self</span>, other):
+        <span class="org-keyword">return</span> <span class="org-keyword">self</span>.<span class="org-builtin">len</span> &lt; other.<span class="org-builtin">len</span>
+
+    <span class="org-keyword">def</span> <span class="org-function-name">__add__</span>(<span class="org-keyword">self</span>, other):
+        <span class="org-keyword">return</span> Vector(<span class="org-keyword">self</span>.x + other.x, <span class="org-keyword">self</span>.y + other.y)
+
+
+<span class="org-variable-name">l</span> = [Vector(3,7), Vector(0,0), Vector(1,0), Vector(0,2), Vector(4,4), Vector(3,7)]
+<span class="org-builtin">print</span>([<span class="org-builtin">abs</span>(v) <span class="org-keyword">for</span> v <span class="org-keyword">in</span> l])
+<span class="org-builtin">print</span>(<span class="org-builtin">sorted</span>(l))
+</pre>
+</div>
+</div>
+</section>
+
+<section id="outline-container-orgc699cdd" class="outline-2">
+<h2 id="orgc699cdd">Weird integers</h2>
+<div class="outline-text-2" id="text-orgc699cdd">
+<p>
+Create a "WeirdInt" class which inherits from int and redefines certain methods:
+</p>
+<ul class="org-ul">
+<li>make it so + usually gives the right answer, but not always (use the random module)</li>
+<li>make it so the str() version of a WeirdInt is something odd, e.g.,
+str(3) return 'three', but str() of other numbers returns the number
+with some leading and trailing spaces</li>
+</ul>
+
+
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">from</span> random <span class="org-keyword">import</span> choice
+<span class="org-keyword">class</span> <span class="org-type">WeirdInt</span>(<span class="org-builtin">int</span>):
+    <span class="org-keyword">def</span> <span class="org-function-name">__add__</span>(<span class="org-keyword">self</span>, other):
+        <span class="org-keyword">if</span> choice([<span class="org-constant">False</span>, <span class="org-constant">False</span>, <span class="org-constant">False</span>, <span class="org-constant">False</span>, <span class="org-constant">True</span>]): <span class="org-comment-delimiter"># </span><span class="org-comment">1 in 5 chance</span>
+            <span class="org-keyword">return</span> WeirdInt(-1 * (<span class="org-keyword">self</span>-other))
+        <span class="org-keyword">else</span>:
+            <span class="org-keyword">return</span> WeirdInt(<span class="org-builtin">super</span>().__add__(other))
+
+    <span class="org-keyword">def</span> <span class="org-function-name">__str__</span>(<span class="org-keyword">self</span>):
+        <span class="org-keyword">if</span> <span class="org-keyword">self</span> == 3:
+            <span class="org-keyword">return</span> <span class="org-string">"three"</span>
+        <span class="org-keyword">else</span>:
+            <span class="org-keyword">return</span> <span class="org-string">" "</span>*<span class="org-keyword">self</span> + <span class="org-builtin">super</span>().__str__() + <span class="org-string">" "</span>*<span class="org-keyword">self</span>
+</pre>
+</div>
+</div>
+</section>
+</div>
+<div id="postamble" class="status">
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

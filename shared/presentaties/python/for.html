@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>For Loops</title>
+<meta name="author" content="Reindert-Jan Ekker"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../../../reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../../../reveal.js/dist/theme/sky.css" id="theme"/>
+
+<link rel="stylesheet" href="../../../reveal.js/plugin/highlight/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>For Loops</h1><h2>Reindert-Jan Ekker</h2><p>Code Sensei</p>
+</section>
+
+<section>
+<section id="slide-org9384d62">
+<h2 id="org9384d62">For: loop over elements of a list</h2>
+<div class="outline-text-2" id="text-org9384d62">
+</div>
+</section>
+<section id="slide-org0766c8f">
+<h3 id="org0766c8f">Remember</h3>
+<p>
+A while loop repeats until something <i>changes</i>:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >x = 0
+while x != -1:
+    x = int(input("A number please? "))
+    # do something with x
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org741f486">
+<h3 id="org741f486">For</h3>
+<p>
+For repeats for every element in a sequence.
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >for var in l:
+    body
+</code></pre>
+</div>
+
+<ul>
+<li class="fragment appear">the body is executed once for every element of <code>l</code></li>
+<li class="fragment appear">every time <code>var</code> takes the value of the next element of <code>l</code></li>
+
+</ul>
+
+
+</section>
+<section id="slide-orgd736533">
+<h3 id="orgd736533">Example</h3>
+<p>
+Looping over every element of a list
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="python" >l = ["Jan", "Feb", "Mar", "Apr"]
+for month in l:
+    print(f"{month} starts with a {month[0]}")
+</code></pre>
+</div>
+
+<pre class="example">
+Jan starts with a J
+Feb starts with a F
+Mar starts with a M
+Apr starts with a A
+</pre>
+
+</section>
+<section id="slide-orgfceb92a">
+<h3 id="orgfceb92a">Example 2</h3>
+<p>
+Looping over elements of a string
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="python" >count = 0
+for character in "Today is a friday":
+    if character == "a":
+        count += 1
+print(f"I counted {count} a's")
+</code></pre>
+</div>
+
+<pre class="example">
+I counted 3 a's
+</pre>
+
+</section>
+<section id="slide-org7aebae0">
+<h3 id="org7aebae0">For x in range</h3>
+<p>
+The function <code>range()</code> makes it possible to loop a fixed number of times:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >for i in range(100):
+    # print all numbers from 0 to 99
+    print(i)
+</code></pre>
+</div>
+</section>
+</section>
+</div>
+</div>
+<script src="../../../reveal.js/dist/reveal.js"></script>
+<script src="../../../reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight]
+});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Webservices: REST, SOAP, Websocket</title>
+<meta name="author" content="Reindert-Jan Ekker"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../../reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../../reveal.js/dist/theme/sky.css" id="theme"/>
+
+<link rel="stylesheet" href="../../reveal.js/plugin/highlight/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>Webservices: REST, SOAP, Websocket</h1><h2>Reindert-Jan Ekker</h2><p>Code Sensei</p>
+</section>
+
+<section>
+<section id="slide-orgc37e135">
+<h2 id="orgc37e135">Webservices</h2>
+<ul>
+<li>REST</li>
+<li>SOAP</li>
+<li>Websocket</li>
+
+</ul>
+
+</section>
+<section id="slide-orgd7a7977">
+<h3 id="orgd7a7977">RPC</h3>
+<ul>
+<li class="fragment appear">Remote Procedure Call</li>
+<li class="fragment appear">Historically difficult</li>
+<li class="fragment appear">Differences in OS, binary representation, etc.</li>
+<li class="fragment appear">Closed Standards</li>
+<li class="fragment appear">CORBA, RMI, &#x2026;</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgf92b27e">
+<h2 id="orgf92b27e">But..</h2>
+<p>
+There's an easy, open standard:
+</p>
+
+<p>
+HTTP
+</p>
+
+</section>
+<section id="slide-org3fc34df">
+<h3 id="org3fc34df">HTTP</h3>
+<p>
+Resources
+</p>
+
+<p>
+Verbs
+</p>
+
+<p>
+Error Handling
+</p>
+
+</section>
+<section id="slide-orgf84e37d">
+<h3 id="orgf84e37d">REST</h3>
+<p>
+Representational State Transfer
+</p>
+
+<p>
+RPC Over HTTP
+</p>
+
+<p>
+Everybody uses it!
+</p>
+
+<p>
+Incl. Facebook, Twitter, Paypal, etc. etc.
+</p>
+
+<p>
+Data format: JSON (Accept Header)
+</p>
+
+</section>
+<section id="slide-orgb255b42">
+<h3 id="orgb255b42">Persons REST API</h3>
+<p>
+How to serve a Persons DB over REST
+</p>
+
+
+<div id="org2b609e3" class="figure">
+<p><img src="../static/REST_table.png" alt="REST_table.png" />
+</p>
+</div>
+
+
+</section>
+<section id="slide-org371b66f">
+<h3 id="org371b66f">Note</h3>
+<p>
+GET en PUT must be <i>idempotent</i>
+</p>
+
+<p>
+And about true <i>restfulness</i>..
+</p>
+
+</section>
+<section id="slide-org58d8bb9">
+<h3 id="org58d8bb9">Resources</h3>
+<p>
+<a href="http://web.archive.org/web/20130116005443/http://tomayko.com/writings/rest-to-my-wife">How I explained REST to my wife</a>
+</p>
+
+<p>
+<a href="http://martinfowler.com/articles/richardsonMaturityModel.html">Martin Fowler: glory of REST</a>
+</p>
+
+<p>
+<a href="http://stackoverflow.com/questions/671118/what-exactly-is-restful-programming">Stackoverflow discussie</a>
+</p>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org72acb5f">
+<h2 id="org72acb5f">SOAP</h2>
+<p>
+Simple Object Access Protocol
+</p>
+
+</section>
+<section id="slide-org71dd90e">
+<h3 id="org71dd90e">SOAP</h3>
+<p>
+Popular before REST
+</p>
+
+<p>
+XML, XML, XML
+</p>
+
+<p>
+Still important for the <i>enterprise</i>
+</p>
+
+</section>
+<section id="slide-org66f641d">
+<h3 id="org66f641d">XML</h3>
+<ul>
+<li>Tags like XML</li>
+<li>Define a custom, formal syntax</li>
+
+</ul>
+<ul>
+<li class="fragment appear">Example</li>
+
+</ul>
+
+<div class="org-src-container">
+
+<pre  class="fragment (appear)"  ><code class="xml" >&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns="http://java.sun.com/xml/ns/javaee"
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0"&gt;
+  &lt;servlet&gt;
+    &lt;servlet-name&gt;appServlet&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+  &lt;/servlet&gt;
+  &lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;appServlet&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/&lt;/url-pattern&gt;
+  &lt;/servlet-mapping&gt;
+&lt;/web-app&gt;
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgefa6609">
+<h3 id="orgefa6609">XML: Why?</h3>
+<ul>
+<li>Automatically check validity of data</li>
+<li>Formal specs</li>
+
+</ul>
+
+</section>
+<section id="slide-org71cfcde">
+<h3 id="org71cfcde">SOAP: WSDL</h3>
+<p>
+Web Services Description Language
+</p>
+
+<p>
+Formal description of a Web Service
+</p>
+
+<p>
+DEMO: <a href="http://www.service-repository.com/">http://www.service-repository.com/</a>
+</p>
+</section>
+</section>
+<section>
+<section id="slide-orgaa6dfdf">
+<h2 id="orgaa6dfdf">WebSocket</h2>
+<ul>
+<li>protocol over TCP, just like HTTP</li>
+<li><i>full-duplex</i></li>
+<li>Binary</li>
+<li>HTTP handshake upgrade</li>
+
+</ul>
+</section>
+</section>
+</div>
+</div>
+<script src="../../reveal.js/dist/reveal.js"></script>
+<script src="../../reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight]
+});
+
+</script>
+</body>
+</html>

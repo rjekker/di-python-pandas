@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Projects and Package Management</title>
+<meta name="author" content="Reindert-Jan Ekker"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../../../reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../../../reveal.js/dist/theme/moon.css" id="theme"/>
+
+<link rel="stylesheet" href="../../../reveal.js/plugin/highlight/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>Projects and Package Management</h1><h2>Reindert-Jan Ekker</h2><p>Code Sensei</p>
+</section>
+
+<section>
+<section id="slide-orgeb6cb72">
+<h2 id="orgeb6cb72">Installing Libraries</h2>
+<div class="outline-text-2" id="text-orgeb6cb72">
+</div>
+</section>
+<section id="slide-org09419d1">
+<h3 id="org09419d1">Virtual Environments</h3>
+<p>
+A <i>virtual environment</i> is an isolated environment for a project
+</p>
+
+<p>
+You can install packages in here (this is a <i>different kind</i> of package!)
+</p>
+
+<p>
+This will not affect the rest of your system
+</p>
+</section>
+<section id="slide-org07e8241">
+<h3 id="org07e8241">Creating a venv</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >python -m venv name-of-env
+</code></pre>
+</div>
+
+<p>
+This will create a new folder called <i>name-of-venv</i>
+</p>
+
+<p>
+This has its own python, installed packages, and more
+</p>
+</section>
+<section id="slide-orgb28bd4c">
+<h3 id="orgb28bd4c">Pycharm</h3>
+<p>
+Pycharm automatically creates a venv for each project
+</p>
+</section>
+<section id="slide-org4459e64">
+<h3 id="org4459e64">Venv activation</h3>
+<p>
+Always work inside an active virtual environment
+</p>
+
+<p>
+Run the <code>activate</code> script inside the environment:
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="sh" ># on linux/mac
+. env-name/bin/activate
+
+# on windows
+env-name\Scripts\activate.bat
+</code></pre>
+</div>
+
+<p>
+You will see the command prompt change: the name of the environment will be shown
+at the start, in parens.
+</p>
+
+</section>
+<section id="slide-orgb6d23f4">
+<h3 id="orgb6d23f4">Installing packages</h3>
+<p>
+Use <a href="https://pip.pypa.io/en/stable/user_guide/">Pip</a>
+</p>
+
+<p>
+Pip is a part of your python installation
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="sh" >python -m pip install requests
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org4629af5">
+<h3 id="org4629af5">Other commands</h3>
+<div class="org-src-container">
+
+<pre   ><code class="sh" >python -m pip uninstall requests
+python -m pip show requests
+python -m pip list
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org7d68c5b">
+<h3 id="org7d68c5b">Anaconda</h3>
+<p>
+Anaconda includes the command <code>conda</code> which offers functionality from both pip and venv.
+</p>
+</section>
+</section>
+</div>
+</div>
+<script src="../../../reveal.js/dist/reveal.js"></script>
+<script src="../../../reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight]
+});
+
+</script>
+</body>
+</html>

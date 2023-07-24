@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>HTML Intro</title>
+<meta name="author" content="Reindert-Jan Ekker"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../../../reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../../../reveal.js/dist/theme/black.css" id="theme"/>
+
+<link rel="stylesheet" href="../../../reveal.js/plugin/highlight/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>HTML Intro</h1><h2>Reindert-Jan Ekker</h2><p>Code Sensei</p>
+</section>
+
+<section>
+<section id="slide-orgc45e4a8">
+<h2 id="orgc45e4a8">Frontend</h2>
+<p>
+What is <i>frontend technology</i>?
+</p>
+
+<p>
+What do you think?
+</p>
+
+</section>
+<section id="slide-org50e70d4">
+<h3 id="org50e70d4">Frontend/Backend</h3>
+<p>
+The frontend is concerned with <i>presenting</i> info to the user.
+</p>
+
+<p>
+Think: images, colors, animations, forms.
+</p>
+
+<p>
+The backend is concerned with logic and data storage.
+</p>
+
+</section>
+<section id="slide-org00b8ec2">
+<h3 id="org00b8ec2">Frontend vs backend</h3>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Front</th>
+<th scope="col" class="org-left">Back</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Visuals</td>
+<td class="org-left">Logic</td>
+</tr>
+
+<tr>
+<td class="org-left">Animations</td>
+<td class="org-left">Store data in database</td>
+</tr>
+
+<tr>
+<td class="org-left">Runs in browser</td>
+<td class="org-left">Runs on server</td>
+</tr>
+</tbody>
+</table>
+
+</section>
+<section id="slide-orgfc9435d">
+<h3 id="orgfc9435d">Frontend vs backend</h3>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Front</th>
+<th scope="col" class="org-left">Back</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">HTML</td>
+<td class="org-left">Java, C#, Python</td>
+</tr>
+
+<tr>
+<td class="org-left">CSS</td>
+<td class="org-left">Databases</td>
+</tr>
+
+<tr>
+<td class="org-left">JavaScript</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+</section>
+</section>
+<section>
+<section id="slide-orgb32651b">
+<h2 id="orgb32651b">HTML</h2>
+
+<div id="orgb1e6faf" class="figure">
+<p><img src="../../static/html_logo.png" alt="html_logo.png" style="border:0" />
+</p>
+</div>
+
+<p>
+HyperText Markup Language
+</p>
+
+</section>
+<section id="slide-org7148148">
+<h3 id="org7148148">HTML</h3>
+<p>
+HTML gives <i>structure</i> to a document:
+</p>
+
+<ul>
+<li>paragraphs</li>
+<li>sections</li>
+<li>title</li>
+<li>links</li>
+<li>headers</li>
+
+</ul>
+
+<p class="fragment (appear)">
+Usually HTML documents are viewed in a <i>browser</i>
+</p>
+
+</section>
+<section id="slide-orgde9c0d7">
+<h3 id="orgde9c0d7">Minimal document</h3>
+<div class="org-src-container">
+
+<pre   ><code class="html" >&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Page title here&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    This text will go on page
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org84f57be">
+<h3 id="org84f57be">HTML elements</h3>
+<p>
+Are represented by <i>tags</i>
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="html" >&lt;h1&gt;This is a header&lt;/h1&gt;
+&lt;p&gt;This is a paragraph&lt;/p&gt;
+&lt;p&gt;A part of this paragraph
+  &lt;em&gt;will be emphasized&lt;/em&gt;
+but the rest is not.&lt;/p&gt;
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org2b8370b">
+<h3 id="org2b8370b">Explore</h3>
+<p>
+Let's explore some real-world HTML.
+</p>
+
+</section>
+<section id="slide-org6f5a607">
+<h3 id="org6f5a607">Work along</h3>
+<p>
+Writing HTML code on <a href="https://jsfiddle.net/">JSFiddle</a>
+</p>
+</section>
+<section id="slide-orgf15194d">
+<h3 id="orgf15194d">Structure vs. layout</h3>
+<p>
+Many tags affect the layout of your page.
+</p>
+
+<p>
+But we use HTML to <i>structure</i> our documents.
+</p>
+
+<p>
+For layout we will use CSS
+</p>
+
+<p>
+Try to keep this strictly separate
+</p>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org0b0514d">
+<h2 id="org0b0514d">Important Tags</h2>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element">MDN Reference</a></li>
+<li><a href="http://www.w3schools.com/html/">W3Schools</a></li>
+
+</ul>
+</section>
+<section id="slide-org626335d">
+<h3 id="org626335d">Text</h3>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">h1 .. h6</td>
+<td class="org-left">Headers</td>
+</tr>
+
+<tr>
+<td class="org-left">strong, em</td>
+<td class="org-left">Emphasis</td>
+</tr>
+
+<tr>
+<td class="org-left">p</td>
+<td class="org-left">Paragraphs (block-level)</td>
+</tr>
+
+<tr>
+<td class="org-left">span</td>
+<td class="org-left">Inline-grouping of text</td>
+</tr>
+</tbody>
+</table>
+
+</section>
+<section id="slide-org168377f">
+<h3 id="org168377f">Text example</h3>
+<div class="org-src-container">
+
+<pre   ><code class="html" >&lt;h1&gt;Header&lt;/h1&gt;
+&lt;h3&gt;Subheader&lt;/h3&gt;
+&lt;p&gt;Hi, this is an example
+  &lt;span class="flarp"&gt;these words have special layout applied&lt;/span&gt;
+  rest of the paragraph
+  &lt;bold&gt;bold&lt;/bold&gt;
+  &lt;em&gt;italic&lt;/em&gt;
+&lt;/p&gt;
+</code></pre>
+</div>
+
+
+</section>
+<section id="slide-orgba9ca7c">
+<h3 id="orgba9ca7c">Structure</h3>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">section, article</td>
+<td class="org-left">structural grouping</td>
+</tr>
+
+<tr>
+<td class="org-left">nav, header, footer, aside</td>
+<td class="org-left">functional grouping</td>
+</tr>
+
+<tr>
+<td class="org-left">div</td>
+<td class="org-left">"general" grouping</td>
+</tr>
+</tbody>
+</table>
+
+</section>
+<section id="slide-orgfae920b">
+<h3 id="orgfae920b">Lists</h3>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">ol, ul</td>
+<td class="org-left">lists</td>
+</tr>
+
+<tr>
+<td class="org-left">li</td>
+<td class="org-left">elements</td>
+</tr>
+</tbody>
+</table>
+
+<div class="org-src-container">
+
+<pre   ><code class="html" >&lt;ol&gt;
+  &lt;li&gt;First item&lt;/li&gt;
+  &lt;li&gt;Second item&lt;/li&gt;
+  &lt;li&gt;Etc..&lt;/li&gt;
+&lt;/ol&gt;
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org7d234dc">
+<h3 id="org7d234dc">Tables</h3>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">table</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">tr</td>
+<td class="org-left">table row</td>
+</tr>
+
+<tr>
+<td class="org-left">td</td>
+<td class="org-left">table cell</td>
+</tr>
+</tbody>
+</table>
+
+<div class="org-src-container">
+
+<pre   ><code class="html" >&lt;table&gt;
+  &lt;tr&gt;&lt;th&gt;Dier&lt;/th&gt;&lt;th&gt;Poten&lt;/th&gt;&lt;tr&gt;
+  &lt;tr&gt;&lt;td&gt;Hond&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;Spin&lt;/td&gt;&lt;td&gt;8&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;Slang&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+</code></pre>
+</div>
+
+
+</section>
+<section id="slide-org6aa24ae">
+<h3 id="org6aa24ae">Links</h3>
+<div class="org-src-container">
+
+<pre   ><code class="html" >&lt;a href="members/reindert/profile.html"&gt;
+  Reinderts Profile (local)
+&lt;/a&gt;
+&lt;a href="http://github.com/rjekker"&gt;
+  Reinderts Profile On Github (remote)
+&lt;/a&gt;
+</code></pre>
+</div>
+
+<p>
+Links to <i>external</i> locations start with <code>http://</code>
+</p>
+
+</section>
+<section id="slide-org0e69b69">
+<h3 id="org0e69b69">Images</h3>
+<div class="org-src-container">
+
+<pre   ><code class="html" >&lt;img src="/images/foto.png"&gt;
+</code></pre>
+</div>
+
+<ul>
+<li>Images can be remote or local as well</li>
+<li>NB: No closing tag</li>
+
+</ul>
+
+</section>
+<section id="slide-orgacd7c23">
+<h3 id="orgacd7c23">Closing tags?</h3>
+<p>
+Most tags can contain text or other tags and need to be closed: <code>&lt;h2&gt;...&lt;/h2&gt;</code>
+</p>
+
+<p>
+In some cases the closing tag is optional or not allowed:
+</p>
+
+<ul>
+<li>&lt;p&gt;</li>
+<li>&lt;br&gt;</li>
+<li>&lt;hr&gt;</li>
+<li>&lt;img&gt;</li>
+<li>&lt;input&gt;</li>
+<li>&lt;meta&gt;</li>
+
+</ul>
+
+<p>
+<a href="http://blog.teamtreehouse.com/to-close-or-not-to-close-tags-in-html5">Read more here</a>
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-orgb94623b">
+<h2 id="orgb94623b">HTML Head</h2>
+<p>
+Contains <i>meta-data</i> about the document
+</p>
+
+
+</section>
+<section id="slide-orgbde92b7">
+<h3 id="orgbde92b7">Head</h3>
+<ul>
+<li><code>&lt;title&gt;</code> sets title of document</li>
+<li><code>meta</code> can contain all kinds of data about author, language, caching, and more</li>
+<li><code>style</code> and <code>script</code> tags</li>
+<li><code>link</code> tags to style sheets etc.</li>
+
+</ul>
+
+</section>
+<section id="slide-org34ebaa9">
+<h3 id="org34ebaa9">Explore</h3>
+<p>
+Look at the source code of a few popular sites like google, wikipedia.
+</p>
+
+<p>
+Inspect the html <code>head</code>. Can you understand what it contains?
+</p>
+</section>
+</section>
+</div>
+</div>
+<script src="../../../reveal.js/dist/reveal.js"></script>
+<script src="../../../reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight]
+});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>CSV Files</title>
+<meta name="author" content="Reindert-Jan Ekker"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../../../reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../../../reveal.js/dist/theme/black.css" id="theme"/>
+
+<link rel="stylesheet" href="../../../reveal.js/plugin/highlight/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>CSV Files</h1><h2>Reindert-Jan Ekker</h2><p>Code Sensei</p>
+</section>
+
+<section>
+<section id="slide-org6226cd7">
+<h2 id="org6226cd7">CSV module</h2>
+<p>
+Python has  <a href="https://docs.python.org/3/library/csv.html">builtin CSV support</a>.
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-orga1b1193">
+<h2 id="orga1b1193">Reading CSV files</h2>
+<p>
+Use a CSV Reader:
+</p>
+
+</section>
+<section id="slide-org4584e00">
+<h3 id="org4584e00">CSV file example</h3>
+<p>
+Personel data:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="text" >Anna,Amsterdam,Manager
+George,New York,Programmer
+Ben,Berlin,Trainer
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org64d1d61">
+<h3 id="org64d1d61">Reading CSV files</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >import csv
+
+with open("data.csv", 'r', newline='') as csvfile:
+    reader = csv.reader(csvfile)
+    # row will contain a list of fields
+    # for every line in the file
+    for row in reader:
+        # Print city
+        print(row[1])
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgb3dfe5b">
+<h3 id="orgb3dfe5b">Open</h3>
+<p>
+Why do we use <code>newline=''</code> here?
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >with open("data.csv", 'r', newline='') as csvfile:
+    ...
+</code></pre>
+</div>
+
+<p>
+See <a href="https://docs.python.org/3/library/csv.html#csv.reader">The documentation</a>
+</p>
+
+</section>
+<section id="slide-org16322b0">
+<h3 id="org16322b0">Dictreader 1</h3>
+<p>
+If the file has a header:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="text" >Name,City,Role
+Anna,Amsterdam,Manager
+George,New York,Programmer
+Ben,Berlin,Trainer
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org02cbcad">
+<h3 id="org02cbcad">DictReader 2</h3>
+<p>
+Read lines as dicts, with headers as keys.
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >import csv
+
+with open("data.csv", 'r', newline='') as csvfile:
+    reader = csv.DictReader(csvfile)
+    for row in reader:
+        print(row['City'])
+</code></pre>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org728b6ba">
+<h2 id="org728b6ba">Writing CSV files</h2>
+<div class="org-src-container">
+
+<pre   ><code class="python" >import csv
+
+data = [["animal", "legs", "wings"],
+        ["dog", 4, 0],
+        ["bird", 2, 2]]
+
+with open('animals.csv', 'w', newline='') as f:
+    writer = csv.writer(f)
+    for l in data:
+        writer.writerow(l)
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgd168515">
+<h3 id="orgd168515">Writing CSV (dicts)</h3>
+<p>
+In this case, we have a dictionary for each line.
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="python" >import csv
+
+data = [{"animal": "dog", "legs": 4, "wings": 4},
+      {"animal": "bird", "legs": 0, "wings": 2}]
+
+with open('animals.csv', 'w', newline='') as f:
+    writer = csv.DictWriter(f, data[0].keys())
+    writer.writeheader()
+    for l in data:
+        writer.writerow(l)
+</code></pre>
+</div>
+
+<p>
+Note that we have to pass the keys to create the DictWriter!
+</p>
+</section>
+</section>
+</div>
+</div>
+<script src="../../../reveal.js/dist/reveal.js"></script>
+<script src="../../../reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight]
+});
+
+</script>
+</body>
+</html>

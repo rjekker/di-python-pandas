@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>SQLAlchemy</title>
+<meta name="author" content="Reindert-Jan Ekker"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../../../reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../../../reveal.js/dist/theme/moon.css" id="theme"/>
+
+<link rel="stylesheet" href="../../../reveal.js/plugin/highlight/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>SQLAlchemy</h1><h2>Reindert-Jan Ekker</h2><p>Code Sensei</p>
+</section>
+
+<section>
+<section id="slide-org8920519">
+<h2 id="org8920519">SqlAlchemy</h2>
+<div class="outline-text-2" id="text-org8920519">
+</div>
+</section>
+<section id="slide-org319726d">
+<h3 id="org319726d">SqlAlchemy</h3>
+<p>
+<a href="https://www.sqlalchemy.org/">https://www.sqlalchemy.org/</a>
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="sh" >pip install sqlalchemy
+</code></pre>
+</div>
+
+<p>
+A library for working with SQL databases from Python
+</p>
+
+</section>
+<section id="slide-org7d2fcac">
+<h3 id="org7d2fcac">Relational databases</h3>
+<p>
+Data stored in Tables, Rows, Columns
+</p>
+
+<p>
+Retrieve and store data using SQL
+</p>
+
+
+</section>
+<section id="slide-org9ff8b51">
+<h3 id="org9ff8b51">SqlAlchemy</h3>
+<p>
+Supports most major SQL Databases
+</p>
+
+<p>
+Can generate table structure based on Python code
+</p>
+
+</section>
+<section id="slide-orga68e164">
+<h3 id="orga68e164">ORM</h3>
+<p>
+Object-Relational Mapping
+</p>
+
+<ul>
+<li>Python Classes    &#x2013;&gt;  DB Tables</li>
+<li>Python objects    &#x2013;&gt;  Rows in Tables</li>
+<li>Object Attributes &#x2013;&gt;  Columns in Tables</li>
+
+</ul>
+
+</section>
+<section id="slide-org6185dd4">
+<h3 id="org6185dd4">Setup</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >from sqlalchemy import create_engine
+
+engine = create_engine('sqlite:///mydb.sqlite', echo=True)
+</code></pre>
+</div>
+
+<p>
+Engine object represents db connection
+</p>
+
+<p>
+Can be sqlite, mysql, etc. etc.
+</p>
+
+<p>
+Different DB's use a different <i>connection string</i>
+</p>
+
+<p>
+May need to install an extra library e.g. psycopg
+</p>
+
+</section>
+<section id="slide-orga6d4226">
+<h3 id="orga6d4226">Class for Table</h3>
+<p>
+Class needs to inherit from <code>Base</code>
+</p>
+
+<p>
+This makes it a persistent class, mapped to a table
+</p>
+
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, Integer, String, Boolean
+
+Base = declarative_base()
+
+class Resource(Base):
+    __tablename__ = "resource"  # DB tabelnaam
+
+    id = Column(Integer, primary_key=True)
+    hostname = Column(String)
+    ip = Column(String)
+    memory = Column(Integer)
+    active = Column(Boolean)
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgb801d48">
+<h3 id="orgb801d48">Creating an Object</h3>
+<p>
+<code>__init__()</code> is auto-generated 
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >res = Resource(hostname="rjekker.nl",\
+                     ip="123.456.7.8",\
+                 memory=50000,\
+                 active=True)
+</code></pre>
+</div>
+
+<p>
+Note: the <code>id</code> field is set by the DB and we don't touch it.
+</p>
+
+
+</section>
+<section id="slide-org43ecf81">
+<h3 id="org43ecf81">Creating tables</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >Base.metadata.create_all(engine)
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org76fe4ba">
+<h3 id="org76fe4ba">Creating data</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >from sqlalchemy.orm import sessionmaker
+
+# 1 sessionfactory per python programma/db connection
+session_factory = sessionmaker(bind=engine)
+
+# Create a session for each transaction
+session = session_factory()
+res = Resource(hostname="rjekker.nl",\
+               ip="123.456.7.8",\
+               memory=50000,\
+               active=True)
+session.add(res)
+session.commit()
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgdfb347c">
+<h3 id="orgdfb347c">Retrieving data</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >session = session_factory()
+resources = session.query(Resource).all()
+</code></pre>
+</div>
+
+<p>
+Filter on an attribute:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >resources = session.query(Resouce).filter(Resource.hostname=="rjekker.nl")
+</code></pre>
+</div>
+</section>
+</section>
+</div>
+</div>
+<script src="../../../reveal.js/dist/reveal.js"></script>
+<script src="../../../reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight]
+});
+
+</script>
+</body>
+</html>

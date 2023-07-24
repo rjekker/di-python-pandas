@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Solutions: Booleans and If Statements</title>
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../../themes/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="../../themes/readtheorg/css/readtheorg.css"/>
+<link rel="stylesheet" type="text/css" href="../../css/homelink.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../themes/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="../../themes/readtheorg/js/readtheorg.js"></script>
+<script type="text/javascript" src="../../js/addhomelink.js"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Solutions: Booleans and If Statements</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org376ea98">Pass or fail</a></li>
+<li><a href="#orga2559fd">Tax brackets</a></li>
+<li><a href="#org992694e">Multiplication Quiz</a></li>
+<li><a href="#org7ac3cdb">Largest</a></li>
+<li><a href="#org88adb19">Vowels</a></li>
+<li><a href="#orga874dc9">Weeks</a></li>
+<li><a href="#orgc2d9f04">Cost of shipping</a></li>
+</ul>
+</div>
+</div>
+
+<section id="outline-container-org376ea98" class="outline-2">
+<h2 id="org376ea98">Pass or fail</h2>
+<div class="outline-text-2" id="text-org376ea98">
+<p>
+Ask the user to enter a test score (a number between 0 and 100). If it
+is 60 or higher, print "Pass", else print "Fail"
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-variable-name">score</span> = <span class="org-builtin">int</span>(<span class="org-builtin">input</span>(<span class="org-string">"Your score? "</span>))
+<span class="org-keyword">if</span> score &gt;= 60:
+    <span class="org-builtin">print</span>(<span class="org-string">"Pass"</span>)
+<span class="org-keyword">else</span>:
+    <span class="org-builtin">print</span>(<span class="org-string">"Fail"</span>)
+</pre>
+</div>
+</div>
+</section>
+
+<section id="outline-container-orga2559fd" class="outline-2">
+<h2 id="orga2559fd">Tax brackets</h2>
+<div class="outline-text-2" id="text-orga2559fd">
+<p>
+Ask the user to input his income in dollars. Then print how much taxes
+he has to pay according to the following (imaginary) rules:
+</p>
+
+<ul class="org-ul">
+<li>Anything below $ 20,000: no taxes</li>
+<li>$20,000 - $50,000: 30%</li>
+<li>Everything above: 60%</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-variable-name">income</span> = <span class="org-builtin">int</span>(<span class="org-builtin">input</span>(<span class="org-string">"How much do you earn? "</span>))
+<span class="org-keyword">if</span> income &lt; 20000:
+    <span class="org-builtin">print</span>(<span class="org-string">"You don't have to pay taxes!"</span>)
+<span class="org-keyword">elif</span> income &lt;= 50000:
+    <span class="org-builtin">print</span>(<span class="org-string">"You have to pay 30%"</span>)
+<span class="org-keyword">else</span>:
+    <span class="org-builtin">print</span>(<span class="org-string">"You have to pay 60%"</span>)
+</pre>
+</div>
+</div>
+</section>
+
+<section id="outline-container-org992694e" class="outline-2">
+<h2 id="org992694e">Multiplication Quiz</h2>
+<div class="outline-text-2" id="text-org992694e">
+<p>
+Write a program that prints two random integers. The user has to enter
+the product of these two integers. Check that the answer was correct
+and show this to the user.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">import</span> random
+<span class="org-variable-name">x</span> = random.randint(0,20)
+<span class="org-variable-name">y</span> = random.randint(0,20)
+
+<span class="org-builtin">print</span>(<span class="org-string">"What is"</span>, x, <span class="org-string">"x"</span>, y, <span class="org-string">"? "</span>)
+<span class="org-variable-name">answer</span> = <span class="org-builtin">int</span>(<span class="org-builtin">input</span>())
+
+<span class="org-keyword">if</span> answer == x*y:
+    <span class="org-builtin">print</span>(<span class="org-string">"That is correct!"</span>)
+<span class="org-keyword">else</span>:
+    <span class="org-builtin">print</span>(<span class="org-string">"That is wrong :("</span>)
+</pre>
+</div>
+</div>
+</section>
+
+<section id="outline-container-org7ac3cdb" class="outline-2">
+<h2 id="org7ac3cdb">Largest</h2>
+<div class="outline-text-2" id="text-org7ac3cdb">
+<p>
+Write a program that asks the user to enter three numbers. The program will
+then determine and print the largest of the three numbers.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-variable-name">a</span> = <span class="org-builtin">int</span>(<span class="org-builtin">input</span>(<span class="org-string">"first number? "</span>))
+<span class="org-variable-name">b</span> = <span class="org-builtin">int</span>(<span class="org-builtin">input</span>(<span class="org-string">"second number? "</span>))
+<span class="org-variable-name">c</span> = <span class="org-builtin">int</span>(<span class="org-builtin">input</span>(<span class="org-string">"third number? "</span>))
+
+<span class="org-keyword">if</span> a &gt; b:
+    <span class="org-keyword">if</span> a &gt; c:
+        <span class="org-builtin">print</span>(a)
+    <span class="org-keyword">else</span>:
+        <span class="org-builtin">print</span>(c)
+<span class="org-keyword">else</span>:
+    <span class="org-keyword">if</span> b &gt; c:
+        <span class="org-builtin">print</span>(b)
+    <span class="org-keyword">else</span>:
+        <span class="org-builtin">print</span>(c)
+</pre>
+</div>
+</div>
+</section>
+
+
+<section id="outline-container-org88adb19" class="outline-2">
+<h2 id="org88adb19">Vowels</h2>
+<div class="outline-text-2" id="text-org88adb19">
+<p>
+Write a program that asks the user to enter a letter and check whether
+it is a vowel or a consonant. If it is neither, you show an error
+message.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-comment-delimiter"># </span><span class="org-comment">A little trick: we convert letters to lowercase</span>
+letter = <span class="org-builtin">input</span>(<span class="org-string">"Enter a letter?"</span>).lower()
+<span class="org-keyword">if</span> letter == <span class="org-string">'a'</span> <span class="org-keyword">or</span> letter == <span class="org-string">'e'</span> <span class="org-keyword">or</span> letter == <span class="org-string">'i'</span> <span class="org-keyword">or</span> letter == <span class="org-string">'o'</span> <span class="org-keyword">or</span> letter == <span class="org-string">'u'</span> <span class="org-keyword">or</span> letter == <span class="org-string">'y'</span>:
+    <span class="org-builtin">print</span>(letter, <span class="org-string">"is a vowel"</span>)
+<span class="org-keyword">elif</span> letter == <span class="org-string">'b'</span> <span class="org-keyword">or</span> letter == <span class="org-string">'c'</span> <span class="org-keyword">or</span> letter == <span class="org-string">'d'</span> <span class="org-keyword">or</span> letter == <span class="org-string">'f'</span> <span class="org-keyword">or</span> letter == <span class="org-string">'g'</span> <span class="org-keyword">or</span> letter == <span class="org-string">'h'</span>: <span class="org-comment-delimiter"># </span><span class="org-comment">etc.</span>
+    <span class="org-builtin">print</span>(letter, <span class="org-string">"is a consonant"</span>)
+<span class="org-keyword">else</span>:
+    <span class="org-builtin">print</span>(letter, <span class="org-string">"is neither a vowel or a consonant"</span>)
+</pre>
+</div>
+
+<p>
+You can actually do that a bit more elegantly:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-variable-name">letter</span> = <span class="org-builtin">input</span>(<span class="org-string">"Enter a letter?"</span>).lower()
+<span class="org-keyword">if</span> letter <span class="org-keyword">in</span> <span class="org-string">'aeiouy'</span>:
+    <span class="org-builtin">print</span>(letter, <span class="org-string">"is a vowel"</span>)
+<span class="org-keyword">elif</span> letter <span class="org-keyword">in</span> <span class="org-string">'bcdfghjklmnpqrstvwxz'</span>: <span class="org-comment-delimiter"># </span><span class="org-comment">etc.</span>
+    <span class="org-builtin">print</span>(letter, <span class="org-string">"is a consonant"</span>)
+<span class="org-keyword">else</span>:
+    <span class="org-builtin">print</span>(letter, <span class="org-string">"is neither a vowel or a consonant"</span>)
+</pre>
+</div>
+</div>
+</section>
+
+<section id="outline-container-orga874dc9" class="outline-2">
+<h2 id="orga874dc9">Weeks</h2>
+<div class="outline-text-2" id="text-orga874dc9">
+<p>
+Write a program that asks the user for a number between 1 and 7 and
+prints the corresponding name of the weekday.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-variable-name">n</span> = <span class="org-builtin">int</span>(<span class="org-builtin">input</span>(<span class="org-string">"Day number?"</span>))
+<span class="org-keyword">if</span> n == 1:
+    <span class="org-builtin">print</span>(<span class="org-string">"monday"</span>)
+<span class="org-keyword">elif</span> n == 2:
+    <span class="org-builtin">print</span>(<span class="org-string">"tuesday"</span>)
+<span class="org-keyword">elif</span> n == 3:
+    <span class="org-builtin">print</span>(<span class="org-string">"wednesday"</span>)
+<span class="org-keyword">elif</span> n == 4:
+    <span class="org-builtin">print</span>(<span class="org-string">"thursday"</span>)
+<span class="org-keyword">elif</span> n == 5:
+    <span class="org-builtin">print</span>(<span class="org-string">"friday"</span>)
+<span class="org-keyword">elif</span> n == 6:
+    <span class="org-builtin">print</span>(<span class="org-string">"saturday"</span>)
+<span class="org-keyword">elif</span> n == 7:
+    <span class="org-builtin">print</span>(<span class="org-string">"sunday"</span>)
+<span class="org-keyword">else</span>:
+    <span class="org-builtin">print</span>(<span class="org-string">"wrong number!"</span>)
+</pre>
+</div>
+</div>
+</section>
+
+<section id="outline-container-orgc2d9f04" class="outline-2">
+<h2 id="orgc2d9f04">Cost of shipping</h2>
+<div class="outline-text-2" id="text-orgc2d9f04">
+<p>
+A shipping company uses the following function to calculate the cost
+(in dollars) of shipping based on the weight of the package (in
+pounds).
+</p>
+
+<p>
+Cost for weight w is:
+</p>
+<ul class="org-ul">
+<li>2.5, if 0 &lt; w &lt;= 2</li>
+<li>4.5, if 2 &lt; w &lt;= 4</li>
+<li>7.5, if 4 &lt; w &lt;= 10</li>
+<li>10.5, if 10 &lt; w &lt;= 20</li>
+</ul>
+
+<p>
+Write a program that prompts the user to enter the weight of the
+package and display the shipping cost. If the weight is greater than
+20, display a message “the package cannot be shipped".
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-variable-name">w</span> = <span class="org-builtin">int</span>(<span class="org-builtin">input</span>(<span class="org-string">"Weight? "</span>))
+
+<span class="org-keyword">if</span> 0 &lt; w &lt;=2:
+    <span class="org-builtin">print</span>(<span class="org-string">"Cost: "</span>, 2.5)
+<span class="org-keyword">elif</span> 2 &lt; w &lt;= 4:
+    <span class="org-builtin">print</span>(<span class="org-string">"Cost: "</span>, 4.5)
+<span class="org-keyword">elif</span> 4 &lt; w &lt;= 10:
+    <span class="org-builtin">print</span>(<span class="org-string">"Cost: "</span>, 7.5)
+<span class="org-keyword">elif</span> 10 &lt; w &lt;= 20:
+    <span class="org-builtin">print</span>(<span class="org-string">"Cost: "</span>, 10.5)
+<span class="org-keyword">else</span>:
+    <span class="org-builtin">print</span>(<span class="org-string">"The package cannot be shipped."</span>)
+</pre>
+</div>
+</div>
+</section>
+</div>
+<div id="postamble" class="status">
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

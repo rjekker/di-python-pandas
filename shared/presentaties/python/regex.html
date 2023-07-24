@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Regular Expressions</title>
+<meta name="author" content="Reindert-Jan Ekker"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../../../reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../../../reveal.js/dist/theme/league.css" id="theme"/>
+
+<link rel="stylesheet" href="../../../reveal.js/plugin/highlight/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>Regular Expressions</h1><h2>Reindert-Jan Ekker</h2><p>Code Sensei</p>
+</section>
+
+<section>
+<section id="slide-org451cd85">
+<h2 id="org451cd85">Regular Expressions</h2>
+<div class="outline-text-2" id="text-org451cd85">
+</div>
+</section>
+<section id="slide-orgc8164cc">
+<h3 id="orgc8164cc">Regex</h3>
+<ul>
+<li>A way to define text patterns that can be matched against a string</li>
+
+</ul>
+
+<ul>
+<li class="fragment appear">Useful for search/replace</li>
+
+<li class="fragment appear">Included with most programming languages, including Python</li>
+
+</ul>
+
+</section>
+<section id="slide-org64e4a68">
+<h3 id="org64e4a68">Module</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >import re
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org3edc62a">
+<h3 id="org3edc62a">Resources</h3>
+<ul>
+<li><a href="https://docs.python.org/3/library/re.html">Official Docs</a></li>
+<li><a href="https://www.w3schools.com/python/python_regex.asp">W3schools</a></li>
+<li><a href="https://realpython.com/regex-python/">RealPython</a></li>
+
+</ul>
+
+</section>
+<section id="slide-org535e218">
+<h3 id="org535e218">Tools</h3>
+<ul>
+<li><a href="https://pythex.org/">https://pythex.org/</a></li>
+<li><a href="http://www.pyregex.com/">http://www.pyregex.com/</a></li>
+
+</ul>
+
+</section>
+<section id="slide-org31f7d68">
+<h3 id="org31f7d68">Example</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >import re
+
+f = open("auth.log")
+
+for line in f:
+    match = re.search(r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}', line)
+    if match:
+        print(match.group())
+</code></pre>
+</div>
+
+
+</section>
+<section id="slide-org7d6e047">
+<h3 id="org7d6e047">Backslashes</h3>
+<p>
+A backslash in a Python string "escapes" the next character.
+</p>
+
+<ul>
+<li><code>"\n"</code> is a newline</li>
+<li><code>"\t"</code> is a tab</li>
+<li><code>"\\"</code> is a backslash</li>
+
+</ul>
+
+<p>
+In regular expressions we need a lot of backslashes. So we would type
+lots of double slashes.
+</p>
+</section>
+<section id="slide-org586d1cd">
+<h3 id="org586d1cd">Raw strings</h3>
+<p>
+A string prefixed with 'r' is a <i>raw string</i>: a backslash has no special meaning.
+</p>
+
+<p>
+This is useful for regular expressions.
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="python" >re.match(r'\.\d', s)
+</code></pre>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org901c6c1">
+<h2 id="org901c6c1">Methods</h2>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">match()</td>
+<td class="org-left">Match at the beginning of the string.</td>
+</tr>
+
+<tr>
+<td class="org-left">search()</td>
+<td class="org-left">Matches any location.</td>
+</tr>
+
+<tr>
+<td class="org-left">findall()</td>
+<td class="org-left">Find all matches, and returns them as a list.</td>
+</tr>
+
+<tr>
+<td class="org-left">sub()</td>
+<td class="org-left">Replace matches with a string.</td>
+</tr>
+
+<tr>
+<td class="org-left">split()</td>
+<td class="org-left">Returns a list of substrings, split at matches</td>
+</tr>
+</tbody>
+</table>
+
+</section>
+<section id="slide-orgcce7570">
+<h3 id="orgcce7570">Example: Times</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >import re
+
+f = open("auth.log")
+
+for line in f:
+    match = re.search(r'\d{1,2}:\d{1,2}:\d{1,2}', line)
+    if match:
+        print(match.group())
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgcf26f3b">
+<h3 id="orgcf26f3b">Match object</h3>
+<p>
+Returned by =re.search(), match object has methods:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">.span()</td>
+<td class="org-left">tuple containing start and end positions of the match</td>
+</tr>
+
+<tr>
+<td class="org-left">.string()</td>
+<td class="org-left">the string passed into the function</td>
+</tr>
+
+<tr>
+<td class="org-left">.group()</td>
+<td class="org-left">returns the matching part of the string</td>
+</tr>
+</tbody>
+</table>
+
+</section>
+<section id="slide-orgbeb05d3">
+<h3 id="orgbeb05d3">Groups</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >import re
+
+f = open("auth.log")
+
+for line in f:
+    match = re.search(r'port (\d+)', line)
+    if match:
+        print(match.group(0))  # whole match: "port 22"
+        print(match.group(1))  # 22
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org8d21a16">
+<h3 id="org8d21a16">Compile</h3>
+<p>
+For speed, when you need to do lots of regex matching
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >pattern = re.compile("\d{1,2}:\d{1,2}:\d{1,2}")
+for line in file:
+    pattern.search(line)  
+</code></pre>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org9b53ab3">
+<h2 id="org9b53ab3">When (not) to use regex?</h2>
+<blockquote >
+<p>
+Some people, when confronted with a problem, think
+</p>
+
+<p>
+“I know, I'll use regular expressions.”
+</p>
+
+<p>
+Now they have two problems. 
+</p>
+</blockquote>
+
+</section>
+<section id="slide-orge48d8bf">
+<h3 id="orge48d8bf">The problem</h3>
+<blockquote >
+<p>
+<a href="https://blog.codinghorror.com/regular-expressions-now-you-have-two-problems/">Regex are not evil, per se, but overuse of regex is evil.
+</a>
+</p>
+</blockquote>
+
+</section>
+<section id="slide-org7f3518e">
+<h3 id="org7f3518e">Best practice</h3>
+<p>
+Use regex for string matching problems where there is no simple solution in plain code.
+</p>
+
+<p>
+Avoid using complex regular expressions.
+</p>
+</section>
+</section>
+</div>
+</div>
+<script src="../../../reveal.js/dist/reveal.js"></script>
+<script src="../../../reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight]
+});
+
+</script>
+</body>
+</html>

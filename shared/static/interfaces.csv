@@ -1,0 +1,27 @@
+interface,vlan,ip,hsrp_vip,subnetmask,description,multicast_enabled
+TenGigabitEthernet2/3,1,10.28.48.253,10.28.48.254,255.255.255.0,www,yes
+TenGigabitEthernet3/3,2,10.70.208.253,10.70.208.254,255.255.225.0,mail,yes
+GigabitEthernet,3,10.30.96.29,10.30.96.30  ,255.255.255.224,dns,no
+TenGigabitEthernet1/3,4,1.10.96.28,1.10.96.30,255.255.255.224,httpd,no
+TenGigabitEthernet3/3,5,1.11.96.28,1.11.96.30,255.255.255.224,gateway,no
+TenGigabitEthernet2/3,6,1.12.96.252,1.12.96.254,255.255.255.0,,no
+TenGigabitEthernet1/3,7,1.18.32.28,1.18.32.30,255.255.255.224,,yes
+TenGigabitEthernet1/3,8,12.24.96.28,12.24.96.30,255.255.255.224,,no
+GigabitEthernet,9,13.20.96.28,13.20.96.30,255.255.255.224,,yes
+TenGigabitEthernet1/3,10,5.19.96.28,5.19.96.30 ,255.255.255.224,,yes
+TenGigabitEthernet1/3,11,1.19.96.60,1.19.96.62   ,255.255.255.224,,yes
+TenGigabitEthernet1/3,12,1.19.96.92,1.19.96.94,255.255.255.224,,yes
+TenGigabitEthernet2/3,13,1.14.96.28,1.14.96.30 ,255.255.255.224,,no
+TenGigabitEthernet1/3,1,172.28.48.252,172.28.48.254,255.255.255.0,www,yes
+TenGigabitEthernet3/3,2,145.70.208.252,145.70.208.254,255.255.225.0,mail,yes
+TenGigabitEthernet3/3,3,172.30.96.28,172.30.96.30  ,255.255.255.224,dns,no
+TenGigabitEthernet1/3,4,10.10.96.29,10.10.96.30,255.255.255.224,httpd,no
+GigabitEthernet,5,10.11.96.29,10.11.96.30,255.255.255.224,gateway,no
+TenGigabitEthernet1/3,6,10.12.96.253,10.12.96.254,255.255.255.0,,no
+TenGigabitEthernet1/3,7,10.18.32.29,10.18.32.30,255.255.255.224,,yes
+TenGigabitEthernet3/3,8,172.24.96.29,172.24.96.30,255.255.255.224,,no
+TenGigabitEthernet1/3,9,10.20.96.29,10.20.96.30,255.255.255.224,,yes
+TenGigabitEthernet1/3,10,10.19.96.29,10.19.96.30 ,255.255.255.224,,yes
+TenGigabitEthernet2/3,11,10.19.96.61,10.19.96.62   ,255.255.255.224,,yes
+TenGigabitEthernet1/3,12,10.19.96.93,10.19.96.94,255.255.255.224,,yes
+TenGigabitEthernet1/3,13,10.14.96.29,10.14.96.30 ,255.255.255.224,,no

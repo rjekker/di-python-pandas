@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Version Control with Git</title>
+<meta name="author" content="Reindert-Jan Ekker"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../../reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../../reveal.js/dist/theme/sky.css" id="theme"/>
+
+<link rel="stylesheet" href="../../reveal.js/plugin/highlight/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>Version Control with Git</h1><h2>Reindert-Jan Ekker</h2><p>Code Sensei</p>
+</section>
+
+<section>
+<section id="slide-org9551cad">
+<h2 id="org9551cad">Intro: Git</h2>
+<blockquote >
+<p>
+Git is software for tracking changes in any set of files,
+usually used for coordinating work among programmers collaboratively
+developing source code during software development.
+</p>
+</blockquote>
+
+</section>
+<section id="slide-org59861e7">
+<h3 id="org59861e7">Why</h3>
+<ul>
+<li>Safe storage</li>
+<li>Collaboration</li>
+<li>History</li>
+
+</ul>
+
+<p>
+<b>Never lose your work again</b>
+</p>
+
+<p>
+An example: <a href="https://github.com/angular">AngularJS</a>
+</p>
+
+</section>
+<section id="slide-orgdb725ac">
+<h3 id="orgdb725ac">Git</h3>
+
+<div id="org696db2d" class="figure">
+<p><img src="../static/git_logo.jpeg" alt="git_logo.jpeg" />
+</p>
+</div>
+
+<ul>
+<li>Linus Torvalds in 2005</li>
+<li>Linux Kernel Source Code</li>
+<li><b>Distributed</b> and very advanced</li>
+<li>De-facto standard</li>
+
+</ul>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org66dd0cd">
+<h2 id="org66dd0cd">Part 1</h2>
+<p>
+Working locally
+</p>
+
+</section>
+<section id="slide-org2b8ee85">
+<h3 id="org2b8ee85">Hands-on intro</h3>
+<p>
+Let's create a small project
+</p>
+
+<ol>
+<li>Create a repository</li>
+<li>Explore the repo</li>
+<li>Create some files</li>
+<li>Commit a version</li>
+<li>Create some other files</li>
+<li>Commit another version</li>
+<li>Log, checkout</li>
+
+</ol>
+
+</section>
+<section id="slide-org63e40b5">
+<h3 id="org63e40b5">The basic flow</h3>
+
+<div id="org0de095b" class="figure">
+<p><img src="../static/git_diag_simple.png" alt="git_diag_simple.png" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org4c51cb9">
+<h2 id="org4c51cb9">Four concepts</h2>
+<ul>
+<li>Repo</li>
+<li>Working Directory</li>
+<li>HEAD</li>
+<li>Index or "staging area"</li>
+
+</ul>
+
+</section>
+<section id="slide-orge1135c0">
+<h3 id="orge1135c0">Working Directory</h3>
+<p>
+This is your project directory with all the files you work with.
+</p>
+
+</section>
+<section id="slide-org6eeb631">
+<h3 id="org6eeb631">Repo</h3>
+<p>
+This is the <code>.git</code> folder in your project.
+</p>
+
+<p>
+It contains the complete history of the project.
+</p>
+
+</section>
+<section id="slide-orge4884b5">
+<h3 id="orge4884b5">Commit</h3>
+<p>
+A commit creates a new version in the repo, reflecting the current state
+of your files.
+</p>
+
+<p>
+You should always add a commit comment.
+</p>
+</section>
+<section id="slide-org5ffab73">
+<h3 id="org5ffab73">Check out</h3>
+<p>
+At any moment you can "check out" any version from the repo into your
+working directory.
+</p>
+
+<p>
+The files will then be changed to reflect that version of the project.
+</p>
+
+</section>
+<section id="slide-org3b38b33">
+<h3 id="org3b38b33">HEAD</h3>
+<p>
+HEAD refers to the version that you checked out last.
+</p>
+
+<p>
+In other words, it's the version that the files in your working directory
+are currently based on.
+</p>
+
+</section>
+<section id="slide-orgb67f153">
+<h3 id="orgb67f153">Clean</h3>
+<p>
+When you do a <i>checkout</i> of a version from the repo, the working directory is <b>clean</b>:
+</p>
+
+<p>
+it has no differences with the HEAD version
+</p>
+
+</section>
+<section id="slide-org3b7c46c">
+<h3 id="org3b7c46c">Dirty</h3>
+<p>
+When you make changes (and you did not commit them), the working directory is <b>dirty</b>.
+</p>
+
+</section>
+<section id="slide-org7506b71">
+<h3 id="org7506b71">Commit 2</h3>
+<p>
+When you make changes and create a new commit, this will result in:
+</p>
+
+<ul>
+<li>a new version (which will be the new HEAD)</li>
+<li>with the previous HEAD as its parent</li>
+<li>a clean working directory</li>
+
+</ul>
+
+</section>
+<section id="slide-orgfaa346b">
+<h3 id="orgfaa346b">Question</h3>
+<p>
+Make some changes so that your working directory is dirty.
+</p>
+
+<p>
+Now try to checkout an older version. What happens?
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-orge86f3e3">
+<h2 id="orge86f3e3">Part 2</h2>
+<p>
+Working with a remote
+</p>
+
+</section>
+<section id="slide-org5e86dff">
+<h3 id="org5e86dff">Remote repo</h3>
+<p>
+Let's store the repo for our project on a server.
+</p>
+
+<p>
+This makes it possible to work with a team.
+</p>
+
+</section>
+<section id="slide-org7459d16">
+<h3 id="org7459d16">Git is distributed</h3>
+<p>
+Everyone has their own local git repo.
+</p>
+
+<p>
+Including the <i>complete</i> project history.
+</p>
+
+<p>
+There's also a complete repo on the server.
+</p>
+
+<p>
+Usually the repo on the server is main repo (<code>origin</code>).
+</p>
+
+<p>
+All others are <i>clones</i> of <code>origin</code>.
+</p>
+
+</section>
+<section id="slide-org217df1c">
+<h3 id="org217df1c">Github</h3>
+<p>
+We will use Github to serve our repo.
+</p>
+
+<p>
+Github is a <i>company</i> that serves Git repos and adds some extra features.
+</p>
+
+<p>
+You don't need Github with Git - they are separate things.
+</p>
+
+</section>
+<section id="slide-org79df0fb">
+<h3 id="org79df0fb">Push/pull</h3>
+<p>
+A <b>commit</b> creates a local version on your machine.
+</p>
+
+<p>
+To send new versions to the remote, we <b>push</b>
+</p>
+
+<p>
+To get versions from the remote, we <b>pull</b>
+</p>
+
+</section>
+<section id="slide-org73c6e8a">
+<h3 id="org73c6e8a">Hands-on</h3>
+<ol>
+<li>Create an account on <a href="https://github.com/">https://github.com/</a></li>
+<li>Create a project</li>
+<li>Clone it locally</li>
+<li>Make some changes</li>
+<li>Commit/Pull/Push</li>
+
+</ol>
+
+</section>
+<section id="slide-org98b8f56">
+<h3 id="org98b8f56">Flow</h3>
+
+<div id="orgc96303f" class="figure">
+<p><img src="../static/git-diagram.png" alt="git-diagram.png" />
+</p>
+</div>
+
+
+</section>
+<section id="slide-org0afdcfd">
+<h3 id="org0afdcfd">Flow 2</h3>
+
+<div id="orgf51fdff" class="figure">
+<p><img src="../static/git-fire.jpg" alt="git-fire.jpg" width="70%" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orgf2537da">
+<h2 id="orgf2537da">Part 3</h2>
+<p>
+Teamwork
+</p>
+
+</section>
+<section id="slide-org677490a">
+<h3 id="org677490a">Hands-on</h3>
+<ul>
+<li>Add a fellow student as a <i>collaborator</i> in your Github project</li>
+<li>They have to accept the invitation</li>
+<li>The can now clone the project</li>
+<li>Commit/push/pull</li>
+<li>Make sure to both push and pull chances to the repo</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org63917ba">
+<h2 id="org63917ba">Tomorrow</h2>
+<div class="outline-text-2" id="text-org63917ba">
+</div>
+</section>
+<section id="slide-org89a4a4a">
+<h3 id="org89a4a4a">You ain't seen nothing yet</h3>
+<ul>
+<li>Branches</li>
+<li>Merging</li>
+
+</ul>
+</section>
+</section>
+</div>
+</div>
+<script src="../../reveal.js/dist/reveal.js"></script>
+<script src="../../reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight]
+});
+
+</script>
+</body>
+</html>

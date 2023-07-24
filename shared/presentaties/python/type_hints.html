@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Type Hints</title>
+<meta name="author" content="Reindert-Jan Ekker"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../../../reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../../../reveal.js/dist/theme/league.css" id="theme"/>
+
+<link rel="stylesheet" href="../../../reveal.js/plugin/highlight/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>Type Hints</h1><h2>Reindert-Jan Ekker</h2><p>Code Sensei</p>
+</section>
+
+<section>
+<section id="slide-orgf7f84b0">
+<h2 id="orgf7f84b0">Type Checking in Python</h2>
+<ul>
+<li>What?</li>
+<li>Why?</li>
+<li>How?</li>
+<li>Pros and Cons</li>
+
+</ul>
+</section>
+<section id="slide-org0dd4570">
+<h3 id="org0dd4570">Static vs Dynamic</h3>
+<p>
+Static Typing (Java, C#, &#x2026;)
+</p>
+
+<ul>
+<li class="fragment appear">Type declarations in code</li>
+<li class="fragment appear">Variables are typed</li>
+<li class="fragment appear">Function argument types</li>
+<li class="fragment appear">Checked statically (compile-time)</li>
+
+</ul>
+
+</section>
+<section id="slide-org2f94d03">
+<h3 id="org2f94d03">Static vs Dynamic</h3>
+<p>
+Dynamic Typing (Python, Ruby, JS, &#x2026;)
+</p>
+
+<ul>
+<li class="fragment appear">No type information in code</li>
+<li class="fragment appear">No type checking</li>
+<li class="fragment appear">Runtime errors</li>
+
+</ul>
+
+</section>
+<section id="slide-org69882a1">
+<h3 id="org69882a1">Gradual Typing</h3>
+<p>
+The future of Python: <i>gradual typing</i>
+</p>
+
+<ul>
+<li>(Best of?) both worlds</li>
+
+</ul>
+<ul>
+<li class="fragment appear">Planned for many years</li>
+<li class="fragment appear">Support added since python 3.5</li>
+
+</ul>
+
+</section>
+<section id="slide-org44f577a">
+<h3 id="org44f577a">PEPs</h3>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">PEP</th>
+<th scope="col" class="org-left">Topic</th>
+<th scope="col" class="org-right">Python version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">3107</td>
+<td class="org-left">function annotations</td>
+<td class="org-right">3.0</td>
+</tr>
+
+<tr>
+<td class="org-right">484</td>
+<td class="org-left">type hints</td>
+<td class="org-right">3.5</td>
+</tr>
+
+<tr>
+<td class="org-right">526</td>
+<td class="org-left">variable annotations</td>
+<td class="org-right">3.6</td>
+</tr>
+
+<tr>
+<td class="org-right">560</td>
+<td class="org-left">core support</td>
+<td class="org-right">3.7</td>
+</tr>
+
+<tr>
+<td class="org-right">561</td>
+<td class="org-left">stubs</td>
+<td class="org-right">3.7</td>
+</tr>
+
+<tr>
+<td class="org-right">544</td>
+<td class="org-left">protocols</td>
+<td class="org-right">3.8</td>
+</tr>
+
+<tr>
+<td class="org-right">&#x2026;</td>
+<td class="org-left">literals, typed dicts, finals</td>
+<td class="org-right">3.8</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="slide-orge287daa">
+<h3 id="orge287daa">New</h3>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">PEP</th>
+<th scope="col" class="org-left">Topic</th>
+<th scope="col" class="org-right">Python version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">585</td>
+<td class="org-left">Built-in collection types</td>
+<td class="org-right">3.9</td>
+</tr>
+
+<tr>
+<td class="org-right">604</td>
+<td class="org-left">New Union operator</td>
+<td class="org-right">3.10</td>
+</tr>
+
+<tr>
+<td class="org-right">&#x2026;</td>
+<td class="org-left">and more</td>
+<td class="org-right">3.10</td>
+</tr>
+</tbody>
+</table>
+
+</section>
+</section>
+<section>
+<section id="slide-orgeab1cdc">
+<h2 id="orgeab1cdc">The Future Face of Python</h2>
+<div class="outline-text-2" id="text-orgeab1cdc">
+</div>
+</section>
+<section id="slide-org6aa0a9b">
+<h3 id="org6aa0a9b">Gradual Typing</h3>
+<p>
+If you don't add type annotations to a function, the type checker will
+not check it!
+</p>
+
+<p>
+This allows you to add typing annotations to only parts of your code.
+</p>
+</section>
+<section id="slide-org90a3d3e">
+<h3 id="org90a3d3e">An example</h3>
+<ul>
+<li>Demo: <a href="../../static/typing_demo_1_avg.py">Average</a></li>
+
+</ul>
+</section>
+<section id="slide-org48a8a2c">
+<h3 id="org48a8a2c">Function annotations</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >def average(a: int, b: int) -&gt; float:
+    return (a + b) / 2
+</code></pre>
+</div>
+<div class="org-src-container">
+
+<pre  class="fragment (appear)"  ><code class="python" >average("a", []) # Still valid python!
+</code></pre>
+</div>
+
+<ul>
+<li>Annotations: PEP 3107</li>
+<li>No formal semantics (use any valid expression)</li>
+<li>Optional; ignored by interpreter</li>
+<li>No effect on runtime (no optimization)</li>
+
+</ul>
+</section>
+<section id="slide-org1a96d18">
+<h3 id="org1a96d18">Type annotations</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >def average(a: int, b: int) -&gt; float:
+    return (a + b) / 2
+</code></pre>
+</div>
+
+<ul>
+<li>Interpretation left to external tools</li>
+<li>Tool examples: mypy, pyre, pytype</li>
+<li>Static type checking before running</li>
+
+</ul>
+
+</section>
+<section id="slide-orgb9495c1">
+<h3 id="orgb9495c1">Benefits</h3>
+<p>
+Function annotations:
+</p>
+<ul>
+<li>Document functions</li>
+<li>Allow for static type checking</li>
+<li>Prevent runtime errors</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-orgf6c9d2e">
+<h2 id="orgf6c9d2e">Types and Type Checking</h2>
+<div class="outline-text-2" id="text-orgf6c9d2e">
+</div>
+</section>
+<section id="slide-orgf714d70">
+<h3 id="orgf714d70">Classes vs Types</h3>
+<ul>
+<li class="fragment appear">A class is a <i>runtime</i> concept</li>
+<li class="fragment appear">Values are class instances</li>
+
+</ul>
+<p class="fragment (appear)">
+But a type is a concept for the <i>checker</i>
+</p>
+
+</section>
+<section id="slide-orga863cd0">
+<h3 id="orga863cd0">Builtin Classes are Types</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >reveal_type(4)
+reveal_type("hi")
+reveal_type([3,4,5])
+</code></pre>
+</div>
+
+<div class="org-src-container">
+
+<pre  class="fragment (appear)"  ><code class="text" >$ mypy example.py
+1: note: Revealed type is "Literal[4]?"
+2: note: Revealed type is "Literal['hi']?"
+3: note: Revealed type is "builtins.list[builtins.int]"
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgbf844ad">
+<h3 id="orgbf844ad">Custom Classes are types</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >class Person:
+    ...
+
+def greet(p: Person) -&gt; str:
+    return "Hi " + p.name
+</code></pre>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orge87da1c">
+<h2 id="orge87da1c">Hints: Examples</h2>
+<p>
+See also the <a href="https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html">mypy cheat sheet</a>
+</p>
+</section>
+<section id="slide-orgb2d3f2a">
+<h3 id="orgb2d3f2a">List</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >def roots(l: list[int]) -&gt; list[float]:
+    return [x**0.5 for x in l]
+
+print(roots(range(100)))
+</code></pre>
+</div>
+
+<ul>
+<li class="fragment appear">Note the use of square brackets - not parens!</li>
+<li class="fragment appear">There's a typing error in this code..</li>
+
+</ul>
+
+</section>
+<section id="slide-orgcb5ef68">
+<h3 id="orgcb5ef68">List 2</h3>
+<p>
+This doesn't work:
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="python" >def roots2(l: list[int]) -&gt; list[float]:
+    return [x**0.5 for x in l.values()]
+</code></pre>
+</div>
+<div class="org-src-container">
+
+<pre  class="fragment (appear)"  ><code class="text" >$ mypy list_type.py
+error: "List[int]" has no attribute "values"
+</code></pre>
+</div>
+<p class="fragment (appear)">
+Mypy knows about class attributes!
+</p>
+</section>
+<section id="slide-org8e04688">
+<h3 id="org8e04688">Tuples</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >x: tuple[int, str, float] = (3, "yes", 7.5)
+y: tuple[int, ...] = (5,4,3,2,1)
+z: tuple[()] = ()
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org8f4888a">
+<h3 id="org8f4888a">Dicts</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >from typing import Any
+
+def max_avg(d: dict[Any, list[float]]) -&gt; float:
+    return max([sum(l)/len(l) for l in d.values()])
+</code></pre>
+</div>
+
+<ul>
+<li class="fragment appear"><code>dict</code> specifies type of key and value</li>
+<li class="fragment appear">Note the use of <code>Any</code> (type, not class)</li>
+<li class="fragment appear"><code>float</code> also implies <code>int</code></li>
+
+</ul>
+</section>
+<section id="slide-org1b814ad">
+<h3 id="org1b814ad">Type Inference</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >def str_len(s: str) -&gt; int:
+    return len(s)
+
+x = str_len("a"), str_len("b")
+
+reveal_type(x)
+</code></pre>
+</div>
+
+<div class="org-src-container">
+
+<pre  class="fragment (appear)"  ><code class="text" >Revealed type is 'Tuple[builtins.int, builtins.int]'
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgadfe926">
+<h3 id="orgadfe926">Type Inference (2)</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >l = [1,2,3]
+l.append('a') # Can we do this?
+x = 5
+x = []
+z = []
+</code></pre>
+</div>
+
+<div class="org-src-container">
+
+<pre  class="fragment (appear)"  ><code class="text" >error: Argument 1 to "append" of "list" has incompatible type "str"; expected "int"
+error: Incompatible types in assignment (expression has type "List[&lt;nothing&gt;]", variable has type "int")
+error: Need type annotation for 'z' (hint: "z: List[&lt;type&gt;] = ...")
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgab48b18">
+<h3 id="orgab48b18">Variable Annotation</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >from typing import list
+
+class Student:
+    def __init__(self, name: str) -&gt; None:
+        self.name = name
+        self.grades: list[int] = []
+</code></pre>
+</div>
+
+<ul>
+<li class="fragment appear">Use this in case mypy cannot infer the type of the variable/attribute</li>
+
+</ul>
+</section>
+<section id="slide-orgcc444cb">
+<h3 id="orgcc444cb">Type inference and classes</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" ># monkeypatching.py
+  class Person:
+      def __init__(self, name: str, age: int) -&gt; None:
+          self.name = name
+          self.age = age
+
+
+  def greet(p: Person) -&gt; None:
+      print("Hi", p.name, "from",  p.city)
+
+
+  r = Person("Reindert", 40)
+  r.city = "Amsterdam"
+  greet(r)
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgc0dbe03">
+<h3 id="orgc0dbe03">Types that are NOT Classes</h3>
+<ul>
+<li>Any (accept everything)</li>
+<li>Optional</li>
+<li>Union</li>
+<li>(and more&#x2026;)</li>
+
+</ul>
+
+</section>
+<section id="slide-org79b6d3b">
+<h3 id="org79b6d3b">Union and Optional</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >def send_email(address: str|list[str],
+               sender: str,
+               cc: list[str]|None,
+               bcc: list[str]|None,
+               subject='',
+               body: list[str]|None = None
+               ) -&gt; bool:
+    ...
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgf3fadd5">
+<h3 id="orgf3fadd5">Older code</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >from typing import Union, Optional, List
+
+def send_email(address: Union[str, List[str]],
+               sender: str,
+               cc: Optional[List[str]],
+               bcc: Optional[List[str]],
+               subject='',
+               body: Optional[List[str]] = None
+               ) -&gt; bool:
+    ...
+</code></pre>
+</div>
+
+<ul>
+<li class="fragment appear">Union, Optional are special types like any</li>
+<li class="fragment appear">For collections use List, Tuple, Dict: import from typing</li>
+<li class="fragment appear"><code>|</code> operator for unions is available since Python 3.10</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org499d2a7">
+<h2 id="org499d2a7">Recap</h2>
+<p>
+Let's do a short recap.
+</p>
+
+<p>
+Note: all of this is still changing/developing!
+</p>
+</section>
+<section id="slide-orga7ac61d">
+<h3 id="orga7ac61d">Recap 1</h3>
+<ul>
+<li class="fragment appear">We can annotate function args and return types</li>
+<li class="fragment appear">Variables as well (but these can be inferred)</li>
+<li class="fragment appear">All classes are types</li>
+<li class="fragment appear">In older code: import types for list, dict etc. from <code>typing</code></li>
+
+</ul>
+</section>
+<section id="slide-org0ea0745">
+<h3 id="org0ea0745">Recap 2</h3>
+<ul>
+<li class="fragment appear">Use <code>|</code> if you accept multiple types</li>
+<li class="fragment appear">Use <code>Any</code> if you don't care</li>
+<li class="fragment appear">In older code use <code>Union</code> and <code>Optional</code></li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-orge3c0108">
+<h2 id="orge3c0108">Subtyping, duck-typing, and more</h2>
+<div class="outline-text-2" id="text-orge3c0108">
+</div>
+</section>
+<section id="slide-orgb86944e">
+<h3 id="orgb86944e">Inheritance</h3>
+<p>
+Type checking works with inheritance.
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" ># game.py
+class Weapon:
+    def shoot(self) -&gt; str:
+        raise NotImplementedError
+
+
+class Gun(Weapon):
+    def shoot(self) -&gt; str:
+        return "Bang"
+
+
+class Laser(Weapon):
+    def shoot(self) -&gt; str:
+        return "dzzzj"
+
+
+class Player:
+    def __init__(self, name: str, weapon: Weapon):
+        self.name = name
+        self.weapon = weapon
+
+    def attack(self):
+        print(self.weapon.shoot())
+
+
+p = Player("Reindert", Laser())
+</code></pre>
+</div>
+
+<p class="fragment (appear)">
+This is called <i>nominal subtyping</i>
+</p>
+</section>
+<section id="slide-org8ca2a06">
+<h3 id="org8ca2a06">But what about this?</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >def even_length(l):
+    return len(l) % 2 == 0
+</code></pre>
+</div>
+
+<ul>
+<li>l need to implement <code>__len__</code></li>
+<li>How to specify that?</li>
+
+</ul>
+
+</section>
+<section id="slide-org85b224b">
+<h3 id="org85b224b">Protocols</h3>
+<p>
+These are like abstract base classes but without inheritance.
+</p>
+
+<p>
+Many predefined protocols are in <a href="https://docs.python.org/3/library/typing.html#typing.Sized">typing</a>.
+</p>
+
+<p>
+Protocols allow us to do <i>duck typing</i> e.g. <i>structural subtyping</i>.
+</p>
+</section>
+<section id="slide-orgb3b0df1">
+<h3 id="orgb3b0df1">Protocol example</h3>
+<p>
+<code>Sized</code> is the protocol that specifies <code>__len__</code>:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >from typing import Sized
+
+def even_length(l: Sized) -&gt; bool:
+    return len(l) % 2 == 0
+
+print(even_length([1,2,3]))
+print(even_length("abc"))
+print(even_length(None)) # Error
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orga72da65">
+<h3 id="orga72da65">TypeVar</h3>
+<p>
+What if your function returns different types depending on the input?
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >from typing import TypeVar
+
+T = TypeVar("T", list, str)
+
+def reverse(x: T) -&gt; T:
+    return x[::-1]
+</code></pre>
+</div>
+
+<div class="org-src-container">
+
+<pre  class="fragment (appear)"  ><code class="python" >def values_as_list(d: Dict[Any, T]) -&gt; List[T]:
+    return list(d.values())
+</code></pre>
+</div>
+
+<p class="fragment (appear)">
+This <i>looks</i> like generics in Java, C# but is fundamentally different!
+</p>
+
+</section>
+<section id="slide-org224f50c">
+<h3 id="org224f50c">Overloading</h3>
+<p>
+Even more freedom:
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="python" >@overload
+def process(response: None) -&gt; None:
+    ...
+@overload
+def process(response: int) -&gt; Tuple[int, str]:
+    ...
+@overload
+def process(response: bytes) -&gt; str:
+    ...
+def process(response):
+    &lt;actual implementation&gt;
+</code></pre>
+</div>
+
+<ul>
+<li class="fragment appear">This is NOT a dispatch mechanism!</li>
+
+</ul>
+
+</section>
+<section id="slide-org81f6e30">
+<h3 id="org81f6e30">Things I did not talk about</h3>
+<ul>
+<li>Callables and higher-order functions</li>
+<li>Forward references</li>
+<li>Literals</li>
+<li>Final types</li>
+<li>Generics</li>
+<li>&#x2026;</li>
+
+</ul>
+</section>
+<section id="slide-org5c2f5eb">
+<h3 id="org5c2f5eb">So</h3>
+<p>
+You can do many great and complex things with type annotations.
+</p>
+
+<p>
+But don't let them fool you: the interpreter ignores them all.
+</p>
+</section>
+</section>
+<section>
+<section id="slide-orga1c2dfb">
+<h2 id="orga1c2dfb">Into the wild</h2>
+<div class="outline-text-2" id="text-orga1c2dfb">
+</div>
+</section>
+<section id="slide-org602b9de">
+<h3 id="org602b9de">Using libraries / stdlib</h3>
+<p>
+What if you use a library that has no type annotations?
+</p>
+<ul>
+<li class="fragment appear">Stubs are typing annotations kept in <code>.pyi</code> files, <i>outside</i> of the python source</li>
+<li class="fragment appear">Mypy comes with its own <a href="https://github.com/python/typeshed/">typeshed</a>.</li>
+<li class="fragment appear">There are tools to generate stubs (monkeytype, stubgen)</li>
+
+</ul>
+
+</section>
+<section id="slide-org53b8734">
+<h3 id="org53b8734">Adding to an existing codebase</h3>
+<ul>
+<li class="fragment appear">Start with most-used/most-imported modules</li>
+<li class="fragment appear">Annotate your functions</li>
+<li class="fragment appear">Annotate variables only if needed</li>
+<li class="fragment appear">Use type checker in CI or pre-commit hook</li>
+<li class="fragment appear">Untyped dependencies: create stubs</li>
+
+</ul>
+
+</section>
+<section id="slide-org151de5a">
+<h3 id="org151de5a">It's good enough for production</h3>
+<p>
+But you might have some problems
+</p>
+
+</section>
+<section id="slide-org91f2f30">
+<h3 id="org91f2f30">What if you run into problems</h3>
+<ul>
+<li>Use <code>Any</code></li>
+<li>Use <code>typing.cast()</code></li>
+<li><code># type: ignore</code></li>
+
+</ul>
+
+</section>
+<section id="slide-org2a314bb">
+<h3 id="org2a314bb">Tools: Mypy</h3>
+<p>
+<a href="http://mypy-lang.org/">http://mypy-lang.org/</a>
+</p>
+
+<p>
+Guido van Rossums implementation in Python, most popular.
+</p>
+</section>
+<section id="slide-org7940db6">
+<h3 id="org7940db6">Tools: Pyre</h3>
+<p>
+<a href="https://pyre-check.org/">https://pyre-check.org/</a>
+</p>
+
+<ul>
+<li>Created by Facebook</li>
+<li>Written in ocaml</li>
+<li>High performance on large code bases</li>
+<li>No Windows support</li>
+
+</ul>
+</section>
+<section id="slide-org3279e9f">
+<h3 id="org3279e9f">Tools: Pytype</h3>
+<p>
+<a href="https://github.com/google/pytype">https://github.com/google/pytype</a>
+</p>
+
+<ul>
+<li>Created by google</li>
+<li>Written in python</li>
+<li>Different philosophy: uses inference instead of gradual typing.</li>
+<li>Lenient instead of strict.</li>
+
+</ul>
+</section>
+<section id="slide-org6bbefb6">
+<h3 id="org6bbefb6">pyright (microsoft)</h3>
+<p>
+<a href="https://github.com/Microsoft/pyright">https://github.com/Microsoft/pyright</a>
+</p>
+
+<ul>
+<li>Created by MicroSoft</li>
+<li>Written in TypeScript (no dependency on python)</li>
+<li>Fast</li>
+<li>VS Code integration</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org7fe0911">
+<h2 id="org7fe0911">Things to love</h2>
+<ul>
+<li class="fragment appear">Clean syntax</li>
+<li class="fragment appear">Protocols are great</li>
+<li class="fragment appear">Gradual Typing is wonderful</li>
+<li class="fragment appear">Documentation and correctness testing</li>
+<li class="fragment appear">Better productivity, maintainability</li>
+<li class="fragment appear">Great for large/complex projects</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgbbba29b">
+<h2 id="orgbbba29b">But..</h2>
+<div class="outline-text-2" id="text-orgbbba29b">
+</div>
+</section>
+<section id="slide-orga4c8dab">
+<h3 id="orga4c8dab">Users from other languages</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >def foo(x: int) -&gt; str:
+    # x does not have to be an int here!
+</code></pre>
+</div>
+
+<ul>
+<li>Wrong impression for users from java, C#</li>
+<li>Same with @overload, TypeVar</li>
+
+</ul>
+</section>
+<section id="slide-orgf06192f">
+<h3 id="orgf06192f">Preferable?</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >def foo(x):
+    # type: int -&gt; str
+</code></pre>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org0b1efc7">
+<h2 id="org0b1efc7">That's it</h2>
+<p>
+Now go and add type annotations to your code!
+</p>
+</section>
+</section>
+</div>
+</div>
+<script src="../../../reveal.js/dist/reveal.js"></script>
+<script src="../../../reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight]
+});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Exceptions, continued</title>
+<meta name="author" content="Reindert-Jan Ekker"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../../../reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../../../reveal.js/dist/theme/black.css" id="theme"/>
+
+<link rel="stylesheet" href="../../../reveal.js/plugin/highlight/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>Exceptions, continued</h1><h2>Reindert-Jan Ekker</h2><p>Code Sensei</p>
+</section>
+
+<section>
+<section id="slide-org38772b7">
+<h2 id="org38772b7">More try/except</h2>
+<div class="outline-text-2" id="text-org38772b7">
+</div>
+</section>
+<section id="slide-org9204f20">
+<h3 id="org9204f20">Else</h3>
+<p>
+The else clause runs if no exception occurs.
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="python" >try:
+    x = int(input("please enter a number?"))
+except ValueError:
+    print("That is not a number!")
+else:
+    print("Nice :)")
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org20fb08b">
+<h3 id="org20fb08b">Finally</h3>
+<p>
+The finally block <b>always</b> runs, even if an exception occurred.
+</p>
+
+<p>
+This is nice for cleanup actions.
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="python" >try:
+    f = open("my_file.txt")
+    # do lots of work with f here
+finally:
+    f.close()
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org3973580">
+<h3 id="org3973580">Compare with..</h3>
+<p>
+Context manager
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >with open("log.txt") as f:
+    # Do things with f
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org63bd1da">
+<h3 id="org63bd1da">Basic syntax overview</h3>
+<p>
+See <a href="https://realpython.com/python-exceptions/">Realpython</a>
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org97b025b">
+<h2 id="org97b025b">Exception object</h2>
+<p>
+Capture the exception object with <code>as</code>, for example to log it:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >def get_location():
+    try:
+        return gps_client.get_location()
+    except NoGPSException as e:
+        logger.log("could not get location from gps:", e)
+        logger.log("falling back to wifi detection")
+        return wifi.get_location()
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org6d07b55">
+<h3 id="org6d07b55">Don't do this</h3>
+<p>
+If you just want to log and raise:
+</p>
+
+<p>
+Don't catch and raise a new exception!
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >try:
+    run_sql_query()
+except ErrorInQueryException as e:
+    logger.error("Seems our query is wrong:", e)
+    # You will lose the stacktrace!
+    raise ErrorInQueryException("Wrong Query")
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org5f3bbf8">
+<h3 id="org5f3bbf8">Re-raise</h3>
+<p>
+Instead, log and re-raise the original exception
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >try:
+    run_sql_query()
+except ErrorInQueryException as e:
+    logger.error("Seems our query is wrong:", e)
+    raise
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org3a3d8bd">
+<h3 id="org3a3d8bd">Raise from</h3>
+<p>
+You can also "wrap" the exception in another exception type.
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >try:
+    run_sql_query()
+except ErrorInQueryException as e:
+    logger.error("Seems our query is wrong:", e)
+    raise MyCustomException("Problem in Query") from e
+</code></pre>
+</div>
+
+
+<pre class="example" id="org2dab473">
+ErrorInQueryException: "This was the original problem"
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+MyCustomException: Problem in Query
+</pre>
+
+</section>
+<section id="slide-org5e74893">
+<h3 id="org5e74893">Custom Exception Class</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >class MyCustomError(Exception):
+    pass
+</code></pre>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orgb991916">
+<h2 id="orgb991916">Patterns and Practices</h2>
+<div class="outline-text-2" id="text-orgb991916">
+</div>
+</section>
+<section id="slide-org20ca404">
+<h3 id="org20ca404">First of all</h3>
+<p>
+<a href="https://realpython.com/the-most-diabolical-python-antipattern/">The most diabolical antipattern</a>
+</p>
+
+</section>
+<section id="slide-org1605669">
+<h3 id="org1605669">Boundaries</h3>
+<p>
+Exceptions mostly happen at program boundaries:
+</p>
+
+<ul>
+<li>User input</li>
+<li>DB input</li>
+<li>Network traffic</li>
+<li>File I/O</li>
+
+</ul>
+
+<p>
+etc.
+</p>
+
+</section>
+<section id="slide-org0682915">
+<h3 id="org0682915">What to handle</h3>
+<ul>
+<li>Only catch exceptions you can meaningfully handle</li>
+<li>Handle exceptions at the right level</li>
+<li>Logging and re-raising is ok at any level</li>
+
+</ul>
+
+</section>
+<section id="slide-org283a95c">
+<h3 id="org283a95c">Question</h3>
+<p>
+What is wrong with this code?
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >filename = "somefile.txt"
+if os.path.exists(filename):
+    f = open(filename)
+    # do stuff
+</code></pre>
+</div>
+
+<ul>
+<li class="fragment appear">The file may be removed before you get to <code>open()</code> it</li>
+
+</ul>
+</section>
+<section id="slide-orgc3ca0f5">
+<h3 id="orgc3ca0f5">Best Practice</h3>
+<p>
+It's better to say sorry than to ask for permission.
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >try:
+    f = open(filename)
+except FileNotFoundError:
+    print("File does not exist, please choose another file.")
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgc9b9f75">
+<h3 id="orgc9b9f75">Another example</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >persons = {'Ann': 'Amsterdam', 'Leo': 'London', ...}
+
+name = input()
+if name in persons:
+    print(f"{name} lives in {persons[name]}")
+</code></pre>
+</div>
+
+<p class="fragment (appear)">
+When run in a multithreaded context, the dict may change before you
+retrieve the data.
+</p>
+
+</section>
+<section id="slide-orgd6c0f09">
+<h3 id="orgd6c0f09">Better</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >try:
+    print(f"{name} lives in {persons[name]}")
+except KeyError:
+    ...
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org88342a7">
+<h3 id="org88342a7">More</h3>
+<ul>
+<li><a href="https://eli.thegreenplace.net/2008/08/21/robust-exception-handling/">See this article</a></li>
+
+</ul>
+</section>
+</section>
+</div>
+</div>
+<script src="../../../reveal.js/dist/reveal.js"></script>
+<script src="../../../reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight]
+});
+
+</script>
+</body>
+</html>

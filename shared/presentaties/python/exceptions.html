@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Exceptions</title>
+<meta name="author" content="Reindert-Jan Ekker"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../../../reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../../../reveal.js/dist/theme/black.css" id="theme"/>
+
+<link rel="stylesheet" href="../../../reveal.js/plugin/highlight/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>Exceptions</h1><h2>Reindert-Jan Ekker</h2><p>Code Sensei</p>
+</section>
+
+<section>
+<section id="slide-org5315cf2">
+<h2 id="org5315cf2">Exceptions</h2>
+<div class="outline-text-2" id="text-org5315cf2">
+</div>
+</section>
+<section id="slide-org86c5303">
+<h3 id="org86c5303">When things go wrong</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >l = ['a', 'b', 'c']
+l[6]
+</code></pre>
+</div>
+
+<pre class="example" id="org142a6ec">
+Traceback (most recent call last):
+  File "stdin", line 1, in module
+IndexError: list index out of range
+</pre>
+
+<ul>
+<li class="fragment appear">Exceptions you don't handle cause the program to crash.</li>
+
+</ul>
+
+</section>
+<section id="slide-org9acb042">
+<h3 id="org9acb042">Try/except</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >try:
+    body_l1  # do your work, when something goes wrong
+    body_l2  # an exception will be thrown
+except:
+    handle_error
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org2dfe80c">
+<h3 id="org2dfe80c">Example</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >products = ['bread', 'wine', 'coffee']
+try:
+    # Just do the work: "happy flow"
+    choice = int(input("Select a product [0-2]? "))
+    prod = products[choice]
+    # Do stuff with product
+except:
+    print("Cannot get that product")
+</code></pre>
+</div>
+
+<ul>
+<li class="fragment appear">This handles at least 2 kinds of problems</li>
+<li class="fragment appear">Code becomes cleaner</li>
+
+</ul>
+
+</section>
+<section id="slide-org09971cd">
+<h3 id="org09971cd">Catching by type</h3>
+<p>
+Catching a specific type of error:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >def divide(a, b):
+    try:
+        return a/b
+    except ZeroDivisionError:
+        print("cannot divide by zero")
+    except TypeError:
+        print("either a or b is not a number")
+    except Exception:
+        print("something went wrong")
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org8c168d1">
+<h3 id="org8c168d1">Catching everything</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >try:
+     # code here..
+except Exception:
+    print("something went wrong")
+</code></pre>
+</div>
+
+<p>
+This is a bad practice! Read more <a href="https://realpython.com/the-most-diabolical-python-antipattern/">here</a>
+</p>
+</section>
+<section id="slide-org819717f">
+<h3 id="org819717f">Common Exception Types</h3>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">IndexError</td>
+<td class="org-left">index not found in a sequence.</td>
+</tr>
+
+<tr>
+<td class="org-left">KeyError</td>
+<td class="org-left">key is not found in a dictionary.</td>
+</tr>
+
+<tr>
+<td class="org-left">NameError</td>
+<td class="org-left">identifier  not found</td>
+</tr>
+
+<tr>
+<td class="org-left">IOError</td>
+<td class="org-left">input/ output operation failed</td>
+</tr>
+
+<tr>
+<td class="org-left">TypeError</td>
+<td class="org-left">operation is invalid for the data type.</td>
+</tr>
+</tbody>
+</table>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgd84fa00">
+<h2 id="orgd84fa00">Throw exceptions</h2>
+<div class="org-src-container">
+
+<pre   ><code class="python" >def average(l):
+    if not l:
+        raise ValueError("Empty list has no average")
+    return sum(l)/len(l)
+</code></pre>
+</div>
+</section>
+</section>
+</div>
+</div>
+<script src="../../../reveal.js/dist/reveal.js"></script>
+<script src="../../../reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight]
+});
+
+</script>
+</body>
+</html>

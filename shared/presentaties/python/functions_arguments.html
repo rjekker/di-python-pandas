@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Function arguments</title>
+<meta name="author" content="Reindert-Jan Ekker"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../../../reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../../../reveal.js/dist/theme/sky.css" id="theme"/>
+
+<link rel="stylesheet" href="../../../reveal.js/plugin/highlight/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>Function arguments</h1><h2>Reindert-Jan Ekker</h2><p>Code Sensei</p>
+</section>
+
+<section>
+<section id="slide-org058c1ea">
+<h2 id="org058c1ea">Function definition</h2>
+<pre class="example" id="org4bc75d5">
+def &lt;function_name&gt;([&lt;parameters&gt;]):
+    &lt;statement(s)&gt;
+</pre>
+
+<p>
+To run the code, you <i>call</i> the function:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >function_name(param0, param1, ...)
+</code></pre>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org3957ed4">
+<h2 id="org3957ed4">Positional arguments</h2>
+<div class="org-src-container">
+
+<pre   ><code class="python" >def greet(firstname, lastname, greeting):
+    print(f'{greeting} {firstname} {lastname}!')
+
+greet("John", "Doe", "Hi")
+</code></pre>
+</div>
+
+<pre class="example" id="org37c2ecf">
+Hi John Doe!
+</pre>
+
+</section>
+<section id="slide-org0e47cbf">
+<h3 id="org0e47cbf">Positional arguments 2</h3>
+<p>
+Number of arguments must match
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >def greet(firstname, lastname, greeting):
+    print(f'{greeting} {firstname} {lastname}!')
+
+greet("John", "Doe")
+</code></pre>
+</div>
+
+<pre class="example" id="org9880a6a">
+TypeError: greet() missing 1 required positional argument: 'greeting'
+</pre>
+
+</section>
+<section id="slide-org3a2281f">
+<h3 id="org3a2281f">Positional arguments 3</h3>
+<p>
+Order of arguments matters
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >def greet(firstname, lastname, greeting):
+    print(f'{greeting} {firstname} {lastname}!')
+
+greet("Hello", "Doe", "John")  
+</code></pre>
+</div>
+
+<pre class="example" id="org66e780c">
+John Hello Doe!
+</pre>
+
+</section>
+</section>
+<section>
+<section id="slide-org087160e">
+<h2 id="org087160e">Keyword arguments</h2>
+<ul>
+<li>Arguments specified in the form <code>name=value</code>.</li>
+<li>Matched by name, order does not matter</li>
+
+</ul>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >def greet(firstname, lastname, greeting):
+    print(f'{greeting} {firstname} {lastname}!')
+
+greet(greeting="Hello", lastname="Doe", firstname="John")  
+</code></pre>
+</div>
+
+<pre class="example" id="org6fc2aa5">
+Hello John Doe!
+</pre>
+
+</section>
+<section id="slide-org4f57d5d">
+<h3 id="org4f57d5d">Keyword arguments 2</h3>
+<ul>
+<li>Names must match</li>
+
+</ul>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >def greet(firstname, lastname, greeting):
+    print(f'{greeting} {firstname} {lastname}!')
+
+
+greet(greeting="Hello", firstname="John", last="Doe")  
+</code></pre>
+</div>
+
+<pre class="example" id="org6697f48">
+TypeError: greet() got an unexpected keyword argument 'last'
+</pre>
+
+</section>
+<section id="slide-org24d291f">
+<h3 id="org24d291f">Keyword arguments 3</h3>
+<ul>
+<li>Number of arguments must match</li>
+
+</ul>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >def greet(firstname, lastname, greeting):
+    print(f'{greeting} {firstname} {lastname}!')
+
+
+greet(greeting="Hello", lastname="John")  
+</code></pre>
+</div>
+
+<pre class="example" id="org2140f7c">
+TypeError: greet() missing 1 required positional argument: 'firstname'
+</pre>
+
+</section>
+</section>
+<section>
+<section id="slide-org20055c3">
+<h2 id="org20055c3">Combining</h2>
+<p>
+When positional and keyword arguments are both present, all the
+positional arguments must come first:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >def greet(firstname, lastname, greeting):
+    print(f'{greeting} {firstname} {lastname}!')
+
+
+greet("John", greeting="Hello", lastname="Doe")
+greet(greeting="Hello", lastname="Doe", "John")
+</code></pre>
+</div>
+
+<pre class="example" id="orgafed84a">
+Hello John Doe!  # First call is ok
+SyntaxError: positional argument follows keyword argument
+</pre>
+
+</section>
+</section>
+<section>
+<section id="slide-orgf83a7d8">
+<h2 id="orgf83a7d8">Default parameters</h2>
+<p>
+You can specify default values for a parameter in the function definition.
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >def greet(firstname, lastname, greeting="Hello"):
+    print(f'{greeting} {firstname} {lastname}!')
+
+
+greet("John", "Doe")
+greet("John", "Doe", "Hi")
+greet(greeting="Hi", lastname="Doe", firstname="John")
+</code></pre>
+</div>
+
+<pre class="example" id="org0598d4a">
+Hello John Doe!
+Hi John Doe!
+Hi John Doe!
+</pre>
+
+</section>
+<section id="slide-org55a28f2">
+<h3 id="org55a28f2">Default parameters 2</h3>
+<p>
+Default parameters have to come last:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >def greet(firstname, lastname="Doe", greeting):
+    print(f'{greeting} {firstname} {lastname}!')
+</code></pre>
+</div>
+
+<pre class="example" id="org3c7a5c7">
+SyntaxError: non-default argument follows default argument
+</pre>
+
+</section>
+<section id="slide-orgd8ee094">
+<h3 id="orgd8ee094">Default parameters 3</h3>
+<p>
+Never use a <i>mutable object</i> as a default parameter:
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="python" >&gt;&gt;&gt; def f(my_list=[]):
+...     print(id(my_list))
+...     my_list.append('###')
+...     return my_list
+...
+&gt;&gt;&gt; f()
+140095566958408
+['###']        
+&gt;&gt;&gt; f()
+140095566958408
+['###', '###']
+&gt;&gt;&gt; f()
+140095566958408
+['###', '###', '###']
+</code></pre>
+</div>
+
+<ul>
+<li>Use <code>None</code> instead</li>
+<li>See <a href="https://realpython.com/defining-your-own-python-function/#mutable-default-parameter-values">Realpython</a></li>
+
+</ul>
+</section>
+</section>
+</div>
+</div>
+<script src="../../../reveal.js/dist/reveal.js"></script>
+<script src="../../../reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight]
+});
+
+</script>
+</body>
+</html>

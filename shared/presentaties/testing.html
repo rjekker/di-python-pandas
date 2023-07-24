@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Testing</title>
+<meta name="author" content="Reindert-Jan Ekker"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../../reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../../reveal.js/dist/theme/league.css" id="theme"/>
+
+<link rel="stylesheet" href="../../reveal.js/plugin/highlight/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>Testing</h1><h2>Reindert-Jan Ekker</h2><p>Code Sensei</p>
+</section>
+
+<section>
+<section id="slide-orgfcb5b9c">
+<h2 id="orgfcb5b9c">Automated testing</h2>
+<p>
+Testing your code with code
+</p>
+
+</section>
+<section id="slide-org2a9f627">
+<h3 id="org2a9f627">Why?</h3>
+<ul>
+<li class="fragment appear">Improve quality</li>
+<li class="fragment appear">Prevent recurring bugs (add a test for every fixed bug)</li>
+<li class="fragment appear">Formally specify behavour (kind of documentation)</li>
+<li class="fragment appear">Makes changing code easier and faster</li>
+<li class="fragment appear">Faster development in general</li>
+
+</ul>
+
+</section>
+<section id="slide-org161428e">
+<h3 id="org161428e">Unit testing</h3>
+<p>
+Test a single component <i>in isolation</i>.
+</p>
+
+<p>
+Usually just a single function.
+</p>
+
+</section>
+<section id="slide-org0d501ca">
+<h3 id="org0d501ca">Integration testing</h3>
+<p>
+Test how components work together.
+</p>
+
+</section>
+<section id="slide-org7d164c6">
+<h3 id="org7d164c6">TDD</h3>
+<p>
+Test-driven development
+</p>
+
+<p>
+Write tests first
+</p>
+
+<p class="fragment (appear)">
+This forces you to think about the exact specs before you write the code
+</p>
+
+</section>
+<section id="slide-org38633a7">
+<h3 id="org38633a7">TDD 2</h3>
+<p>
+If you use TDD, you start with a bunch of tests that <b>fail</b>.
+</p>
+
+<p>
+While writing your code, the tests will start succeeding.
+</p>
+
+</section>
+<section id="slide-orgdfcee26">
+<h3 id="orgdfcee26">Writing tests</h3>
+<p>
+<a href="https://realpython.com/python-testing/">Testing Tutorial</a>
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-orgb40239a">
+<h2 id="orgb40239a">What to test?</h2>
+<ul>
+<li>Happy flow</li>
+<li>Edge cases (empty, strange values, lots of data, etc.)</li>
+<li>Failure scenario's</li>
+<li>Bad input</li>
+
+</ul>
+
+</section>
+<section id="slide-orgd11d9b5">
+<h3 id="orgd11d9b5">Too much?</h3>
+<p>
+Can you write too many tests?
+</p>
+
+<p class="fragment (appear)">
+Let's look at the project. What to test? And what not?
+</p>
+</section>
+<section id="slide-org6a5bded">
+<h3 id="org6a5bded">Coverage</h3>
+<p>
+Use a plugin to measure code coverage.
+</p>
+
+<p>
+Try to achieve a certain percentage.
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org4eb4f5a">
+<h2 id="org4eb4f5a">Dependencies</h2>
+<p>
+Help! My function depends on something I cannot re-create in the unit test..
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >def readfile():
+    f = open("myfile.txt")
+    return f.readlines()
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org436647a">
+<h3 id="org436647a">Solution</h3>
+<p>
+Use mocking:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >@mock.patch('mymodule.open')
+def test_x(mock_open):
+    readfile()
+    mock_open.assert_called_once()
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgfdf9b44">
+<h3 id="orgfdf9b44">Using mocks</h3>
+<ul>
+<li><a href="https://realpython.com/python-mock-library/">Mock Tutorial</a></li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org97a55db">
+<h2 id="org97a55db">Pytest</h2>
+<p>
+A powerful test runner with some cool extra features:
+</p>
+
+<ul>
+<li><a href="https://realpython.com/pytest-python-testing/">Pytest Tutorial</a></li>
+
+</ul>
+</section>
+</section>
+</div>
+</div>
+<script src="../../reveal.js/dist/reveal.js"></script>
+<script src="../../reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight]
+});
+
+</script>
+</body>
+</html>

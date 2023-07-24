@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Solutions: Functions</title>
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../../themes/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="../../themes/readtheorg/css/readtheorg.css"/>
+<link rel="stylesheet" type="text/css" href="../../css/homelink.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../themes/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="../../themes/readtheorg/js/readtheorg.js"></script>
+<script type="text/javascript" src="../../js/addhomelink.js"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Solutions: Functions</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orge59e58a">Miles and kilometers</a></li>
+<li><a href="#orgf478fb9">Pass or Fail</a></li>
+<li><a href="#orgef96dc5">Statistics: range</a></li>
+<li><a href="#orgee740d7">VAT</a></li>
+<li><a href="#orgd6ac35f">Threes</a></li>
+<li><a href="#org1074753">Travel</a></li>
+<li><a href="#org997cd16">URL</a></li>
+</ul>
+</div>
+</div>
+
+
+<section id="outline-container-orge59e58a" class="outline-2">
+<h2 id="orge59e58a">Miles and kilometers</h2>
+<div class="outline-text-2" id="text-orge59e58a">
+<p>
+See <a href="warming_up.html#orgf39d8f5">Exercise: mile to kilometer</a>.
+</p>
+
+<p>
+Put this code into a function called <code>convert(miles)</code>, and make sure
+to call it several times with different values.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">def</span> <span class="org-function-name">convert</span>(miles):
+    <span class="org-builtin">print</span>(miles, <span class="org-string">"miles is"</span>, 1.6*miles, <span class="org-string">"kilometers"</span>)
+
+convert(8)
+convert(12)
+convert(131)
+</pre>
+</div>
+</div>
+</section>
+
+<section id="outline-container-orgf478fb9" class="outline-2">
+<h2 id="orgf478fb9">Pass or Fail</h2>
+<div class="outline-text-2" id="text-orgf478fb9">
+<p>
+See <a href="bool_if.html#org7b5e63b">Pass or fail</a>.
+</p>
+
+<p>
+Put your code into a function. Call it at least three times with
+different values.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">def</span> <span class="org-function-name">pass_or_fail</span>(score):
+    <span class="org-keyword">if</span> score &gt;= 60:
+        <span class="org-builtin">print</span>(<span class="org-string">"Pass"</span>)
+    <span class="org-keyword">else</span>:
+        <span class="org-builtin">print</span>(<span class="org-string">"Fail"</span>)
+
+pass_or_fail(40)
+pass_or_fail(60)
+pass_or_fail(80)
+</pre>
+</div>
+</div>
+</section>
+<section id="outline-container-orgef96dc5" class="outline-2">
+<h2 id="orgef96dc5">Statistics: range</h2>
+<div class="outline-text-2" id="text-orgef96dc5">
+<p>
+See <a href="bool_if.html#org94f9e14">Largest</a>.
+</p>
+
+<p>
+Write a function <code>max(a, b, c)</code> that returns the largest of its three
+arguments.
+</p>
+
+<p>
+Write another function <code>min(a, b, c)</code> that returns the smallest of its
+three arguments.
+</p>
+
+<p>
+Write a function <code>range(a, b, c)</code> that returns the <i>range</i>: the
+difference between the maximum and minimum of the three numbers.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">def</span> <span class="org-function-name">max</span>(a, b, c):
+    <span class="org-keyword">if</span> a &gt; b:
+        <span class="org-keyword">if</span> a &gt; c:
+            <span class="org-keyword">return</span> a
+        <span class="org-keyword">else</span>:
+            <span class="org-keyword">return</span> c
+    <span class="org-keyword">else</span>:
+        <span class="org-keyword">if</span> b &gt; c:
+            <span class="org-keyword">return</span> b
+        <span class="org-keyword">else</span>:
+            <span class="org-keyword">return</span> c
+
+<span class="org-keyword">def</span> <span class="org-function-name">min</span>(a, b, c):
+    <span class="org-keyword">if</span> a &lt; b:
+        <span class="org-keyword">if</span> a &lt; c:
+            <span class="org-keyword">return</span> a
+        <span class="org-keyword">else</span>:
+            <span class="org-keyword">return</span> c
+    <span class="org-keyword">else</span>:
+        <span class="org-keyword">if</span> b &lt; c:
+            <span class="org-keyword">return</span> b
+        <span class="org-keyword">else</span>:
+            <span class="org-keyword">return</span> c
+
+<span class="org-keyword">def</span> <span class="org-function-name">range</span>(a, b, c):
+    <span class="org-keyword">return</span> (<span class="org-builtin">max</span>(a, b, c) - <span class="org-builtin">min</span>(a, b, c))
+
+<span class="org-builtin">print</span>(<span class="org-builtin">range</span>(0, 0, 10))
+<span class="org-builtin">print</span>(<span class="org-builtin">range</span>(100, 40, 1))
+<span class="org-builtin">print</span>(<span class="org-builtin">range</span>(33, 1000, 100))
+</pre>
+</div>
+</div>
+</section>
+
+<section id="outline-container-orgee740d7" class="outline-2">
+<h2 id="orgee740d7">VAT</h2>
+<div class="outline-text-2" id="text-orgee740d7">
+<p>
+In the Netherlands we have 2 different tariffs for BTW (VAT): 9% for
+food, and 21% for everything else. We are writing a program that
+calculates VAT for a given product.
+</p>
+
+<p>
+Please see the code below. It tries to call two functions that don't
+exist yet. Implement them:
+</p>
+
+<ul class="org-ul">
+<li><code>vat_high(ex_vat)</code> takes the price excl. VAT as input and returns
+the total price including the high tariff of 21%.</li>
+
+<li><code>vat_low(ex_vat)</code> takes the price excl VAT as input and returns the
+total price including the low tariff of 9%.</li>
+</ul>
+
+<p>
+Don't forget to also correct the if statement.
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">def</span> <span class="org-function-name">vat_high</span>(prijs):
+    <span class="org-keyword">return</span> 1.21 * prijs
+
+<span class="org-keyword">def</span> <span class="org-function-name">vat_low</span>(prijs):
+    <span class="org-keyword">return</span> 1.09 * prijs
+
+<span class="org-variable-name">ex_vat</span> = <span class="org-builtin">float</span>(<span class="org-builtin">input</span>(<span class="org-string">"Please enter price of product excluding VAT? "</span>))
+<span class="org-variable-name">highlow</span> = <span class="org-builtin">input</span>(<span class="org-string">"Which tariff? [H]igh or [L]ow? "</span>)
+
+<span class="org-keyword">if</span> highlow.lower() == <span class="org-string">'h'</span>:
+    <span class="org-builtin">print</span>(vat_high(ex_vat))
+<span class="org-keyword">else</span>:
+    <span class="org-builtin">print</span>(vat_low(ex_vat))
+</pre>
+</div>
+</div>
+</section>
+
+<section id="outline-container-orgd6ac35f" class="outline-2">
+<h2 id="orgd6ac35f">Threes</h2>
+<div class="outline-text-2" id="text-orgd6ac35f">
+<p>
+First, define a function called <code>cube</code> that takes an argument called
+number.
+</p>
+
+<p>
+Make that function return the <code>cube</code> of that number (i.e. that number
+multiplied by itself and multiplied by itself once again).
+</p>
+
+<p>
+Define a second function called <code>by_three</code> that takes an argument called
+number. Uf that number is divisible by 3, <code>by_three</code> should call
+<code>cube(number)</code> and return its result. Otherwise, <code>by_three</code> should return
+False.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">def</span> <span class="org-function-name">cube</span>(number):
+    <span class="org-keyword">return</span> number**3
+
+<span class="org-keyword">def</span> <span class="org-function-name">by_three</span>(number):
+    <span class="org-keyword">if</span> number % 3 == 0:
+        <span class="org-keyword">return</span> cube(number)
+    <span class="org-keyword">else</span>:
+        <span class="org-keyword">return</span> <span class="org-constant">False</span>
+</pre>
+</div>
+</div>
+</section>
+
+
+<section id="outline-container-org1074753" class="outline-2">
+<h2 id="org1074753">Travel</h2>
+<div class="outline-text-2" id="text-org1074753">
+<p>
+Let's use functions to calculate your trip's costs:
+</p>
+
+<p>
+Define a function called <code>hotel_cost</code> with one argument nights as
+input. The hotel costs $140 per night. So, the function <code>hotel_cost</code>
+should return <code>140 * nights</code>.
+</p>
+
+
+<p>
+Define a function called <code>plane_ride_cost</code> that takes a string, city,
+as input. The function should return a different price depending on
+the location, similar to the code example above. Below are the valid
+destinations and their corresponding round-trip prices.
+</p>
+
+<ul class="org-ul">
+<li>"Charlotte": 183</li>
+<li>"Tampa": 220</li>
+<li>"Pittsburgh": 222</li>
+<li>"Los Angeles": 475</li>
+</ul>
+
+<p>
+Below your existing code, define a function called <code>rental_car_cost</code>
+with an argument called days. Calculate the cost of renting the car:
+Every day you rent the car costs $40. (cost=40*days) if you rent the
+car for 7 or more days, you get $50 off your
+total( cost-=50).
+</p>
+
+<p>
+Then, define a function called <code>trip_cost</code> that takes two
+arguments, city and days. Like the example above, have your function
+return the sum of calling the <code>rental_car_cost(days)</code>, <code>hotel_cost(days)</code>,
+and =plane_ride_cost(city) =functions.
+</p>
+
+
+<p>
+Modify your trip_cost function definion. Add a third argument,
+<code>spending_money</code>. Modify what the <code>trip_cost</code> function does. Add the
+variable <code>spending_money</code> to the sum that it returns.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">def</span> <span class="org-function-name">hotel_cost</span>(nights):
+    <span class="org-keyword">return</span> 140*nights
+
+<span class="org-keyword">def</span> <span class="org-function-name">plane_ride_cost</span>(city):
+    <span class="org-variable-name">cities</span> = { <span class="org-string">"Charlotte"</span>: 183, <span class="org-string">"Tampa"</span>: 220, <span class="org-string">"Pittsburgh"</span>: 222, <span class="org-string">"Los Angeles"</span>: 475 }
+    <span class="org-comment-delimiter"># </span><span class="org-comment">this will raise an exception when city is not valid</span>
+    <span class="org-keyword">return</span> cities[city]
+
+<span class="org-keyword">def</span> <span class="org-function-name">rental_car_cost</span>(days):
+    <span class="org-variable-name">cost</span> = 40*days
+    <span class="org-keyword">if</span> days &gt;= 7:
+        <span class="org-variable-name">cost</span> -= 50
+    <span class="org-keyword">return</span> cost
+
+<span class="org-keyword">def</span> <span class="org-function-name">trip_cost</span>(city, days, spending_money):
+    <span class="org-keyword">return</span> hotel_cost(days) + rental_car_cost(days) + plane_ride_cost(city) + spending_money
+</pre>
+</div>
+</div>
+</section>
+
+
+<section id="outline-container-org997cd16" class="outline-2">
+<h2 id="org997cd16">URL</h2>
+<div class="outline-text-2" id="text-org997cd16">
+<p>
+Write a function <code>generate_url(host)</code>:
+</p>
+
+<p>
+If called with just a hostname, it will return a <code>.nl</code>
+url. <code>generate_url("rjekker")</code> returns <code>http://www.rjekker.nl</code>.
+</p>
+
+<p>
+The function takes several <i>optional</i> arguments:
+</p>
+
+<ul class="org-ul">
+<li>"tld": Set the top-level domain (.nl, .be, .com, etc.)</li>
+<li>"secure": if True this will create a <code>https</code> url</li>
+<li>"port": this will set the port number (see below)</li>
+<li>"path": this will set the path of the url (part after the host/port</li>
+</ul>
+
+<p>
+Example:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">def</span> <span class="org-function-name">generate_url</span>(host, tld=<span class="org-string">"com"</span>, secure=<span class="org-constant">False</span>, port=80, path=<span class="org-string">""</span>):
+    <span class="org-keyword">if</span> secure:
+        protocol = <span class="org-string">"https://"</span>
+    <span class="org-keyword">else</span>:
+        protocol = <span class="org-string">"http://"</span>
+    <span class="org-keyword">if</span> port == 80:
+        port_str = <span class="org-string">""</span>
+    <span class="org-keyword">else</span>:
+        port_str = <span class="org-string">":"</span> + <span class="org-builtin">str</span>(port)
+
+    url = protocol + <span class="org-string">"www."</span> + host + <span class="org-string">"."</span> + tld + port_str
+    <span class="org-keyword">if</span> path:
+        url += <span class="org-string">"/"</span> + path
+    <span class="org-keyword">return</span> url
+
+<span class="org-builtin">print</span>(generate_url(<span class="org-string">"pluralsight"</span>))
+<span class="org-builtin">print</span>(generate_url(<span class="org-string">"codesensei"</span>, tld=<span class="org-string">"nl"</span>))
+<span class="org-builtin">print</span>(generate_url(<span class="org-string">'google'</span>, secure=<span class="org-constant">True</span>, port=4444, path=<span class="org-string">"index.html"</span>, tld=<span class="org-string">"fr"</span>))
+</pre>
+</div>
+</div>
+</section>
+</div>
+<div id="postamble" class="status">
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

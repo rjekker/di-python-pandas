@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>HTTP: Vervolg</title>
+<meta name="author" content="Reindert-Jan Ekker"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../../reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../../reveal.js/dist/theme/league.css" id="theme"/>
+
+<link rel="stylesheet" href="../../reveal.js/plugin/highlight/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>HTTP: Vervolg</h1><h2>Reindert-Jan Ekker</h2><p>Code Sensei</p>
+</section>
+
+<section>
+<section id="slide-orga7ebd8b" data-background="#483D8B" data-background-transition="page">
+<h2 id="orga7ebd8b">Overhoring!</h2>
+<p>
+Wat kun je mij vertellen over de HTTP Request/Response cyclus?
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org79a2807" data-background="#483D8B" data-background-transition="page">
+<h2 id="org79a2807">Redirects</h2>
+<p>
+De 3xx statuscodes zijn een <i>verzoek</i> aan de client om het elders te
+proberen.
+</p>
+
+<p>
+Leveren dus een nieuwe request op.
+</p>
+
+<p>
+Subtiel verschillende statuscodes: zie <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#3xx_Redirection">Wikipedia</a>
+</p>
+
+<p>
+Je hebt geen garantie dat de client zich hieraan houdt!
+</p>
+
+<p>
+Servlet: <code>response.sendRedirect()</code>
+</p>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org9ff454a" data-background="#483D8B" data-background-transition="page">
+<h2 id="org9ff454a">Cookies</h2>
+
+<div id="org716622d" class="figure">
+<p><img src="../static/cookies.jpg" alt="cookies.jpg" />
+</p>
+</div>
+
+
+</section>
+<section id="slide-orgc52dc95">
+<h3 id="orgc52dc95">Stateless</h3>
+<p>
+HTTP is stateless. Wat houdt dit ook alweer in?
+</p>
+</section>
+<section id="slide-orgf3ed8ff">
+<h3 id="orgf3ed8ff">Cookies</h3>
+<p>
+Een manier om toch een soort <i>state</i> bij te houden over HTTP.
+</p>
+
+<p>
+Een cookie heeft een naam, een waarde, en enkele attributen.
+</p>
+
+<ul>
+<li class="fragment appear">Server zet een "Set-Cookie" header in een Response</li>
+<li class="fragment appear">Dit kan dus pas als er eerst een request van de client is geweest.</li>
+<li class="fragment appear">Client <i>mag</i> dit cookie opslaan</li>
+<li class="fragment appear">Client <i>mag</i> de cookie meesturen met alle volgende requests</li>
+
+</ul>
+
+</section>
+<section id="slide-org9fd1eb0">
+<h3 id="org9fd1eb0">Illustratie</h3>
+
+<div id="orgefe1ea0" class="figure">
+<p><img src="../static/cookie_simple.png" alt="cookie_simple.png" />
+</p>
+</div>
+
+</section>
+<section id="slide-org89c1a0b">
+<h3 id="org89c1a0b">Cookies</h3>
+<p>
+Zijn beperkt tot het domein waarop de site geserveerd wordt
+</p>
+
+<p>
+Een cookie van google.nl wordt dus nooit naar facebook.com gestuurd
+</p>
+
+</section>
+<section id="slide-orgebba2e5">
+<h3 id="orgebba2e5">Cookie Attributen</h3>
+<ul>
+<li>Domain en Path</li>
+<li>Expires en Max-Age</li>
+<li>Secure en HttpOnly</li>
+
+</ul>
+
+<p>
+Zie <a href="https://en.wikipedia.org/wiki/HTTP_cookie#Cookie_attributes">Wikipedia</a>
+</p>
+
+</section>
+<section id="slide-orgf255c7f">
+<h3 id="orgf255c7f">Login cookies</h3>
+<p>
+Dit mechanisme wordt gebruikt voor login.
+</p>
+
+<ul>
+<li>Maak een "secret" aan op de server.</li>
+<li>Deel dit "secret" met de client via een cookie.</li>
+
+</ul>
+
+<p>
+Als je nu een request krijgt met dit secret erin, weet je dat het om
+de ingelogde gebruiker gaat.
+</p>
+
+</section>
+<section id="slide-org4bd6a0e">
+<h3 id="org4bd6a0e">Sessie einde</h3>
+<p>
+Zo'n sessie kan verbroken worden:
+</p>
+<ul>
+<li>Door het secret weg te gooien op de server (timeout of logout)</li>
+<li>Door het cookie weg te gooien in de client.</li>
+
+</ul>
+
+</section>
+<section id="slide-org6515e00">
+<h3 id="org6515e00">Demo: Session Hijacking</h3>
+
+</section>
+<section id="slide-org08f2447">
+<h3 id="org08f2447">Verwarring: "session"</h3>
+<p>
+Het woord "session" kan betekenen:
+</p>
+
+<ul>
+<li>HTTP-session: request-response sessie</li>
+<li>Browser session: totdat de browser afgesloten is</li>
+<li>Login session: via cookies, zie vorige sheets</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org57405e1">
+<h2 id="org57405e1">Servlets en Sessions</h2>
+<div class="outline-text-2" id="text-org57405e1">
+</div>
+</section>
+<section id="slide-org27fec03">
+<h3 id="org27fec03">Session</h3>
+<p class="fragment (appear)">
+Om data vast te houden tussen requests, kunnen we het <code>Session</code> object gebruiken.
+</p>
+
+</section>
+<section id="slide-org68b0de0">
+<h3 id="org68b0de0">Session</h3>
+<div class="org-src-container">
+
+<pre   ><code class="java" >HttpSession session = request.getSession();
+session.setAttribute("username", "reindert");
+</code></pre>
+</div>
+
+<p>
+Bij een volgende request, op een andere pagina:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="java" >HttpSession session = request.getSession();
+String username = (String)session.getAttribute("username");
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgdbd3450">
+<h3 id="orgdbd3450">Session</h3>
+<p>
+Je kunt een <code>boolean</code> waarde meegeven aan <code>getSession()</code>.
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="java" >HttpSession session = request.getSession(false);
+</code></pre>
+</div>
+
+<p>
+De boolean bepaalt het gedrag als er nog geen sessie is:
+</p>
+<ul>
+<li><code>true</code>:  automatisch nieuwe sessie aangemaakt</li>
+<li><code>false</code>: return <code>null</code></li>
+
+</ul>
+
+
+</section>
+<section id="slide-org121fa2a">
+<h3 id="org121fa2a">Session</h3>
+<ul>
+<li>Is gekoppeld aan de <i>browser</i> door middel van een <i>cookie</i>.</li>
+<li>De session data bestaat alleen op de server</li>
+<li>Kun je weggooien dmv <code>session.invalidate()</code></li>
+
+</ul>
+
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-org0ed0bdb" data-background="#483D8B" data-background-transition="page">
+<h2 id="org0ed0bdb">Servlets en State</h2>
+</section>
+<section id="slide-org6d3fe67">
+<h3 id="org6d3fe67">Servlets en concurrency</h3>
+<p>
+Dezelfde servlet-instantie kan requests van meerdere gebruikers
+afhandelen
+</p>
+
+<p>
+(denk aan hoger/lager met meerdere users)
+</p>
+
+<p>
+Bovendien kunnen er meerdere <i>threads</i> tegelijk van dezelfde servlet gebruik maken
+</p>
+
+</section>
+<section id="slide-orga34c146">
+<h3 id="orga34c146">Servlets en State</h3>
+<p>
+Daarom mag een servlet nooit <i>state</i> hebben:
+</p>
+
+<ul>
+<li>geen instance variabelen</li>
+<li>geen globale of <i>static</i> waardes veranderen</li>
+
+</ul>
+
+</section>
+<section id="slide-org09a7c05">
+<h3 id="org09a7c05">Servlets: HttpSession</h3>
+<p>
+Gebruik <code>request.getSession()</code> om state bij te houden voor een gebruiker
+</p>
+
+<p>
+Dit zorgt dat er een session cookie aangemaakt wordt
+</p>
+</section>
+</section>
+</div>
+</div>
+<script src="../../reveal.js/dist/reveal.js"></script>
+<script src="../../reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight]
+});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Exercises: Functions</title>
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../../themes/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="../../themes/readtheorg/css/readtheorg.css"/>
+<link rel="stylesheet" type="text/css" href="../../css/homelink.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../themes/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="../../themes/readtheorg/js/readtheorg.js"></script>
+<script type="text/javascript" src="../../js/addhomelink.js"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Exercises: Functions</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgc2f1c98">Miles and kilometers</a></li>
+<li><a href="#org7e2fa15">Question: arguments</a></li>
+<li><a href="#orge8ec252">Pass or Fail</a></li>
+<li><a href="#orge283836">Duplicates</a></li>
+<li><a href="#orge72a17d">Statistics: range</a></li>
+<li><a href="#org5855259">Question: return</a></li>
+<li><a href="#orgb627890">VAT</a></li>
+<li><a href="#orgf8c4430">Threes</a></li>
+<li><a href="#org11e877b">Travel</a></li>
+<li><a href="#orgac64c10">Bonus: URL</a></li>
+<li><a href="#org5e2ff98">Bonus: Craps</a></li>
+</ul>
+</div>
+</div>
+<p>
+We start by converting some of the earlier exercises into functions.
+</p>
+<section id="outline-container-orgc2f1c98" class="outline-2">
+<h2 id="orgc2f1c98">Miles and kilometers</h2>
+<div class="outline-text-2" id="text-orgc2f1c98">
+<p>
+See <a href="warming_up.html#orgf39d8f5">Exercise: mile to kilometer</a>.
+</p>
+
+<p>
+Put this code into a function called <code>convert(miles)</code>, and make sure
+to call it several times with different values.
+</p>
+
+<p>
+Example output:
+</p>
+<pre class="example" id="org7ec76f4">
+8 miles is 12.8 kilometers
+12 miles is 19.200000000000003 kilometers
+131 miles is 209.60000000000002 kilometers
+</pre>
+</div>
+</section>
+
+<section id="outline-container-org7e2fa15" class="outline-2">
+<h2 id="org7e2fa15">Question: arguments</h2>
+<div class="outline-text-2" id="text-org7e2fa15">
+<p>
+What happens if you call the function from the previous exercise
+without providing any arguments?
+</p>
+
+<p>
+And if you call it with more than 1 argument (for example <code>convert(5,8,"hi")</code>)?
+</p>
+
+<p>
+And what if you call it with an argument that it cannot convert? Try
+passing a string. What happens?
+</p>
+</div>
+</section>
+<section id="outline-container-orge8ec252" class="outline-2">
+<h2 id="orge8ec252">Pass or Fail</h2>
+<div class="outline-text-2" id="text-orge8ec252">
+<p>
+See <a href="bool_if.html#org7b5e63b">Pass or fail</a>.
+</p>
+
+<p>
+Put your code into a function. Call it at least three times with
+different values.
+</p>
+</div>
+</section>
+
+<section id="outline-container-orge283836" class="outline-2">
+<h2 id="orge283836">Duplicates</h2>
+<div class="outline-text-2" id="text-orge283836">
+<p>
+Write a small script that contains two different functions with the
+same name. Then try to call each function. What happens?
+</p>
+</div>
+</section>
+
+<section id="outline-container-orge72a17d" class="outline-2">
+<h2 id="orge72a17d">Statistics: range</h2>
+<div class="outline-text-2" id="text-orge72a17d">
+<p>
+See <a href="bool_if.html#org94f9e14">Largest</a>.
+</p>
+
+<p>
+Write a function <code>max(a, b, c)</code> that returns the largest of its three
+arguments.
+</p>
+
+<p>
+Write another function <code>min(a, b, c)</code> that returns the smallest of its
+three arguments.
+</p>
+
+<p>
+Write a function <code>range(a, b, c)</code> that returns the <i>range</i>:  the
+difference between the maximum and minimum of the three numbers.
+Make sure that this function calls both of your other functions.
+</p>
+
+<p>
+Example:
+</p>
+<pre class="example" id="orgd0bb844">
+  print(range(0, 0, 10))
+  print(range(100, 40, 1))
+  print(range(33, 1000, 100))
+
+output:
+10
+99
+967
+
+
+</pre>
+</div>
+</section>
+
+<section id="outline-container-org5855259" class="outline-2">
+<h2 id="org5855259">Question: return</h2>
+<div class="outline-text-2" id="text-org5855259">
+<p>
+Experiment with the following: can you have a return statement in the
+middle of a function? What happens to the lines that come after it?
+</p>
+</div>
+</section>
+
+<section id="outline-container-orgb627890" class="outline-2">
+<h2 id="orgb627890">VAT</h2>
+<div class="outline-text-2" id="text-orgb627890">
+<p>
+In the Netherlands we have 2 different tariffs for BTW (VAT): 9% for
+food, and 21% for everything else. We are writing a program that
+calculates VAT for a given product.
+</p>
+
+<p>
+Please see the code below. It tries to call two functions that don't
+exist yet. Implement them:
+</p>
+
+<ul class="org-ul">
+<li><code>vat_high(ex_vat)</code> takes the price excl. VAT as input and returns
+the total price including the high tariff of 21%.</li>
+
+<li><code>vat_low(ex_vat)</code> takes the price excl VAT as input and returns the
+total price including the low tariff of 9%.</li>
+</ul>
+
+<p>
+Don't forget to also correct the if statement.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-variable-name">ex_vat</span> = <span class="org-builtin">float</span>(<span class="org-builtin">input</span>(<span class="org-string">"Please enter price of product excluding VAT? "</span>))
+<span class="org-variable-name">highlow</span> = <span class="org-builtin">input</span>(<span class="org-string">"Which tariff? [H]igh or [L]ow? "</span>)
+
+<span class="org-keyword">if</span> <span class="org-string">"please_include_correct_test_here"</span>:
+    <span class="org-builtin">print</span>(vat_high(ex_vat))
+<span class="org-keyword">else</span>:
+    <span class="org-builtin">print</span>(vat_low(ex_vat))
+</pre>
+</div>
+
+<p>
+Example output:
+</p>
+<pre class="example" id="org65d7a87">
+Please enter price of product excluding VAT? 100
+Which tariff? [H]igh or [L]ow? h
+121.0
+
+Please enter price of product excluding VAT? 100
+Which tariff? [H]igh or [L]ow? l
+109.00000000000001
+</pre>
+</div>
+</section>
+<section id="outline-container-orgf8c4430" class="outline-2">
+<h2 id="orgf8c4430">Threes</h2>
+<div class="outline-text-2" id="text-orgf8c4430">
+<p>
+First, define a function called <code>cube</code> that takes an argument called
+number.
+</p>
+
+<p>
+Make that function return the <code>cube</code> of that number (i.e. that number
+multiplied by itself and multiplied by itself once again).
+</p>
+
+<p>
+Define a second function called <code>by_three</code> that takes an argument called
+number. Uf that number is divisible by 3, <code>by_three</code> should call
+<code>cube(number)</code> and return its result. Otherwise, <code>by_three</code> should return
+False.
+</p>
+</div>
+</section>
+
+
+<section id="outline-container-org11e877b" class="outline-2">
+<h2 id="org11e877b">Travel</h2>
+<div class="outline-text-2" id="text-org11e877b">
+<p>
+Let's use functions to calculate your trip's costs:
+</p>
+
+<p>
+Define a function called <code>hotel_cost</code> with one argument <code>nights</code> as
+input. The hotel costs $140 per night. So, the function <code>hotel_cost</code>
+should return <code>140 * nights</code>.
+</p>
+
+
+<p>
+Define a function called <code>plane_ride_cost</code> that takes a string, city,
+as input. The function should return a different price depending on
+the location, similar to the code example above. Below are the valid
+destinations and their corresponding round-trip prices.
+</p>
+
+<ul class="org-ul">
+<li>"Charlotte": 183</li>
+<li>"Tampa": 220</li>
+<li>"Pittsburgh": 222</li>
+<li>"Los Angeles": 475</li>
+</ul>
+
+<p>
+Below your existing code, define a function called <code>rental_car_cost</code>
+with an argument called days. Calculate the cost of renting the car:
+Every day you rent the car costs $40. (cost=40*days) if you rent the
+car for 7 or more days, you get $50 off your
+total( cost-=50).
+</p>
+
+<p>
+Then, define a function called <code>trip_cost</code> that takes two
+arguments, city and days. Like the example above, have your function
+return the sum of calling the <code>rental_car_cost(days)</code>, <code>hotel_cost(days)</code>,
+and <code>plane_ride_cost(city)</code> functions.
+</p>
+
+
+<p>
+Modify your trip_cost function definion. Add a third argument,
+<code>spending_money</code>. Modify what the <code>trip_cost</code> function does. Add the
+variable <code>spending_money</code> to the sum that it returns.
+</p>
+</div>
+</section>
+
+<section id="outline-container-orgac64c10" class="outline-2">
+<h2 id="orgac64c10">Bonus: URL</h2>
+<div class="outline-text-2" id="text-orgac64c10">
+<p>
+This is an exercise for the more experienced students.
+For this exercise you need to learn about default arguments; see <a href="https://www.w3schools.com/python/python_functions.asp">W3Schools</a> or
+<a href="https://docs.python.org/3/tutorial/controlflow.html#more-on-defining-functions">The official documentation</a>.
+</p>
+
+<p>
+Write a function <code>generate_url(host)</code>:
+</p>
+
+<p>
+If called with just a hostname, it will return a <code>.com</code>
+url. <code>generate_url("pluralsight")</code> returns <code>http://www.pluralsight.com</code>.
+</p>
+
+<p>
+The function takes several <i>optional</i> arguments:
+</p>
+
+<ul class="org-ul">
+<li>"tld": Set the top-level domain (.nl, .be, .com, etc.)</li>
+<li>"secure": if True this will create a <code>https</code> url</li>
+<li>"port": this will set the port number (see below)</li>
+<li>"path": this will set the path of the url (part after the host/port</li>
+</ul>
+
+<p>
+Example:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-builtin">print</span>(generate_url(<span class="org-string">'google'</span>, secure=<span class="org-constant">True</span>, port=4444, path=<span class="org-string">"index.html"</span>, tld=<span class="org-string">"fr"</span>))
+
+<span class="org-doc">"https://www.google.fr:4444/index.html"</span>
+</pre>
+</div>
+
+<p>
+Please note that all arguments after the host name are optional!
+</p>
+</div>
+</section>
+
+<section id="outline-container-org5e2ff98" class="outline-2">
+<h2 id="org5e2ff98">Bonus: Craps</h2>
+<div class="outline-text-2" id="text-org5e2ff98">
+<p>
+Craps is a popular dice game played in casinos. Write a program to play a variation of the game, as follows:
+</p>
+
+<p>
+Roll two dice. Each die has six faces representing values 1, 2, . . ., and 6, respectively.
+</p>
+
+<p>
+Check the sum of the two dice. If the sum is 2, 3, or 12 (called craps), you
+lose; if the sum is 7 or 11 (called natural), you win; if the sum is another value
+(i.e., 4, 5, 6, 8, 9, or 10), a point is established.
+</p>
+
+<p>
+ Continue to roll the dice until either
+a 7 or the same point value is rolled. If 7 is rolled, you lose. Otherwise, you win.
+Your program acts as a single player.
+</p>
+
+<p>
+Here are some sample runs
+</p>
+<pre class="example" id="org3e9c0cd">
+You rolled 5 + 6 = 11
+You win
+
+You rolled 1 + 2 = 3
+You lose
+
+You rolled 4 + 4 = 8
+point is 8
+You rolled 6 + 2 = 8
+You win
+
+You rolled 3 + 2 = 5
+point is 5
+You rolled 2 + 5 = 7
+You lose
+</pre>
+</div>
+</section>
+</div>
+<div id="postamble" class="status">
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

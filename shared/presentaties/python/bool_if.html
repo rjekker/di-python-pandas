@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Booleans and If Statements</title>
+<meta name="author" content="Reindert-Jan Ekker"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../../../reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../../../reveal.js/dist/theme/moon.css" id="theme"/>
+
+<link rel="stylesheet" href="../../../reveal.js/plugin/highlight/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>Booleans and If Statements</h1><h2>Reindert-Jan Ekker</h2><p>Code Sensei</p>
+</section>
+
+<section>
+<section id="slide-org5cd7ab7">
+<h2 id="org5cd7ab7">Booleans</h2>
+<p>
+A <i>boolean</i> expression can either be <i>true</i> or <i>false</i>.
+</p>
+
+<p>
+Predefined values: <code>True</code> and <code>False</code>
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >&gt;&gt;&gt; 5 &gt; 2
+True
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgb0fe50e">
+<h3 id="orgb0fe50e">Boolean operators</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >x == y  # x is equal to y
+x != y  # x is not equal to y
+x &gt; y   # x is greater than y
+x &lt; y   # x is less than y
+x &gt;= y  # x is greater than or equal to y
+x &lt;= y  # x is less than or equal to y
+</code></pre>
+</div>
+
+<p>
+Note: <b>==</b> (comparison) vs. <b>=</b> (assignment)!
+</p>
+</section>
+<section id="slide-org506f117">
+<h3 id="org506f117">Logical operators</h3>
+<p>
+Combine boolean expressions using logical operators
+ <code>and</code>, <code>or</code>, <code>not</code>:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >weekend = (day == "sat") or (day == "sun")
+is_fish = has_fins and not is_mammal
+</code></pre>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org3e0e9b1">
+<h2 id="org3e0e9b1">Conditional Execution</h2>
+<p>
+The <code>if</code>-statement runs code depending on the value of a boolean expression:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >if bank_balance &gt; 0:
+    print('We have some money!')
+else:
+    print('We are broke :(')
+</code></pre>
+</div>
+
+<p>
+The <code>else</code> part is optional.
+</p>
+
+</section>
+<section id="slide-org852c8f6">
+<h3 id="org852c8f6">Nested if statements</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >age = int(input("Age? "))
+gender = input("Gender (m/f)? ")
+
+if age &gt;= 18:
+    if gender == "m":
+        print("Hello sir")
+    else:
+        print("Hello madam")
+else:
+    if gender == "m":
+        print("Hey boy")
+    else:
+        print("Hey girl")
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org90a8de6">
+<h3 id="org90a8de6">Nesting</h3>
+<p>
+This can get out of hand..
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >language = input("What language do you speak? ")
+
+if language == "Dutch":
+    print("Hoi")
+else:
+    if language == "English":
+        print("Hello")
+    else:
+        if language == "French":
+            print("Bonjour")
+        else:
+            if language == "German":
+                print("Gutentag")
+            else: # etc. etc.
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org4da339d">
+<h3 id="org4da339d">Elif</h3>
+<p>
+Use <code>elif</code> to keep the code clean:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >language = input("What language do you speak? ")
+
+if language == "Dutch":
+    print("Hoi")
+elif language == "English":
+    print("Hello")
+elif language == "French":
+    print("Bonjour")
+elif language == "German":
+    print("Gutentag")
+else:
+    print("I don't speak that one :(")
+</code></pre>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org436c885">
+<h2 id="org436c885">Wat is truth?</h2>
+<p>
+Whenever you test for <i>truth</i> (e.g. an if-statement), the following
+values will be seen as <code>False</code>:
+</p>
+
+<ul>
+<li>Constants <code>None</code> en <code>False</code>.</li>
+<li>The number zero: 0, 0.0, (etc)</li>
+<li>Empty collections: '', (), [], {}, set(), range(0)</li>
+
+</ul>
+
+</section>
+<section id="slide-org40afd59">
+<h3 id="org40afd59">False: zero</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >sales = beers_sold + wine_sold + soda_sold + coffee_sold
+if not sales: # if sales == 0
+    print("Nothing sold today :(")
+else:
+    # etc.
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org50236d0">
+<h3 id="org50236d0">False: Empty string</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >if not mail.subject: # mail.subject == ""
+    print("Send  mail with an empty subject?")
+</code></pre>
+</div>
+</section>
+</section>
+</div>
+</div>
+<script src="../../../reveal.js/dist/reveal.js"></script>
+<script src="../../../reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight]
+});
+
+</script>
+</body>
+</html>

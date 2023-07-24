@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Exercises: Lists and slices</title>
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../../themes/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="../../themes/readtheorg/css/readtheorg.css"/>
+<link rel="stylesheet" type="text/css" href="../../css/homelink.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../themes/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="../../themes/readtheorg/js/readtheorg.js"></script>
+<script type="text/javascript" src="../../js/addhomelink.js"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Exercises: Lists and slices</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgdbce858">Warming up</a></li>
+<li><a href="#orgc94dc45">Adding</a></li>
+<li><a href="#orge21d59a">Creating a list</a></li>
+<li><a href="#org07fdc49">Deduplication</a></li>
+<li><a href="#org0fa2d52">Slices: warming up</a>
+<ul>
+<li><a href="#org060a9b3">Slices: step size</a></li>
+</ul>
+</li>
+<li><a href="#org687c945">Reverse</a></li>
+<li><a href="#org5e19d05">Beazley</a></li>
+<li><a href="#orgd3729d6">Money</a></li>
+</ul>
+</div>
+</div>
+
+<section id="outline-container-orgdbce858" class="outline-2">
+<h2 id="orgdbce858">Warming up</h2>
+<div class="outline-text-2" id="text-orgdbce858">
+<p>
+Create a list with 5 values.
+</p>
+
+<p>
+In the next line, use the correct indices to print only the second and
+second-to last elements of the list.
+</p>
+</div>
+</section>
+
+<section id="outline-container-orgc94dc45" class="outline-2">
+<h2 id="orgc94dc45">Adding</h2>
+<div class="outline-text-2" id="text-orgc94dc45">
+<p>
+Given the list:
+</p>
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-variable-name">l</span> <span class="org-operator">=</span> [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+</pre>
+</div>
+
+<p>
+Create a program that asks the user for:
+</p>
+<ul class="org-ul">
+<li>a number.</li>
+<li>an index <code>n</code> (number between 0 and 10)</li>
+</ul>
+
+<p>
+Add the number to the <i>nth</i> element of the list <code>l</code>
+</p>
+
+<p>
+Example:
+</p>
+<pre class="example" id="orgf2b319b">
+Number? 8
+Index? 0
+[18, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+
+Number? 2
+Index? 4
+[10, 20, 30, 40, 52, 60, 70, 80, 90, 100]
+
+Number? 9
+Index? -1
+[10, 20, 30, 40, 50, 60, 70, 80, 90, 109]
+</pre>
+</div>
+</section>
+<section id="outline-container-orge21d59a" class="outline-2">
+<h2 id="orge21d59a">Creating a list</h2>
+<div class="outline-text-2" id="text-orge21d59a">
+<p>
+Create a while loop for the following:
+</p>
+
+<ul class="org-ul">
+<li>Ask the user for a word</li>
+<li>Store this word in a list (use <code>append</code>)</li>
+<li>Print the list</li>
+<li>When the user enters nothing, stop the program</li>
+</ul>
+
+<p>
+Hint: start with creating an empty list before the while loop.
+</p>
+
+<pre class="example" id="orgd1b72bd">
+A word please? hi
+['hi']
+A word please? this
+['hi', 'this']
+A word please? is
+['hi', 'this', 'is']
+A word please? my
+['hi', 'this', 'is', 'my']
+A word please? list
+['hi', 'this', 'is', 'my', 'list']
+A word please?
+</pre>
+</div>
+</section>
+
+<section id="outline-container-org07fdc49" class="outline-2">
+<h2 id="org07fdc49">Deduplication</h2>
+<div class="outline-text-2" id="text-org07fdc49">
+<p>
+Change the program so that, every time the user gives a word, you test
+whether it is already in the list. If it is, you don't add it.
+</p>
+
+<p>
+Hint: to test whether a words is in the list, use the <code>in</code> operator:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">if</span> word <span class="org-keyword">in</span> l:
+    ...
+</pre>
+</div>
+
+<p>
+Example:
+</p>
+<pre class="example" id="orgfd59bca">
+A word please? this
+['this']
+A word please? is
+['this', 'is']
+A word please? is
+['this', 'is']
+A word please? another
+['this', 'is', 'another']
+A word please? this
+['this', 'is', 'another', 'list']
+A word please? list
+['this', 'is', 'another', 'list']
+A word please?
+</pre>
+</div>
+</section>
+
+<section id="outline-container-org0fa2d52" class="outline-2">
+<h2 id="org0fa2d52">Slices: warming up</h2>
+<div class="outline-text-2" id="text-org0fa2d52">
+<p>
+Create a string with some text in it and write slices to:
+</p>
+
+<ul class="org-ul">
+<li>select only the first three characters</li>
+<li>select only the last three characters</li>
+<li>select everything except the first and last characters</li>
+<li>select the entire string</li>
+</ul>
+</div>
+
+<div id="outline-container-org060a9b3" class="outline-3">
+<h3 id="org060a9b3">Slices: step size</h3>
+<div class="outline-text-3" id="text-org060a9b3">
+<p>
+Slices can take a third argument: the step size. The following slice
+starts at the second element and skips 3 elements after that.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-variable-name">l</span> <span class="org-operator">=</span> <span class="org-builtin">list</span>(<span class="org-builtin">range</span>(20)) <span class="org-comment-delimiter"># </span><span class="org-comment">numbers from 0 to 19</span>
+<span class="org-builtin">print</span>(l[1::3])
+</pre>
+</div>
+
+<p>
+Output:
+</p>
+<pre class="example" id="org28709d5">
+[1, 4, 7, 10, 13, 16, 19]
+</pre>
+
+<p>
+Given the following list:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-variable-name">l</span> <span class="org-operator">=</span> <span class="org-builtin">list</span>(<span class="org-builtin">range</span>(3000))
+</pre>
+</div>
+
+<p>
+Can you use slices to find the three largest multiples of 137 that
+are smaller than 3000?
+</p>
+</div>
+</div>
+</section>
+
+<section id="outline-container-org687c945" class="outline-2">
+<h2 id="org687c945">Reverse</h2>
+<div class="outline-text-2" id="text-org687c945">
+<p>
+Can you figure out how to reverse a list or string using only a slice?
+</p>
+</div>
+</section>
+
+<section id="outline-container-org5e19d05" class="outline-2">
+<h2 id="org5e19d05">Beazley</h2>
+<div class="outline-text-2" id="text-org5e19d05">
+<p>
+Try your hand at the exercises at the bottom of the page in <a href="https://dabeaz-course.github.io/practical-python/Notes/02_Working_with_data/04_Sequences.html">Beazley's book</a> (2.13-2.17).
+</p>
+
+<p>
+The example CSV from the book is <a href="https://raw.githubusercontent.com/dabeaz-course/practical-python/master/Work/Data/portfolio.csv">here</a>.
+</p>
+</div>
+</section>
+
+
+<section id="outline-container-orgd3729d6" class="outline-2">
+<h2 id="orgd3729d6">Money</h2>
+<div class="outline-text-2" id="text-orgd3729d6">
+<p>
+Consider the following code
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">def</span> <span class="org-function-name">parse_dollar_amount</span>(amount: <span class="org-builtin">str</span>) <span class="org-operator">-&gt;</span> <span class="org-builtin">tuple</span>:
+  <span class="org-doc">"""Parse the amount given as a string.</span>
+<span class="org-doc">  Return a tuple (dollars, cents)."""</span>
+    ... <span class="org-comment-delimiter"># </span><span class="org-comment">your code here</span>
+
+
+<span class="org-keyword">if</span> <span class="org-builtin">__name__</span><span class="org-operator">==</span><span class="org-string">"__main__"</span>:
+    <span class="org-keyword">for</span> amount <span class="org-keyword">in</span> [<span class="org-string">"$2.45"</span>, <span class="org-string">"$10.80"</span>, <span class="org-string">"$100"</span>, <span class="org-string">"$18.3"</span>, <span class="org-string">"$.49"</span>, <span class="org-string">"$0.001"</span>, <span class="org-string">"$15.00"</span>]:
+        <span class="org-variable-name">dollars</span>, <span class="org-variable-name">cents</span> <span class="org-operator">=</span> parse_dollar_amount(amount)
+        <span class="org-builtin">print</span>(f<span class="org-string">"That is </span>{dollars}<span class="org-string"> dollars and </span>{cents}<span class="org-string"> cents."</span>)
+</pre>
+</div>
+
+<p>
+Complete the function <code>parse_dollar_amount()</code> so that it returns a
+tuple <code>(dollars, cents)</code> representing the dolars and cents in the
+input string <code>amount</code>.
+</p>
+
+<p>
+Use the function 
+<a href="https://python-reference.readthedocs.io/en/latest/docs/str/strindex.html">str.index()</a>
+to find the location of the dot (.) in the string. Then, use slices to determine dollar and cent amounts.
+</p>
+
+<p>
+Example output:
+</p>
+
+<pre class="example" id="orgad76a81">
+$2.45 is 2 dollars and .45 cents.
+$10.80 is 10 dollars and .80 cents.
+$100 is 100 dollars and 0 cents.
+$18.3 is 18 dollars and .3 cents.
+$.49 is 0 dollars and .49 cents.
+$0.001 is 0 dollars and .001 cents.
+$15.00 is 15 dollars and .00 cents.
+</pre>
+</div>
+</section>
+</div>
+<div id="postamble" class="status">
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

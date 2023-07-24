@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Classes (Intro)</title>
+<meta name="author" content="Reindert-Jan Ekker"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../../../reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../../../reveal.js/dist/theme/simple.css" id="theme"/>
+
+<link rel="stylesheet" href="../../../reveal.js/plugin/highlight/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>Classes (Intro)</h1><h2>Reindert-Jan Ekker</h2><p>Code Sensei</p>
+</section>
+
+<section>
+<section id="slide-org4fd0c00">
+<h2 id="org4fd0c00">Classes</h2>
+<p>
+A short introduction
+</p>
+
+</section>
+<section id="slide-org95d3ec4">
+<h3 id="org95d3ec4">Classes</h3>
+<p>
+Give structure to your code by grouping
+</p>
+
+<ul>
+<li>data (values) and</li>
+<li>code (functions)</li>
+
+</ul>
+<p class="fragment (appear)">
+Create our own data types called classes.
+</p>
+
+</section>
+<section id="slide-orgcc29c1f">
+<h3 id="orgcc29c1f">Objects</h3>
+<p>
+Everything in a Pyton is an object. An object's class is also its type.
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="python" >print("hi".__class__)
+print((5).__class__)
+print(None.__class__)
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org8cca312">
+<h3 id="org8cca312">Custom classes</h3>
+<p>
+Lets create our own datatype to store data for a person
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def greet(self):
+        print("Hi! My name is", self.name)
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orga970cfc">
+<h3 id="orga970cfc">Interpretation</h3>
+<p>
+A class is like a "blueprint" for objects. The Person class defines
+properties and behaviour shared by all Persons.
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def greet(self):
+        print("Hi! My name is", self.name)
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orge7acf4b">
+<h3 id="orge7acf4b">Instances</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+    ...
+</code></pre>
+</div>
+
+<p>
+Create a value of this type, this calls <code>__init__</code>
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >p = Person("RJ", 40)
+</code></pre>
+</div>
+</section>
+<section id="slide-orga1c594d">
+<h3 id="orga1c594d">Instances</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >p = Person("RJ", 40)
+</code></pre>
+</div>
+
+<ul>
+<li class="fragment appear">p is an object of class Person!</li>
+<li class="fragment appear">p is created by calling Person like it was a function.</li>
+<li class="fragment appear">This effectively calls <code>__init__</code>, which "constructs" the object</li>
+<li class="fragment appear">The arguments to <code>__init__</code> are the information needed to build the object</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgdb249e7">
+<h2 id="orgdb249e7">Attributes</h2>
+<div class="outline-text-2" id="text-orgdb249e7">
+</div>
+</section>
+<section id="slide-orgf3b8c54">
+<h3 id="orgf3b8c54">Dot</h3>
+<p>
+Access the attributes of an object by using a dot
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >p = Person("RJ", 40)
+p2 = Person("Jake", 35)
+print(p.name)
+print(p2.age)
+
+# Attribute has to exist
+print(p.something) # Error
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgdd6b396">
+<h3 id="orgdd6b396">Methods</h3>
+<p>
+Methods are the function attributes of a class.
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >class Person:
+    def __init__(self, name, age):
+        ...
+
+    def greet(self):
+        print("Hi! My name is", self.name)
+
+    def get_year_of_birth(self):
+        return 2020 - self.age
+</code></pre>
+</div>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >p.greet()
+print(p.get_year_of_birth())
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org390498e">
+<h3 id="org390498e">Self</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >class Person:
+    def __init__(self, name, age):
+        ...
+
+    def greet(self):
+        print("Hi! My name is", self.name)
+
+    def get_year_of_birth(self):
+        return 2020 - self.age
+</code></pre>
+</div>
+
+<ul>
+<li><code>self</code> is the first argument of each method</li>
+<li><code>self</code> points to the object that the method is working on</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org8eb309c">
+<h2 id="org8eb309c">String representation</h2>
+<div class="org-src-container">
+
+<pre   ><code class="python" >p = Person("RJ", 40)
+str(p)  # or print(p)
+</code></pre>
+</div>
+
+<p>
+Output:
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="text" >&lt;__main__.Person object at 0x1058f93a0&gt;
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org64136c4">
+<h3 id="org64136c4">str</h3>
+<p>
+Used to create a human-readable string from an object.
+</p>
+
+<p>
+We can influence its behaviour by writing a method <code>__str__</code>,
+which should return a string.
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="python" >class Person:
+    ...
+
+    def __str__(self):
+        return "Hi, I am " + self.name
+</code></pre>
+</div>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >p = Person("RJ", 40)
+str(p)  # or print(p)
+</code></pre>
+</div>
+
+<div class="org-src-container">
+
+<pre   ><code class="text" >"Hi, I am RJ"
+</code></pre>
+</div>
+</section>
+<section id="slide-orge6565f8">
+<h3 id="orge6565f8">repr</h3>
+<p>
+Used to create a more detailed representation for programmers (or
+other programs).
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >class Person:
+    ...
+
+    def __repr__(self):
+        return f"Person({self.name},{self.age})"
+</code></pre>
+</div>
+
+<p class="fragment (appear)">
+Theoretically, the output of <code>__repr__</code> should be useable with
+<code>eval()</code> to re-create the object
+</p>
+</section>
+</section>
+</div>
+</div>
+<script src="../../../reveal.js/dist/reveal.js"></script>
+<script src="../../../reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight]
+});
+
+</script>
+</body>
+</html>

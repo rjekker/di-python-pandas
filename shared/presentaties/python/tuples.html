@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Tuples</title>
+<meta name="author" content="Reindert-Jan Ekker"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../../../reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../../../reveal.js/dist/theme/serif.css" id="theme"/>
+
+<link rel="stylesheet" href="../../../reveal.js/plugin/highlight/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>Tuples</h1><h2>Reindert-Jan Ekker</h2><p>Code Sensei</p>
+</section>
+
+<section>
+<section id="slide-orgdd4e705">
+<h2 id="orgdd4e705">Tuples</h2>
+<div class="outline-text-2" id="text-orgdd4e705">
+</div>
+</section>
+<section id="slide-orgf34492b">
+<h3 id="orgf34492b">Tuples</h3>
+<ul>
+<li>Sequence with zero or more values</li>
+<li>Very similar to lists</li>
+<li>Support most list operations (indices, for, len, max, min, etc.)</li>
+<li>Difference: tuples are <i>immutable</i></li>
+
+</ul>
+</section>
+<section id="slide-org53f2cd8">
+<h3 id="org53f2cd8">Tuples</h3>
+<p>
+A tuple is a list of values separated by comma's
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="python" >t = 'a', 5, [1, 2]
+t2 = ('a', 5, [1,2]) # optional parens
+t == t2 # True
+type(t) # type 'tuple'
+t = ()  # empty tuple
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org2776fca">
+<h3 id="org2776fca">Tuple with 1 element</h3>
+<p>
+Watch the comma!
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="python" >t = (5)
+type(t) # type 'int' !!!
+t = (5,) # tuple!
+</code></pre>
+</div>
+</section>
+<section id="slide-org20bd925">
+<h3 id="org20bd925">Assignment</h3>
+<p>
+Cannot assign to a tuple element:
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="python" >t = (12, 'augustus', 2019)
+t[1] = 'september'
+</code></pre>
+</div>
+
+<pre class="example" id="org7de4f4a">
+TypeError: 'tuple' object does not support item assignment
+</pre>
+
+</section>
+</section>
+<section>
+<section id="slide-org30239a4">
+<h2 id="org30239a4">Append</h2>
+<p>
+Cannot add elements:
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="python" >t = ()
+t.append('a')
+</code></pre>
+</div>
+
+<pre class="example" id="orga7c4f08">
+AttributeError: 'tuple' object has no attribute 'append'
+</pre>
+</section>
+</section>
+<section>
+<section id="slide-org76f85d7">
+<h2 id="org76f85d7">Using tuples</h2>
+<p>
+Lists where the position of a value is significant
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >coordinates = (3, 8)  # x and y axes
+address = ("My street", "74 a", "Amsterdam", "The Netherlands")
+date = (2020, 7, 14)
+</code></pre>
+</div>
+
+<ul>
+<li class="fragment appear">append or insert don't make sense here</li>
+<li class="fragment appear">compare with dict or objects</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org06210e3">
+<h2 id="org06210e3">As return values</h2>
+<p>
+Function with more than one return value
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="python" >def min_max(l):
+    return min(l), max(l)
+
+t = min_max([5,8,3,1,9])
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org3eba43f">
+<h3 id="org3eba43f">Tuple unpacking</h3>
+<p>
+Assign to multiple variables at once
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="python" >t = (13, 'EUR')
+amount, currency = t
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgdfceb0a">
+<h3 id="orgdfceb0a">dict items</h3>
+<p>
+When looping over a dict; return both key and value
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >capitals = { 'DE': 'Berlin', 'FR': 'Paris', 'NL': 'Amsterdam' }
+for k, v in capitals.items():
+    print(v, "is the capital of", k)
+</code></pre>
+</div>
+
+<pre class="example" id="org230e157">
+Berlin is the capital of DE
+Paris is the capital of FR
+Amsterdam is the capital of NL
+</pre>
+
+
+</section>
+<section id="slide-org88b496a">
+<h3 id="org88b496a">Enumerate</h3>
+<p>
+When looping over a list; return both index and value
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >for index, value in enumerate(['a', 'b', 'c']):
+         print(index, ':', value)
+</code></pre>
+</div>
+
+<pre class="example" id="orgcd53142">
+0 : a
+1 : b
+2 : c
+</pre>
+</section>
+</section>
+</div>
+</div>
+<script src="../../../reveal.js/dist/reveal.js"></script>
+<script src="../../../reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight]
+});
+
+</script>
+</body>
+</html>

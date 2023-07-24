@@ -1,0 +1,12 @@
+regex101.com
+docs.python.org
+www.nytimes.com
+www.lepel.nl
+www.mediamatters.org
+1.1.1.1
+www.ditbestaatniet.nl
+www.politico.com
+www.bloomberg.com
+www.codesensei.com
+www.codesensei.nl
+www.ietf.org

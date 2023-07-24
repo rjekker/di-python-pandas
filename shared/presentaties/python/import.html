@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Modules and import</title>
+<meta name="author" content="Reindert-Jan Ekker"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../../../reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../../../reveal.js/dist/theme/beige.css" id="theme"/>
+
+<link rel="stylesheet" href="../../../reveal.js/plugin/highlight/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>Modules and import</h1><h2>Reindert-Jan Ekker</h2><p>Code Sensei</p>
+</section>
+
+<section>
+<section id="slide-org97ccf1d">
+<h2 id="org97ccf1d">Modules, packages, import</h2>
+<div class="outline-text-2" id="text-org97ccf1d">
+</div>
+</section>
+<section id="slide-org7b66501">
+<h3 id="org7b66501">import</h3>
+<p>
+The <code>import</code> statement lets us use names from other Python modules (.py files)
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >from math import sqrt
+print(sqrt(5))
+</code></pre>
+</div>
+
+<pre class="example" id="org17d3a66">
+2.23606797749979
+</pre>
+
+<ul>
+<li class="fragment appear">This can be anything: variables, functions, classes, etc.</li>
+
+</ul>
+</section>
+<section id="slide-org4483188">
+<h3 id="org4483188">import</h3>
+<p>
+I can import an entire module or just a single name
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >import math
+print(math.sqrt(5))
+</code></pre>
+</div>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >from math import sqrt
+print(sqrt(5))
+</code></pre>
+</div>
+</section>
+<section id="slide-orgf3d28c2">
+<h3 id="orgf3d28c2">Organising your code</h3>
+<p>
+Demo: importing your own code
+</p>
+
+</section>
+<section id="slide-orge97c7e0">
+<h3 id="orge97c7e0">Best practices</h3>
+<p>
+The <i>wildcard</i> import is frowned upon
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="python" >from something import *
+</code></pre>
+</div>
+
+<p>
+Preferably we import just the things we need
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >from something import bread, cheese, butter
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgcadfd52">
+<h3 id="orgcadfd52">Import as</h3>
+<p>
+Re-name an import for local use. Mostly used for abbreviating long
+names.
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="python" >import matplotlib.pyplot as plt
+
+plt.figure()
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org291642a">
+<h3 id="org291642a">Locating files</h3>
+<p>
+Where does Python search for files to import?
+</p>
+
+
+<ol>
+<li>Current directory (same directory as script doing the importing).</li>
+<li>Standard library.</li>
+<li>The paths defined in sys.path</li>
+
+</ol>
+
+</section>
+<section id="slide-org68be4aa">
+<h3 id="org68be4aa">Sys.path</h3>
+<p>
+A variable available in python:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >import sys
+
+print(sys.path)
+</code></pre>
+</div>
+
+<pre class="example" id="orgedfc96b">
+['', '/usr/lib/python37.zip', '/usr/lib/python3.7', ...]
+</pre>
+
+</section>
+<section id="slide-orgd863d83">
+<h3 id="orgd863d83">More info</h3>
+<ul>
+<li><a href="https://realpython.com/python-import/">RealPython: Import</a></li>
+<li><a href="https://docs.python.org/3/tutorial/modules.html">Modules tutorial</a></li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org1c48df5">
+<h2 id="org1c48df5">Imports and <span class="underline"><span class="underline">main</span></span></h2>
+<p>
+What happens when we import a module?
+</p>
+
+<p>
+Can this have side effects?
+</p>
+</section>
+<section id="slide-org72e2136">
+<h3 id="org72e2136">Main</h3>
+<p>
+When we write a Python file that can be run as a script,
+</p>
+
+<p>
+The code to start the program should use the following if-statement:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >if __name__ == '__main__':
+    print("Let's do stuff!")
+</code></pre>
+</div>
+
+<p>
+This make sure that you can <code>import</code> the file without side effects.
+</p>
+</section>
+</section>
+<section>
+<section id="slide-orgd255755">
+<h2 id="orgd255755">Packages</h2>
+<div class="outline-text-2" id="text-orgd255755">
+</div>
+</section>
+<section id="slide-org83bd279">
+<h3 id="org83bd279">Package</h3>
+<p>
+A package is a directory containing Python files
+</p>
+
+<p>
+Must always contain a file <code>__init__.py</code> (can be empty).
+</p>
+
+
+<div id="org0ba01e0" class="figure">
+<p><img src="../../static/package.jpg" alt="package.jpg" />
+</p>
+</div>
+
+<ul>
+<li class="fragment appear">Note: don't confuse this with a package you can download and install.</li>
+
+</ul>
+
+</section>
+<section id="slide-orgdb04f4a">
+<h3 id="orgdb04f4a">Package</h3>
+
+<div id="org10d3f59" class="figure">
+<p><img src="../../static/package.jpg" alt="package.jpg" />
+</p>
+</div>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >import Game.Sound.load
+from Game.Image.change import thing
+</code></pre>
+</div>
+</section>
+<section id="slide-org0a84e0d">
+<h3 id="org0a84e0d">More info</h3>
+<p>
+<a href="https://docs.python.org/3/tutorial/modules.html#packages">Package tutorial</a>
+</p>
+</section>
+</section>
+</div>
+</div>
+<script src="../../../reveal.js/dist/reveal.js"></script>
+<script src="../../../reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight]
+});
+
+</script>
+</body>
+</html>

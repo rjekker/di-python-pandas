@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>CSS Intro</title>
+<meta name="author" content="Reindert-Jan Ekker"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../../../reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../../../reveal.js/dist/theme/black.css" id="theme"/>
+
+<link rel="stylesheet" href="../../../reveal.js/plugin/highlight/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>CSS Intro</h1><h2>Reindert-Jan Ekker</h2><p>Code Sensei</p>
+</section>
+
+
+<section>
+<section id="slide-orgea9ff75">
+<h2 id="orgea9ff75">CSS</h2>
+<p>
+<i>Cascading Style Sheets</i>
+</p>
+
+<p>
+Add layout and styling to an HTML-document
+</p>
+
+</section>
+<section id="slide-org1934746">
+<h3 id="org1934746">Selectors</h3>
+<p>
+CSS code consists of a <i>selector</i> and applied <i>rules</i>:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="css" >p {
+    color: red;
+}
+</code></pre>
+</div>
+
+<p class="fragment (appear)">
+Don't forget the semicolon!
+</p>
+
+</section>
+<section id="slide-org7ac14b1">
+<h3 id="org7ac14b1">Selecting by class</h3>
+<div class="org-src-container">
+
+<pre   ><code class="html" >&lt;p class="intro"&gt;Hi! I'm RJ&lt;/p&gt;
+&lt;p class="other"&gt;Something else&lt;/p&gt;
+</code></pre>
+</div>
+
+<div class="org-src-container">
+
+<pre   ><code class="css" >p { color: black; }
+.intro { font-weight: bold }
+p.other { margin-left: 50px; }
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orga1c5ea5">
+<h3 id="orga1c5ea5">Learn more</h3>
+<ul>
+<li><a href="https://www.w3schools.com/css/">W3schools</a></li>
+<li><a href="https://www.codecademy.com/learn/learn-css">Codecademy CSS</a></li>
+
+</ul>
+</section>
+</section>
+</div>
+</div>
+<script src="../../../reveal.js/dist/reveal.js"></script>
+<script src="../../../reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight]
+});
+
+</script>
+</body>
+</html>

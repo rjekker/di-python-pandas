@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Closures and Decorators: Solutions</title>
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../../themes/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="../../themes/readtheorg/css/readtheorg.css"/>
+<link rel="stylesheet" type="text/css" href="../../css/homelink.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../themes/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="../../themes/readtheorg/js/readtheorg.js"></script>
+<script type="text/javascript" src="../../js/addhomelink.js"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Closures and Decorators: Solutions</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org67809c3">Closures</a>
+<ul>
+<li><a href="#org7c65448">Warming up</a></li>
+<li><a href="#org2096188">Swapping arguments</a></li>
+<li><a href="#org8bdec8b">Caching</a></li>
+</ul>
+</li>
+<li><a href="#org525e0c9">Decorators</a>
+<ul>
+<li><a href="#org5c48ece">HTML</a></li>
+<li><a href="#org8be3250">Authorization</a></li>
+<li><a href="#orga074bab">JSON</a></li>
+<li><a href="#orgac3213e">Bonus</a></li>
+<li><a href="#org22c1e46">Wrapper (Bonus)</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+<section id="outline-container-org67809c3" class="outline-2">
+<h2 id="org67809c3">Closures</h2>
+<div class="outline-text-2" id="text-org67809c3">
+</div>
+<div id="outline-container-org7c65448" class="outline-3">
+<h3 id="org7c65448">Warming up</h3>
+<div class="outline-text-3" id="text-org7c65448">
+<p>
+Please complete the following program:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">def</span> <span class="org-function-name">never_negative</span>(func):
+    <span class="org-doc">"""Make sure `func` never returns a negative number"""</span>
+    <span class="org-keyword">def</span> <span class="org-function-name">wrapper</span>(*args, **kwargs):
+       <span class="org-keyword">return</span> <span class="org-builtin">abs</span>(func(*args, **kwargs))
+    <span class="org-keyword">return</span> wrapper
+
+<span class="org-keyword">import</span> math
+<span class="org-builtin">pow</span> = never_negative(math.<span class="org-builtin">pow</span>)
+
+<span class="org-builtin">print</span>(<span class="org-builtin">pow</span>(-12,2))
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org2096188" class="outline-3">
+<h3 id="org2096188">Swapping arguments</h3>
+<div class="outline-text-3" id="text-org2096188">
+<p>
+Write a function `swap_args` that takes another function as its
+arguments but swaps the arguments. You only have to support 2
+arguments.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">def</span> <span class="org-function-name">swap_args</span>(func):
+    <span class="org-keyword">def</span> <span class="org-function-name">call_with_swapped_args</span>(a,b):
+        <span class="org-keyword">return</span> func(b,a)
+    <span class="org-keyword">return</span> call_with_swapped_args
+
+<span class="org-variable-name">tnirp</span> = swap_args(<span class="org-builtin">print</span>)
+tnirp(<span class="org-string">"Good"</span>, <span class="org-string">"morning"</span>)  <span class="org-comment-delimiter"># </span><span class="org-comment">output: "morning Good"</span>
+
+<span class="org-keyword">from</span> math <span class="org-keyword">import</span> <span class="org-builtin">pow</span>
+wop = swap_args(<span class="org-builtin">pow</span>)
+<span class="org-builtin">print</span>(wop(2,5))  <span class="org-comment-delimiter"># </span><span class="org-comment">print 25 (5^2) instead of 32 (2^5)</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8bdec8b" class="outline-3">
+<h3 id="org8bdec8b">Caching</h3>
+<div class="outline-text-3" id="text-org8bdec8b">
+<p>
+Write a function `cached` that remembers the results of function
+calls. It only supports functions of one argument. Hint: use a dict to
+store the results of previous function calls.
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-python">
+<span class="org-keyword">def</span> <span class="org-function-name">cached</span>(func):
+    <span class="org-variable-name">cache</span> = {}
+    <span class="org-keyword">def</span> <span class="org-function-name">call_with_cache</span>(x):
+        <span class="org-keyword">if</span> x <span class="org-keyword">in</span> <span class="org-variable-name">cache</span>:
+            <span class="org-builtin">print</span>(<span class="org-string">"I remember this!"</span>)
+            <span class="org-keyword">return</span> cache[x]
+        <span class="org-keyword">else</span>:
+            val = func(x)
+            <span class="org-variable-name">cache</span>[<span class="org-variable-name">x</span>] = val
+            <span class="org-keyword">return</span> val
+    <span class="org-keyword">return</span> call_with_cache
+
+<span class="org-keyword">def</span> <span class="org-function-name">some_expensive_calculation</span>(x):
+    <span class="org-keyword">return</span> x**208 %316 -867
+
+<span class="org-variable-name">faster_calc</span> = cached(some_expensive_calculation)
+<span class="org-builtin">print</span>(faster_calc(283))  <span class="org-comment-delimiter"># </span><span class="org-comment">First time, do the calculation</span>
+<span class="org-builtin">print</span>(faster_calc(283))  <span class="org-comment-delimiter"># </span><span class="org-comment">Second time: get it from the cache</span>
+</pre>
+</div>
+</div>
+</div>
+</section>
+
+
+<section id="outline-container-org525e0c9" class="outline-2">
+<h2 id="org525e0c9">Decorators</h2>
+<div class="outline-text-2" id="text-org525e0c9">
+</div>
+<div id="outline-container-org5c48ece" class="outline-3">
+<h3 id="org5c48ece">HTML</h3>
+<div class="outline-text-3" id="text-org5c48ece">
+<p>
+Write two decorators `bold` and `italic` that take a string-generating
+function and add html tags. You should be able to use them like this:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">def</span> <span class="org-function-name">bold</span>(origfunc):
+    <span class="org-keyword">def</span> <span class="org-function-name">bold_wrapper</span>(*args, **kwargs):
+        <span class="org-keyword">return</span> <span class="org-string">'&lt;b&gt;{}&lt;/b&gt;'</span>.<span class="org-builtin">format</span>( origfunc(*args, **kwargs) )
+    <span class="org-keyword">return</span> bold_wrapper
+
+<span class="org-keyword">def</span> <span class="org-function-name">italic</span>(origfunc):
+    <span class="org-keyword">def</span> <span class="org-function-name">italic_wrapper</span>(*args, **kwargs):
+        <span class="org-keyword">return</span> <span class="org-string">'&lt;i&gt;{}&lt;/i&gt;'</span>.<span class="org-builtin">format</span>( origfunc(*args, **kwargs) )
+    <span class="org-keyword">return</span> italic_wrapper
+
+<span class="org-type">@bold</span>
+<span class="org-type">@italic</span>
+<span class="org-keyword">def</span> <span class="org-function-name">say_in_bold_and_italic</span>(text):
+    <span class="org-keyword">return</span> text
+
+
+<span class="org-type">@bold</span>
+<span class="org-keyword">def</span> <span class="org-function-name">say_in_bold</span>(text):
+    <span class="org-keyword">return</span> text
+
+
+<span class="org-builtin">print</span>(say_in_bold(<span class="org-string">"hi"</span>))
+<span class="org-builtin">print</span>(say_in_bold_and_italic(<span class="org-string">"bye"</span>))
+</pre>
+</div>
+
+<p>
+Output:
+</p>
+<pre class="example" id="orgb4a90f1">
+&lt;b&gt;hi&lt;/b&gt;
+&lt;b&gt;&lt;i&gt;bye&lt;/i&gt;&lt;/b&gt;
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org8be3250" class="outline-3">
+<h3 id="org8be3250">Authorization</h3>
+<div class="outline-text-3" id="text-org8be3250">
+<p>
+Write a decorator `auth` that makes a function require authorization.
+Any function decorated in this way, will ask for a password. If the
+password is not entered correctly, you refuse to execute the code.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-variable-name">secret</span>=<span class="org-string">"p@ssw0rd"</span>
+
+<span class="org-keyword">def</span> <span class="org-function-name">auth</span>(origfunc):
+    <span class="org-doc">'''Decorate any function to require authentication, i.e.: 'secret'</span>
+<span class="org-doc">    '''</span>
+    <span class="org-keyword">def</span> <span class="org-function-name">auth_wrapper</span>(*args, **kwargs):
+        <span class="org-keyword">if</span> <span class="org-builtin">input</span>(<span class="org-string">'Enter secret: '</span>) == <span class="org-string">'secret'</span>:
+            <span class="org-keyword">return</span> origfunc(*args, **kwargs)
+        <span class="org-keyword">else</span>:
+            <span class="org-builtin">print</span>(<span class="org-string">'Nooo...!'</span>)
+            <span class="org-keyword">return</span> <span class="org-constant">None</span>
+    <span class="org-keyword">return</span> auth_wrapper
+
+
+<span class="org-type">@auth</span>
+<span class="org-keyword">def</span> <span class="org-function-name">get_private_data</span>():
+    <span class="org-keyword">return</span> something_very_secret
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga074bab" class="outline-3">
+<h3 id="orga074bab">JSON</h3>
+<div class="outline-text-3" id="text-orga074bab">
+<p>
+Write a decorator from_json that will fill the first argument of the
+function it decorates with data read from a json file.
+</p>
+
+<p>
+Hint: use the `json.load()` function.
+</p>
+
+<p>
+Example: given the following file `legs.json`:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python">{
+  <span class="org-string">"Dog"</span>: 4,
+  <span class="org-string">"Cat"</span>: 3,
+  <span class="org-string">"Bird"</span>: 2,
+  <span class="org-string">"Whale"</span>: 0
+}
+</pre>
+</div>
+
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">import</span> json
+
+<span class="org-variable-name">data_file</span> = <span class="org-string">"legs.json"</span>
+
+<span class="org-keyword">def</span> <span class="org-function-name">from_json</span>(func):
+    <span class="org-doc">'''Fill the first argument of func from data_file'''</span>
+    <span class="org-keyword">def</span> <span class="org-function-name">wrapper</span>(*args, **kwargs):
+        <span class="org-keyword">return</span> func(json.load(<span class="org-builtin">open</span>(data_file)), *args, **kwargs)
+    <span class="org-keyword">return</span> wrapper
+
+<span class="org-type">@from_json</span>
+<span class="org-keyword">def</span> <span class="org-function-name">get_number_of_legs</span>(legs_data, animal):
+    <span class="org-keyword">return</span> legs_data[animal]
+
+<span class="org-builtin">print</span>(get_number_of_legs(<span class="org-string">"Bird"</span>))
+</pre>
+</div>
+
+<p>
+This should print "2".
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgac3213e" class="outline-3">
+<h3 id="orgac3213e">Bonus</h3>
+<div class="outline-text-3" id="text-orgac3213e">
+<p>
+As a bonus exercise: try to add the filename of the json file as an
+argument to the decorator. This works slightly different; see <a href="https://blog.miguelgrinberg.com/post/the-ultimate-guide-to-python-decorators-part-iii-decorators-with-arguments">this article</a>.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org22c1e46" class="outline-3">
+<h3 id="org22c1e46">Wrapper (Bonus)</h3>
+<div class="outline-text-3" id="text-org22c1e46">
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">from</span> functools <span class="org-keyword">import</span> wraps
+
+<span class="org-keyword">def</span> <span class="org-function-name">wrap</span>(func):
+ <span class="org-doc">'''Fill the first argument of func from data_file'''</span>
+<span class="org-type">@wraps</span>(func)
+<span class="org-keyword">def</span> <span class="org-function-name">wrap_func</span>(func):
+    <span class="org-doc">'''Fill the first argument of func from data_file'''</span>
+    <span class="org-keyword">def</span> <span class="org-function-name">my_wrapper</span>(*args, **kwargs):
+        <span class="org-doc">"""This is the function wrapper"""</span>
+        <span class="org-keyword">return</span> func(*args, **kwargs)
+    <span class="org-keyword">return</span> my_wrapper
+
+<span class="org-type">@wrap_func</span>
+<span class="org-keyword">def</span> <span class="org-function-name">my_func</span>():
+    <span class="org-doc">"""This is my function"""</span>
+    <span class="org-builtin">print</span>(<span class="org-string">"hi!"</span>)
+
+<span class="org-builtin">print</span>(my_func)
+<span class="org-builtin">print</span>(<span class="org-builtin">help</span>(my_func))
+</pre>
+</div>
+</div>
+</div>
+</section>
+</div>
+<div id="postamble" class="status">
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

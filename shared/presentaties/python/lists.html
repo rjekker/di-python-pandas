@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Lists</title>
+<meta name="author" content="Reindert-Jan Ekker"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../../../reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../../../reveal.js/dist/theme/sky.css" id="theme"/>
+
+<link rel="stylesheet" href="../../../reveal.js/plugin/highlight/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>Lists</h1><h2>Reindert-Jan Ekker</h2><p>Code Sensei</p>
+</section>
+
+<section>
+<section id="slide-org65fad1e">
+<h2 id="org65fad1e">Lists</h2>
+<div class="outline-text-2" id="text-org65fad1e">
+</div>
+</section>
+<section id="slide-org189de02">
+<h3 id="org189de02">Lists</h3>
+<p>
+Lists contain 0 or more elements:
+</p>
+
+<ul>
+<li>Of any type</li>
+<li>You can add, remove and change the elements</li>
+
+</ul>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >&gt;&gt;&gt; [1, 2, "hello", [5, 6]]
+[1, 2, 'hello', [5, 6]]
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgaa774b0">
+<h3 id="orgaa774b0">Creating a list</h3>
+<ul>
+<li><code>[2.5, "a", 1]</code></li>
+<li>The empty list: <code>[]</code></li>
+
+</ul>
+
+</section>
+<section id="slide-org7774361">
+<h3 id="org7774361">len</h3>
+<p>
+The builtin function <code>len()</code> retrieves the length of the list:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >len([8, 'a', [], '35'])
+</code></pre>
+</div>
+
+<pre class="example" id="orge6ee765">
+4
+</pre>
+
+</section>
+<section id="slide-org65a60e4">
+<h3 id="org65a60e4">Add</h3>
+<ul>
+<li>Add an element with <code>append()</code></li>
+
+</ul>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >groceries = ['milk', 'coffee']
+groceries.append('bread')
+print(groceries)
+print(len(groceries))
+</code></pre>
+</div>
+
+<pre class="example">
+['milk', 'coffee', 'bread']
+3
+</pre>
+
+</section>
+<section id="slide-org898090a">
+<h3 id="org898090a">append vs +</h3>
+<p>
+Append adds an element
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="python" >&gt;&gt;&gt; l=[]
+&gt;&gt;&gt; l.append(2)
+&gt;&gt;&gt; l
+[2]
+</code></pre>
+</div>
+
+<p>
+With + you glue two lists together
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="python" >&gt;&gt;&gt; [1,2] + [3,4]
+[1, 2, 3, 4]
+</code></pre>
+</div>
+
+</section>
+<section id="slide-org8eed26f">
+<h3 id="org8eed26f">What happens here?</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >&gt;&gt;&gt; [1,2] + 3
+???
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orge9fe4b6">
+<h3 id="orge9fe4b6">Append</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >groceries.append("coffee")
+</code></pre>
+</div>
+
+<p>
+Why do we say <code>l.append(...)</code> instead of <code>append(l, ...)</code> ?
+</p>
+
+<p>
+This is because this is a function specific to the <i>list class</i>.
+</p>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org5ed843f">
+<h2 id="org5ed843f">Indices</h2>
+<p>
+The <i>nth</i> element can be retrieved with square brackets:  <code>l[5]</code>
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >l = ['tuesday', 'wednesday', 'friday']
+print(l[1])
+</code></pre>
+</div>
+
+<pre class="example" id="org43ec1d9">
+wednesday
+</pre>
+
+<ul>
+<li class="fragment appear">The index of the first element is 0!</li>
+
+</ul>
+
+</section>
+<section id="slide-orgf6d41ef">
+<h3 id="orgf6d41ef">Negative indices</h3>
+<p>
+Negative index counts from the end backwards:
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="python" >l = ["Ann", "Bob", "Chloe", "Dan", "Ella"]
+print(l[-1])
+print(l[-3])
+</code></pre>
+</div>
+
+<pre class="example">
+Ella
+Chloe
+</pre>
+
+</section>
+<section id="slide-org156ab3a">
+<h3 id="org156ab3a">Change an element</h3>
+<p>
+You can assign a new value or update an existing item
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >numbers = [0, 1, 2, 3, "four", 4]
+numbers[4] = 4
+numbers[5] += 1
+print(numbers)
+</code></pre>
+</div>
+
+<pre class="example">
+[0, 1, 2, 3, 4, 5]
+</pre>
+
+</section>
+<section id="slide-org07338d1">
+<h3 id="org07338d1">Remove an element</h3>
+<p>
+You can remove an element using <code>del</code>, or <code>remove</code>
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >l = ["h", "!", "b", "i", "!"]
+del l[2] # remove element at index 2
+l.remove("!") # remove first element with value "!"
+print(l)
+</code></pre>
+</div>
+
+<pre class="example">
+['h', 'i', '!']
+</pre>
+
+</section>
+</section>
+<section>
+<section id="slide-org208a692">
+<h2 id="org208a692">Slices</h2>
+<p>
+Slicing means to take a subsequence from a sequence. The syntax is
+<code>s[start:end]</code>. Where start and end are the indexes of the subsequence
+you want.
+</p>
+
+</section>
+<section id="slide-org6526fc5">
+<h3 id="org6526fc5">Example 1</h3>
+<p>
+Note: Slices do not include the end value.
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="python" >l = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"]
+print(l[2:4])
+print(l[-4:-1])
+</code></pre>
+</div>
+
+<pre class="example">
+['Mar', 'Apr']
+['May', 'Jun', 'Jul']
+</pre>
+
+</section>
+<section id="slide-org796c6f8">
+<h3 id="org796c6f8">Example 2</h3>
+<p>
+If indices are omitted, they default to the beginning or end of the list.
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >l = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"]
+print(l[:3])
+print(l[-3:])
+</code></pre>
+</div>
+
+<pre class="example">
+['Jan', 'Feb', 'Mar']
+['Jun', 'Jul', 'Aug']
+</pre>
+
+</section>
+</section>
+<section>
+<section id="slide-org88496fc">
+<h2 id="org88496fc">Other things you can do</h2>
+<div class="outline-text-2" id="text-org88496fc">
+</div>
+</section>
+<section id="slide-org705ddc9">
+<h3 id="org705ddc9">Other functions for lists</h3>
+<ul>
+<li><code>sum(l)</code>: sum of elements</li>
+<li><code>sorted(l)</code>: sort the elements</li>
+<li><code>max(l)</code>, <code>min(l)</code>: largest and smallest element</li>
+<li>&#x2026; but this only works if the elements are compatible</li>
+
+</ul>
+
+<p>
+See <a href="https://docs.python.org/3/tutorial/datastructures.html">The python tutorial</a>.
+</p>
+</section>
+</section>
+</div>
+</div>
+<script src="../../../reveal.js/dist/reveal.js"></script>
+<script src="../../../reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight]
+});
+
+</script>
+</body>
+</html>

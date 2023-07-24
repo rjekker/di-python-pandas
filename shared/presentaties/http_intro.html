@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>HTTP Introduction</title>
+<meta name="author" content="Reindert-Jan Ekker"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../../reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../../reveal.js/dist/theme/league.css" id="theme"/>
+
+<link rel="stylesheet" href="../../reveal.js/plugin/highlight/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>HTTP Introduction</h1><h2>Reindert-Jan Ekker</h2><p>Code Sensei</p>
+</section>
+
+<section>
+<section id="slide-org7c08ec8">
+<h2 id="org7c08ec8">Http Protocol</h2>
+<ul>
+<li class="fragment appear">Text-based server/client protocol</li>
+<li class="fragment appear">Send any kind of data</li>
+<li class="fragment appear">Serve web sites/apps (HTML/CSS/JS) to browser</li>
+<li class="fragment appear">Serve REST data to apps and other programs</li>
+<li class="fragment appear">&#x2026; and many other uses</li>
+
+</ul>
+
+<p class="fragment (appear)">
+Default poort: 80
+</p>
+
+</section>
+<section id="slide-org7133f85" data-background="#a23" data-background-transition="zoom">
+<h3 id="org7133f85">The cycle</h3>
+<p>
+The HTTP cycle:
+</p>
+<ol>
+<li>The <b>Client</b> sends a <b>Request</b> to the <b>Server</b></li>
+<li>The <b>Server</b> sends a <b>Response</b> back.</li>
+
+</ol>
+
+<p>
+And nothing else!
+</p>
+
+</section>
+<section id="slide-org4cdf876">
+<h3 id="org4cdf876">Some other things</h3>
+<p>
+Request and Response are text messages.
+</p>
+
+<p>
+HTTP is <b>Stateless</b>: there is no "memory" between different
+request/response cycles.
+</p>
+
+<p>
+<a href="https://stackoverflow.com/questions/4913763/what-does-it-mean-when-they-say-http-is-stateless/4913942#4913942">Statelessness explained</a>
+</p>
+
+</section>
+<section id="slide-orgce01e18">
+<h3 id="orgce01e18">HTTP/2 and 3</h3>
+<p>
+A newer, faster HTTP-protocol. Binary instead of text.
+</p>
+
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/HTTP/2">HTTP/2 on wikipedia</a></li>
+<li><a href="https://en.wikipedia.org/wiki/HTTP/3">HTTP/3 (draft)</a></li>
+
+</ul>
+
+</section>
+<section id="slide-org0f6fd76">
+<h3 id="org0f6fd76">Definition: WWW</h3>
+<p>
+An open source information space where
+documents and other web resources
+</p>
+
+<ul>
+<li class="fragment appear">are identified by URLs,</li>
+<li class="fragment appear">interlinked by hypertext links,</li>
+<li class="fragment appear">and can be accessed via the Internet.</li>
+<li class="fragment appear">&#x2026; and served over HTTP, of course</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org8411b08" data-background="#483D8B" data-background-transition="page">
+<h2 id="org8411b08">HTTP: HyperText Transfer Protocol</h2>
+
+</section>
+</section>
+<section>
+<section id="slide-org58af588" data-background="#483D8B" data-background-transition="page">
+<h2 id="org58af588">URLs</h2>
+</section>
+<section id="slide-orgc29f5b1">
+<h3 id="orgc29f5b1">Anatomy of a URL</h3>
+<p>
+<a href="http://www.myserver.org:100/something?x=10">http://www.myserver.org:100/something?x=10</a>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left"><code>http</code></td>
+<td class="org-left">protocol (http, https, ftp, &#x2026;)</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>://</code></td>
+<td class="org-left">delimiter</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>www.myserver.org</code></td>
+<td class="org-left">domain name of server</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>:100</code></td>
+<td class="org-left">Server port. Omit for default (http -&gt; 80)</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>/something?x=10</code></td>
+<td class="org-left"><i>path</i> part of URL</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+The <b>path</b> specifies which <i>resource</i> I am expecting to receive from the server.
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-orge3fcab9" data-background="#483D8B" data-background-transition="page">
+<h2 id="orge3fcab9">HTTP Request</h2>
+</section>
+<section id="slide-org4806a4d">
+<h3 id="org4806a4d">Anatomy</h3>
+<p>
+The request message consists of the following:
+</p>
+
+<ul>
+<li>A request line: Method and Resource</li>
+<li>Request header fields (e.g., Accept-Language: en).</li>
+<li>An empty line.</li>
+<li>An optional message body.</li>
+
+</ul>
+
+</section>
+<section id="slide-orgb50f267">
+<h3 id="orgb50f267">Minimal Example</h3>
+<pre class="example" id="orge4f3ee1">
+GET /index.html HTTP/1.1
+Host: www.google.com
+</pre>
+
+</section>
+<section id="slide-orga03b0ff" data-background="#556B2F" data-background-transition="concave">
+<h3 id="orga03b0ff">Demo: A Human Browser</h3>
+<p>
+<i>telnet</i> as TCP client
+</p>
+
+</section>
+<section id="slide-org5857d64">
+<h3 id="org5857d64">Request Line</h3>
+<p>
+De Request Line is the first line in the reques
+</p>
+<ul>
+<li>Method: GET, POST, PUT, DELETE, HEAD, etc.</li>
+<li>Resource: "path" part of URL</li>
+<li>ends with HTTP version - "HTTP/1.1"</li>
+
+</ul>
+
+</section>
+<section id="slide-org56d3668">
+<h3 id="org56d3668">Headers</h3>
+<ul>
+<li>Key/value pairs</li>
+<li>Syntax: <b>Key: Value</b></li>
+<li>Can be anything</li>
+<li>Ends with an empty line</li>
+
+</ul>
+
+</section>
+<section id="slide-orgf358458">
+<h3 id="orgf358458">Request body</h3>
+<p>
+For sending extra data with request, like
+</p>
+
+<ul>
+<li>form data</li>
+<li>files uploads</li>
+<li>etc.</li>
+
+</ul>
+
+</section>
+<section id="slide-org120d3e0">
+<h3 id="org120d3e0">Another example</h3>
+<pre class="example" id="org1fd0b9f">
+POST /order/form.html HTTP/1.0
+User-Agent: SomeBrowser 5.8
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 44
+
+name=reindert&amp;product=OCA_Book&amp;amount=1
+</pre>
+
+</section>
+</section>
+<section>
+<section id="slide-org1ec3eb8" data-background="#483D8B" data-background-transition="page">
+<h2 id="org1ec3eb8">HTTP Response</h2>
+</section>
+<section id="slide-org3c87bac">
+<h3 id="org3c87bac">Response Anatomy</h3>
+<p>
+Very similar to request.
+</p>
+
+<ul>
+<li>Statuscode</li>
+<li>Headers</li>
+<li>Empty Line</li>
+<li>Response body</li>
+
+</ul>
+
+</section>
+<section id="slide-orgb6ff3d0">
+<h3 id="orgb6ff3d0">Example</h3>
+<pre class="example" id="orgbba993e">
+HTTP/1.1 200 OK
+Date: Mon, 27 Jul 2009 12:28:53 GMT
+Server: Apache/2.2.14 (Win32)
+Last-Modified: Wed, 22 Jul 2009 19:15:56 GMT
+Content-Length: 88
+Content-Type: text/html
+Connection: Closed
+
+&lt;html&gt;
+&lt;body&gt;
+&lt;h1&gt;Hello, World!&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+</section>
+<section id="slide-org438fd2a">
+<h3 id="org438fd2a">Statuscodes</h3>
+<p>
+<a href="https://httpstatuses.com/">https://httpstatuses.com/</a>
+</p>
+
+<ul>
+<li>1xx Informational</li>
+<li>2xx Success</li>
+<li>3xx Redirection</li>
+<li>4xx Client Error</li>
+<li>5xx Server Error</li>
+
+</ul>
+
+</section>
+<section id="slide-org2bc0c33">
+<h3 id="org2bc0c33">Headers</h3>
+<p>
+contain many kinds of information, including:
+</p>
+<ul>
+<li>kind of data in body (MIME type)</li>
+<li>data size</li>
+<li>date resource was served</li>
+<li>caching info</li>
+
+</ul>
+
+</section>
+<section id="slide-orgfc9a76a">
+<h3 id="orgfc9a76a">Body</h3>
+<p>
+contains the "payload": html, css, js, audio, video, etc. etc.
+</p>
+</section>
+</section>
+</div>
+</div>
+<script src="../../reveal.js/dist/reveal.js"></script>
+<script src="../../reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight]
+});
+
+</script>
+</body>
+</html>

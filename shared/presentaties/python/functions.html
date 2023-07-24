@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Functions</title>
+<meta name="author" content="Reindert-Jan Ekker"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../../../reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../../../reveal.js/dist/theme/sky.css" id="theme"/>
+
+<link rel="stylesheet" href="../../../reveal.js/plugin/highlight/zenburn.css"/></head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1>Functions</h1><h2>Reindert-Jan Ekker</h2><p>Code Sensei</p>
+</section>
+
+<section>
+<section id="slide-orgc2d416e">
+<h2 id="orgc2d416e">What is a function</h2>
+<p>
+A function is a piece of code with a name.
+</p>
+
+<p>
+To run the code, you <i>call</i> the function.
+</p>
+
+<p>
+A function can (optionally):
+</p>
+<ul>
+<li class="fragment appear">Receive information (arguments)</li>
+<li class="fragment appear">Return information (return value)</li>
+
+</ul>
+
+</section>
+<section id="slide-org6edc560">
+<h3 id="org6edc560">Example: type</h3>
+<p>
+The builtin function <code>type()</code> takes a value and returns the type of that value:
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >&gt;&gt;&gt; x=5
+&gt;&gt;&gt; type(x)
+type 'int'
+</code></pre>
+</div>
+
+<p class="fragment (appear)">
+This is better than having to copy/paste the source code for <code>type</code>
+all the time
+</p>
+
+</section>
+<section id="slide-org20d8dbf">
+<h3 id="org20d8dbf">Functions: why?</h3>
+<p>
+Functions prevent <i>duplication</i>. Instead of repeating the code, you
+give it a name and call it by that name.
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-orgff5b2d2">
+<h2 id="orgff5b2d2">Creating a function</h2>
+<div class="org-src-container">
+
+<pre   ><code class="python" >def function_name( parameter1, parameter2, ... ):
+    body
+</code></pre>
+</div>
+
+<p>
+A function can take 0 or more parameters. The value passed to a
+parameter is an <i>argument</i>.
+</p>
+
+</section>
+<section id="slide-org22f8b0a">
+<h3 id="org22f8b0a">Example</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >def greet( firstname, lastname ):
+    wholename = firstname + " " + lastname
+    print("Hi, ", wholename )
+</code></pre>
+</div>
+
+<ul>
+<li class="fragment appear">Parameters <code>firstname</code> and <code>lastname</code> are <i>local</i></li>
+<li class="fragment appear">Same for variables created inside the function (<code>wholename</code>)</li>
+<li class="fragment appear">Those variables cannot be reached outside the function.</li>
+
+</ul>
+
+</section>
+<section id="slide-org17424ae">
+<h3 id="org17424ae">But</h3>
+<p>
+What if you want to use the result of a function in the rest of your
+program?
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >def multiply(x,y):
+    print(x * y)
+
+answer = multiply(5, 12)
+</code></pre>
+</div>
+
+<p class="fragment (appear)">
+The variable <code>answer</code> now has the value <b>None</b>!
+</p>
+
+</section>
+<section id="slide-org96e453b">
+<h3 id="org96e453b">Return</h3>
+<p>
+We can use the keyword <code>return</code>
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >def multiply(x,y):
+    return x * y
+
+answer = multiply(5, 12)
+</code></pre>
+</div>
+
+<p>
+Variable <code>answer</code> is 60 now and we can use that value for another calculation
+</p>
+
+</section>
+<section id="slide-org42ceae7">
+<h3 id="org42ceae7">Return 2</h3>
+<p>
+You might say that the return-value is <i>substituted</i> at the place of the function call.
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >def half(x):
+    return x / 2
+
+print("half of 10 is", half(10))
+l = [5, 8, half(12), 60]
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgb7bc818">
+<h3 id="orgb7bc818">Return</h3>
+<p>
+The <code>return</code> keyword does 2 things:
+</p>
+
+<ul>
+<li class="fragment appear">It ends the function; the program continues from where the function was called.</li>
+<li class="fragment appear">If you specify a return value, that is returned to the calling code.</li>
+
+</ul>
+
+</section>
+<section id="slide-org14c45cb">
+<h3 id="org14c45cb">No return</h3>
+<p>
+Functions without a return statement return the special value <b>None</b>.
+</p>
+</section>
+</section>
+</div>
+</div>
+<script src="../../../reveal.js/dist/reveal.js"></script>
+<script src="../../../reveal.js/plugin/highlight/highlight.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealHighlight]
+});
+
+</script>
+</body>
+</html>

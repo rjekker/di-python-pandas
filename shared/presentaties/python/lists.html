@@ -21,13 +21,13 @@
 </section>
 
 <section>
-<section id="slide-org65fad1e">
-<h2 id="org65fad1e">Lists</h2>
-<div class="outline-text-2" id="text-org65fad1e">
+<section id="slide-org0db2240">
+<h2 id="org0db2240">Lists</h2>
+<div class="outline-text-2" id="text-org0db2240">
 </div>
 </section>
-<section id="slide-org189de02">
-<h3 id="org189de02">Lists</h3>
+<section id="slide-orga772922">
+<h3 id="orga772922">Lists</h3>
 <p>
 Lists contain 0 or more elements:
 </p>
@@ -67,7 +67,7 @@ The builtin function <code>len()</code> retrieves the length of the list:
 </code></pre>
 </div>
 
-<pre class="example" id="orge6ee765">
+<pre class="example" id="orgfca5c2b">
 4
 </pre>
 
@@ -162,7 +162,7 @@ print(l[1])
 </code></pre>
 </div>
 
-<pre class="example" id="org43ec1d9">
+<pre class="example" id="orgfc8e400">
 wednesday
 </pre>
 
@@ -281,15 +281,94 @@ print(l[-3:])
 </pre>
 
 </section>
+<section id="slide-orgaa101b1">
+<h3 id="orgaa101b1">Note</h3>
+<p>
+Slices and indices work on strings as well
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >amount = "$4.53"
+print(amount[0])
+print(amount[-2:])
+</code></pre>
+</div>
+
+<pre class="example">
+$
+53
+</pre>
+
+</section>
 </section>
 <section>
-<section id="slide-org88496fc">
-<h2 id="org88496fc">Other things you can do</h2>
-<div class="outline-text-2" id="text-org88496fc">
+<section id="slide-org7e0d349">
+<h2 id="org7e0d349">Finding elements</h2>
+<div class="outline-text-2" id="text-org7e0d349">
 </div>
 </section>
-<section id="slide-org705ddc9">
-<h3 id="org705ddc9">Other functions for lists</h3>
+<section id="slide-org5355f18">
+<h3 id="org5355f18">In</h3>
+<p>
+Check if something is in the list with "if"
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >l = [2, 4, 6, 8, 10, ...]
+if 356 in l:
+    print("It's there!")
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgb4bbfbc">
+<h3 id="orgb4bbfbc">Index</h3>
+<p>
+Find the position of an element
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >l = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"]
+print(l.index("Mar"))
+</code></pre>
+</div>
+
+<pre class="example">
+2
+</pre>
+
+</section>
+<section id="slide-org6f0240c">
+<h3 id="org6f0240c">Count</h3>
+<p>
+Count how often an element appears in the list
+</p>
+<div class="org-src-container">
+
+<pre   ><code class="python" >l = [1, 1, 2, 1, 2, 2, 2, 1, 1, 1, 2, 2, 2]
+print(l.count(2))
+</code></pre>
+</div>
+
+<pre class="example">
+7
+</pre>
+
+</section>
+<section id="slide-org23504df">
+<h3 id="org23504df">Other functions</h3>
+<p>
+See <a href="https://docs.python.org/3/tutorial/datastructures.html">The python tutorial</a>.
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-orgcbdb7df">
+<h2 id="orgcbdb7df">Built-in functions</h2>
 <ul>
 <li><code>sum(l)</code>: sum of elements</li>
 <li><code>sorted(l)</code>: sort the elements</li>
@@ -297,10 +376,6 @@ print(l[-3:])
 <li>&#x2026; but this only works if the elements are compatible</li>
 
 </ul>
-
-<p>
-See <a href="https://docs.python.org/3/tutorial/datastructures.html">The python tutorial</a>.
-</p>
 </section>
 </section>
 </div>

@@ -118,6 +118,33 @@ The second day is Wednesday
 </section>
 </section>
 <section>
+<section id="slide-org6d4bafb">
+<h2 id="org6d4bafb">Escape characters</h2>
+<p>
+The backslash has a special meaning: it "escapes" the next character
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >print("hi\nthere")  # newline
+print("a\tb\tc")    # tab
+print('don\'t')     # quote
+print("c:\\windows\\something.exe") # back slash needs to be doubled
+</code></pre>
+</div>
+
+<pre class="example">
+hi
+there
+a	b	c
+don't
+c:\windows\something.exe
+</pre>
+
+
+</section>
+</section>
+<section>
 <section id="slide-orgda689aa">
 <h2 id="orgda689aa">Sequence</h2>
 <p>
@@ -184,7 +211,7 @@ s[0] = "A"
 </code></pre>
 </div>
 
-<pre class="example" id="org69bdd86">
+<pre class="example" id="orgb72653e">
 TypeError: 'str' object does not support item assignment
 </pre>
 
@@ -202,7 +229,7 @@ s.append("s")
 </code></pre>
 </div>
 
-<pre class="example" id="org5819c55">
+<pre class="example" id="org0f5c634">
 AttributeError: 'str' object has no attribute 'append'
 </pre>
 
@@ -223,13 +250,6 @@ if next_game.upper() == 'N':
 </div>
 
 </section>
-<section id="slide-org422c6b9">
-<h3 id="org422c6b9">Note</h3>
-<p>
-There's no need to know all of these by heart. Google is your friend!
-</p>
-
-</section>
 <section id="slide-orgbdb12b6">
 <h3 id="orgbdb12b6">Splitting</h3>
 <p>
@@ -248,6 +268,24 @@ print(l[2])
 <pre class="example">
 ['man', 'woman', 'camera', 'tv']
 camera
+</pre>
+
+</section>
+<section id="slide-org40bdb75">
+<h3 id="org40bdb75">Join</h3>
+<p>
+<code>join()</code> is the opposite of split.
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >l = ["Today", "is", "a", "beautiful", "day", "!"]
+print(" ".join(l)) # Join with a space between elements
+</code></pre>
+</div>
+
+<pre class="example">
+Today is a beautiful day !
 </pre>
 
 </section>
@@ -320,9 +358,58 @@ here's some text
 </section>
 <section id="slide-org9f6274c">
 <h3 id="org9f6274c">And many others..</h3>
+<ul>
+<li>See <a href="https://docs.python.org/3/library/stdtypes.html#string-methods">https://docs.python.org/3/library/stdtypes.html#string-methods</a></li>
+<li>or <a href="https://www.w3schools.com/python/python_ref_string.asp">String functions</a></li>
+
+</ul>
+
 <p>
-See <a href="https://docs.python.org/3/library/stdtypes.html#string-methods">https://docs.python.org/3/library/stdtypes.html#string-methods</a>
+There's no need to know all of these by heart. Google is your friend!
 </p>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgf4b073b">
+<h2 id="orgf4b073b">Immutable</h2>
+<p>
+Strings are <i>immutable</i>: their contents cannot change
+</p>
+
+</section>
+<section id="slide-org5a3c7ba">
+<h3 id="org5a3c7ba">Functions</h3>
+<p>
+String functions always return a new string object.
+</p>
+
+<div class="org-src-container">
+
+<pre   ><code class="python" >&gt;&gt;&gt; s = "apple"
+&gt;&gt;&gt; s.upper()
+'APPLE'
+&gt;&gt;&gt; s
+'apple'
+&gt;&gt;&gt; s2 = s.upper()
+&gt;&gt;&gt; s2
+'APPLE'
+</code></pre>
+</div>
+
+</section>
+<section id="slide-orgc444c8b">
+<h3 id="orgc444c8b">Elements cannot be changed</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >&gt;&gt;&gt; s = "pear"
+&gt;&gt;&gt; s[1] = 'x'
+Traceback (most recent call last):
+  File "stdin", line 1, in module
+TypeError: 'str' object does not support item assignment
+</code></pre>
+</div>
 </section>
 </section>
 </div>

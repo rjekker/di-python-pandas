@@ -5,8 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Python Automation: Day 3</title>
-<meta name="author" content="Reindert-Jan Ekker" />
+<title>Exercises: Sets</title>
 <meta name="generator" content="Org Mode" />
 <style>
   #content { max-width: 60em; margin: auto; }
@@ -192,140 +191,130 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { }
 </style>
-<link rel="stylesheet" type="text/css" href="../themes/readtheorg/css/htmlize.css"/>
-<link rel="stylesheet" type="text/css" href="../themes/readtheorg/css/readtheorg.css"/>
-<link rel="stylesheet" type="text/css" href="../css/homelink.css"/>
+<link rel="stylesheet" type="text/css" href="../../themes/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="../../themes/readtheorg/css/readtheorg.css"/>
+<link rel="stylesheet" type="text/css" href="../../css/homelink.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../themes/lib/js/jquery.stickytableheaders.min.js"></script>
-<script type="text/javascript" src="../themes/readtheorg/js/readtheorg.js"></script>
-<script type="text/javascript" src="../js/addhomelink-index.js"></script>
+<script type="text/javascript" src="../../themes/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="../../themes/readtheorg/js/readtheorg.js"></script>
+<script type="text/javascript" src="../../js/addhomelink.js"></script>
 </head>
 <body>
 <div id="content" class="content">
-<h1 class="title">Python Automation: Day 3</h1>
+<h1 class="title">Exercises: Sets</h1>
 <div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org35d1699">Practical applications:</a></li>
-<li><a href="#org9f056da">Recap day 3</a></li>
-<li><a href="#org47a4658">Dictionaries</a></li>
-<li><a href="#org3195546">Practical application: CSV's</a></li>
-<li><a href="#org44de975">Practical application: API's</a></li>
-<li><a href="#org163d831">Tuples</a></li>
-<li><a href="#orgb9a4f8d">Sets</a></li>
-<li><a href="#org96333d6">Classes</a></li>
-<li><a href="#org98e0ecd">Solutions</a></li>
+<li><a href="#org57cb622">A set from a string</a></li>
+<li><a href="#org1b0887e">Your own set</a></li>
+<li><a href="#orga875298">Numbers</a></li>
+<li><a href="#org8a2c193">Sentences</a></li>
 </ul>
 </div>
 </div>
+
+<section id="outline-container-org57cb622" class="outline-2">
+<h2 id="org57cb622">A set from a string</h2>
+<div class="outline-text-2" id="text-org57cb622">
 <p>
-We learn about two more datastructure: dicts and tuples. Then we will
-apply our knowledge of loops and datastructures to work with CSV data,
-and after that we will work with more complex, nested data that we get
-from the internet using REST.
+Consider the following code:
 </p>
 
-<div id="outline-container-org35d1699" class="outline-2">
-<h2 id="org35d1699">Practical applications:</h2>
-<div class="outline-text-2" id="text-org35d1699">
-<ul class="org-ul">
-<li>Read CSV files, filter/transform the contents, write this to a new file</li>
-<li>Call a rest service and work with the data it returns</li>
-</ul>
-</div>
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-variable-name">w</span> <span class="org-operator">=</span> <span class="org-builtin">input</span>(<span class="org-string">"A word please? "</span>)
+<span class="org-builtin">print</span>(<span class="org-builtin">set</span>(w))
+</pre>
 </div>
 
-<div id="outline-container-org9f056da" class="outline-2">
-<h2 id="org9f056da">Recap day 3</h2>
-<div class="outline-text-2" id="text-org9f056da">
 <p>
-Lists, for, functions and exceptions.
+Run this code and enter a (long) word. What does it print?
+</p>
+
+<p>
+Change the code so that it prints the number of unique characters in the word.
 </p>
 </div>
+</section>
+
+<section id="outline-container-org1b0887e" class="outline-2">
+<h2 id="org1b0887e">Your own set</h2>
+<div class="outline-text-2" id="text-org1b0887e">
+<p>
+Create a set with a bunch of random, large numbers you choose yourself.
+</p>
+
+<p>
+Can you print these numbers sorted by size?
+</p>
+
+<p>
+Can you print the maximum and minimum number in the set?
+</p>
+
+<p>
+What about the sum of the numbers in the set?
+</p>
+</div>
+</section>
+
+<section id="outline-container-orga875298" class="outline-2">
+<h2 id="orga875298">Numbers</h2>
+<div class="outline-text-2" id="text-orga875298">
+<p>
+Consider the following two lists of numbers:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-comment-delimiter"># </span><span class="org-comment">This generates lists of numbers using a "list comprehension"</span>
+<span class="org-keyword">import</span> math
+<span class="org-variable-name">numbers1</span> <span class="org-operator">=</span> [math.floor(math.sqrt(x<span class="org-operator">*</span>y)) <span class="org-keyword">for</span> x <span class="org-keyword">in</span> <span class="org-builtin">range</span>(0, 100, 3) <span class="org-keyword">for</span> y <span class="org-keyword">in</span> <span class="org-builtin">range</span>(0,100,7)]
+<span class="org-variable-name">numbers2</span> <span class="org-operator">=</span> [math.floor(math.sqrt(x<span class="org-operator">*</span>y)) <span class="org-keyword">for</span> x <span class="org-keyword">in</span> <span class="org-builtin">range</span>(0, 100, 8) <span class="org-keyword">for</span> y <span class="org-keyword">in</span> <span class="org-builtin">range</span>(0,100,19)]
+</pre>
 </div>
 
-<div id="outline-container-org47a4658" class="outline-2">
-<h2 id="org47a4658">Dictionaries</h2>
-<div class="outline-text-2" id="text-org47a4658">
+<p>
+Use a set to determine:
+</p>
 <ul class="org-ul">
-<li><a href="../shared/presentaties/python/dicts.html">Dicts</a></li>
-<li><a href="../shared/exercises/dictionaries.html">Exercises: Dicts</a></li>
+<li>how many unique numbers are in the first list.</li>
+<li>how many unique numbers are in the second list.</li>
+<li>how many numbers are in the first list only</li>
+<li>how many numbers are in the second  list only</li>
 </ul>
 </div>
-</div>
+</section>
 
-<div id="outline-container-org3195546" class="outline-2">
-<h2 id="org3195546">Practical application: CSV's</h2>
-<div class="outline-text-2" id="text-org3195546">
+<section id="outline-container-org8a2c193" class="outline-2">
+<h2 id="org8a2c193">Sentences</h2>
+<div class="outline-text-2" id="text-org8a2c193">
+<p>
+Ask the user to enter two sentences.
+</p>
+
+<p>
+Use sets to:
+</p>
 <ul class="org-ul">
-<li><a href="../shared/presentaties/python/csv.html">CSV</a></li>
-<li><a href="../shared/exercises/csv.html">Exercises: CSV</a></li>
-</ul>
-</div>
-</div>
-
-<div id="outline-container-org44de975" class="outline-2">
-<h2 id="org44de975">Practical application: API's</h2>
-<div class="outline-text-2" id="text-org44de975">
-<ul class="org-ul">
-<li><a href="../shared/presentaties/python/rest_apis.html">REST</a></li>
+<li>print the characters that occur in both sentences</li>
+<li>print the characters that only occur in the first sentence</li>
+<li>print the characters that only occur in the second sentence</li>
 </ul>
 
-<ul class="org-ul">
-<li><a href="../shared/exercises/rest.html">Exercises: REST</a></li>
-</ul>
-</div>
-</div>
+<pre class="example" id="org2faf367">
+Example run:
 
-<div id="outline-container-org163d831" class="outline-2">
-<h2 id="org163d831">Tuples</h2>
-<div class="outline-text-2" id="text-org163d831">
-<ul class="org-ul">
-<li><a href="../shared/presentaties/python/tuples.html">Tuples</a></li>
-<li><a href="../shared/exercises/tuples.html">Exercises: Tuples</a></li>
-</ul>
+First sentence? It's supercalifragilisticexpialidocious. Even though the sound of it is something quite atrocious!
+Second sentence? Hello.
+Characters in both:  {' ', 'n', 'g', 'H', 'r', 'f', 'p', 'e', 'o', '.', "'", 'v', 'c', 'q', 'I', 'x', 'm', 'a', 'd', 's', 'l', 'E', 'i', 't', '!', 'h', 'u'}
+Characters in first only:  {' ', 'n', 'g', 'r', 'f', 'p', "'", 'v', 'c', 'q', 'I', 'x', 'm', 'a', 'd', 's', 'E', 'i', 't', '!', 'h', 'u'}
+Characters in second only:  {'H'}
+</pre>
 </div>
-</div>
-
-<div id="outline-container-orgb9a4f8d" class="outline-2">
-<h2 id="orgb9a4f8d">Sets</h2>
-<div class="outline-text-2" id="text-orgb9a4f8d">
-<ul class="org-ul">
-<li><a href="../shared/presentaties/python/sets.html">Sets</a></li>
-<li><a href="../shared/exercises/sets.html">Exercises: Sets</a></li>
-</ul>
-</div>
-</div>
-
-<div id="outline-container-org96333d6" class="outline-2">
-<h2 id="org96333d6">Classes</h2>
-<div class="outline-text-2" id="text-org96333d6">
-<ul class="org-ul">
-<li><a href="../shared/presentaties/python/classes.html">Classes</a></li>
-<li><a href="../shared/exercises/classes.html">Exercises: Classes</a></li>
-</ul>
-</div>
-</div>
-
-
-<div id="outline-container-org98e0ecd" class="outline-2">
-<h2 id="org98e0ecd">Solutions</h2>
-<div class="outline-text-2" id="text-org98e0ecd">
-<ul class="org-ul">
-<li><a href="../shared/exercises/dictionaries_solutions.html">Dicts</a></li>
-<li><a href="../shared/exercises/csv_solutions.html">CSV</a></li>
-<li><a href="../shared/exercises/rest_solutions.html">REST</a></li>
-<li><a href="../shared/exercises/tuples_solutions.html">Tuples</a></li>
-<li><a href="../shared/exercises/sets_solutions.html">Sets</a></li>
-<li><a href="../shared/exercises/classes_solutions.html">Classes</a></li>
-</ul>
-</div>
-</div>
+</section>
 </div>
 <div id="postamble" class="status">
-<p class="author">Author: Reindert-Jan Ekker</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

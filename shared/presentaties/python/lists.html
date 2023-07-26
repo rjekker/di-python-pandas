@@ -21,13 +21,13 @@
 </section>
 
 <section>
-<section id="slide-org0db2240">
-<h2 id="org0db2240">Lists</h2>
-<div class="outline-text-2" id="text-org0db2240">
+<section id="slide-org562f91a">
+<h2 id="org562f91a">Lists</h2>
+<div class="outline-text-2" id="text-org562f91a">
 </div>
 </section>
-<section id="slide-orga772922">
-<h3 id="orga772922">Lists</h3>
+<section id="slide-orgf10270a">
+<h3 id="orgf10270a">Lists</h3>
 <p>
 Lists contain 0 or more elements:
 </p>
@@ -67,7 +67,7 @@ The builtin function <code>len()</code> retrieves the length of the list:
 </code></pre>
 </div>
 
-<pre class="example" id="orgfca5c2b">
+<pre class="example" id="orgba33a8b">
 4
 </pre>
 
@@ -162,7 +162,7 @@ print(l[1])
 </code></pre>
 </div>
 
-<pre class="example" id="orgfc8e400">
+<pre class="example" id="org3c3cf65">
 wednesday
 </pre>
 
@@ -228,6 +228,21 @@ print(l)
 
 <pre class="example">
 ['h', 'i', '!']
+</pre>
+
+</section>
+<section id="slide-org7126a03">
+<h3 id="org7126a03">Insert at position</h3>
+<div class="org-src-container">
+
+<pre   ><code class="python" >l = ["a", "b", "d"]
+l.insert(2, "c")
+print(l)
+</code></pre>
+</div>
+
+<pre class="example">
+['a', 'b', 'c', 'd']
 </pre>
 
 </section>
@@ -311,16 +326,23 @@ $
 <section id="slide-org5355f18">
 <h3 id="org5355f18">In</h3>
 <p>
-Check if something is in the list with "if"
+Check if something is in the list with <code>in</code> and <code>not in</code>:
 </p>
 
 <div class="org-src-container">
 
-<pre   ><code class="python" >l = [2, 4, 6, 8, 10, ...]
-if 356 in l:
-    print("It's there!")
+<pre   ><code class="python" >l = [2, 4, 6, 8, 10]
+if 6 in l:
+    print("6 is in l")
+if 9 not in l:
+    print("9 is not in l")
 </code></pre>
 </div>
+
+<pre class="example">
+6 is in l
+9 is not in l
+</pre>
 
 </section>
 <section id="slide-orgb4bbfbc">
